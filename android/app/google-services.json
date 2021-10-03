@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "533111099951",
+    "firebase_url": "https://stickerfun-7b63b-default-rtdb.firebaseio.com",
+    "project_id": "stickerfun-7b63b",
+    "storage_bucket": "stickerfun-7b63b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:533111099951:android:144c7f32d3b9831c612cda",
+        "android_client_info": {
+          "package_name": "com.stickerfun.stickerfun"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "533111099951-7qc8s1j7d2nsr2ffcp1aa39gsgj1j4f4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC8MDY154DdTGaIbdT1rghRoAQprMSQkOs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "533111099951-7qc8s1j7d2nsr2ffcp1aa39gsgj1j4f4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
