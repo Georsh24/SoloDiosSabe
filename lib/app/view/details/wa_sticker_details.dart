@@ -11,10 +11,12 @@ import 'package:flutter_stickers_internet/app/controller/api/api_constant.dart';
 import 'package:flutter_stickers_internet/app/model/stickerPack.dart';
 import 'package:flutter_stickers_internet/app/screens/StickerDetails.dart';
 import 'package:flutter_stickers_internet/app/ui/global_controllers/session_controller.dart';
+import 'package:flutter_stickers_internet/app/ui/routes/routes.dart';
 import 'package:flutter_stickers_internet/app/widget/favorite/wa_detail.dart';
 import 'package:flutter_stickers_internet/app/widget/global_colors.dart';
 import 'package:flutter_stickers_internet/app/widget/global_padding.dart';
 import 'package:flutter_stickers_internet/app/widget/hex_colors.dart';
+import 'package:flutter_stickers_internet/app/widgets/CardContainer.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:package_info/package_info.dart';
 import 'package:path/path.dart' as pathbasename;
@@ -23,12 +25,14 @@ import 'package:permission_handler/permission_handler.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_meedu/router.dart' as router;
 import 'package:flutter_meedu/flutter_meedu.dart' as medu;
+import 'package:pay/pay.dart';
 
 import 'package:sizer/sizer.dart';
 FirebaseFirestore firestore = FirebaseFirestore.instance;
 String getuid = '';
 String getidcompra = '';
 String comprado = "init";
+String package_name = "none";
 
 class WaStickerDetail extends StatefulWidget {
   StickerPack pack;
@@ -55,6 +59,9 @@ class _WaStickerDetailState extends State<WaStickerDetail> {
     SchedulerBinding.instance!.addPostFrameCallback((_) {
       Provider.of<WaDetail>(context, listen: false)
           .checkFav(int.parse(widget.pack.identifier));
+    });
+     Future.delayed(Duration(milliseconds: 100), () {
+      getCompras();
     });
     // _bannerAd = BannerAd(
     //     adUnitId: AdManager.bannerAdUnitId,
@@ -101,7 +108,7 @@ class _WaStickerDetailState extends State<WaStickerDetail> {
                       details.removeFavorite(int.parse(widget.pack.identifier));
                     } else {
                       details.addFavorite(
-                          int.parse(widget.pack.identifier), widget.pack);
+                          int.parse(widget.pack.identifier));
                     }
                     // router.pop();
                     loadigFav(context);
@@ -165,6 +172,7 @@ class _WaStickerDetailState extends State<WaStickerDetail> {
 
                 getuid = user.uid;
                 getidcompra = widget.pack.identiFier;
+                package_name = widget.pack.name;
                 return SizedBox.shrink();
                 }),
                 SingleChildScrollView(
@@ -562,20 +570,60 @@ String getCompras() {
   return comprado;
 }
 void comprar(BuildContext context) {
+  const _paymentItems = [
+  PaymentItem(
+    label: 'Total',
+    amount: '1.00',
+    status: PaymentItemStatus.final_price,
+  )
+];
   showDialog(
+    
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          content: Text('Hola'),
+          content:
+              contents(context),
+          
           actions: [
+            
             MaterialButton(
                 child: Text('comprar'),
                 onPressed: () {
-                  addUserr();
-                })
+                  //addUserr();
+                  router.pushNamed(Routes.BUY);
+                }),
+
+GooglePayButton(
+  paymentConfigurationAsset: 'gpay.json',
+  paymentItems: _paymentItems,
+  width: 200,
+  height: 50,
+  style: GooglePayButtonStyle.black,
+  type: GooglePayButtonType.pay,
+  margin: const EdgeInsets.only(top: 15.0),
+  onPaymentResult: (data){
+    print("Pagado");
+    addUserr();
+  },
+  loadingIndicator: const Center(
+    child: CircularProgressIndicator(),
+  ),
+),
           ],
         );
       });
+}
+
+contents(BuildContext context) {
+   final size = MediaQuery.of(context).size;
+  return Container(
+    height: size.height * 0.25,
+    child: Center(
+      
+      child: Text(package_name),
+    ),
+  );
 }
 
 void descargar(BuildContext context) {
@@ -614,5 +662,12 @@ void loadigFav(BuildContext context) {
 }
 
 
+void onApplePayResult(paymentResult) {
+  // Send the resulting Apple Pay token to your server / PSP
+}
 
+void onGooglePayResult(paymentResult) {
+  debugPrint(paymentResult.toString());
+  // Send the resulting Google Pay token to your server / PSP
+}
 

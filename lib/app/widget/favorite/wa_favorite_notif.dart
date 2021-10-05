@@ -18,11 +18,13 @@ class WaFavoriteNotif extends ChangeNotifier{
 
   setLoading(value){
     loading = value;
+    print(setLoading(value));
     notifyListeners();
   }
 
   setList(value){
     list = value;
+    print(setList(value));
     notifyListeners();
   }
 

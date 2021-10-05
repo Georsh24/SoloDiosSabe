@@ -14,6 +14,8 @@ class WaDetail extends ChangeNotifier{
 
   checkFav(int id) async {
     List? list = await waFav.check({'id': id });
+    print ('check fav');
+    print(checkFav(id));
     if (list.isNotEmpty) {
       setFav(true);
     }else{
@@ -27,18 +29,29 @@ class WaDetail extends ChangeNotifier{
   // }
   removeFavorite(int id) async {
     waFav.remove({'id': id}).then((v) {
+      print('remove to favorito wa detail');
+      print(id);
+      print('variable v');
       print(v);
+      print('metodo remove');
+      print(removeFavorite(id));
       checkFav(v);
     });
   }
 
-  addFavorite(int id, StickerPack ebookModel) async {
-    await waFav.addFavorites({'id': id, 'item': ebookModel.toJson()});
+  addFavorite(int id,) async {
+    await waFav.addFavorites({'id': id, });
+    print('add favorito del wall detail');
+    print(id);
+    print ('metodo add favorites wadetail');
+    print(addFavorite(id));
     checkFav(id);
   }
 
   void setFav(value){
     favorite = value;
+    print('Favorito de wa detail');
+    print(favorite);
     notifyListeners();
   }
 

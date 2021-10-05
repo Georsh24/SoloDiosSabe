@@ -65,7 +65,7 @@ class _FavoriteState extends State<Favorite> {
               shrinkWrap: true,
               physics: NeverScrollableScrollPhysics(),
               itemBuilder: (context, index){
-                StickerPack waFavorite = StickerPack.fromJson(waFavoriteNotif.list[index]['item']);
+                StickerPack waFavorite = StickerPack.fromJson(waFavoriteNotif.list[index]);
                 return ClipRRect(
                   borderRadius: BorderRadius.circular(5.0),
                   child: Container(
