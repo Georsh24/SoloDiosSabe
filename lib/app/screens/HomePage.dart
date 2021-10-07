@@ -320,93 +320,12 @@ class _MyHomePageState extends State<MyHomePage> {
                                 },
                               );
 
-                              // return Column(
-                              //   children: [
-                              //     Expanded(
-                              //       child: Container(
-                              //         child:
-                              //             Text(listOfSliderSticker[index].name),
-                              //       ),
-                              //     ),
-                              //   ],
-                              // );
                             },
                           ),
                         ),
                       ),
 
-                      // SizedBox(
-                      //   height: 23.0.h,
-                      //   child: Carousel(
-                      //       itemCount: listOfSliderSticker.length,
-                      //       itemHeight: 10.0.h,
-                      //       itemBuilder: (BuildContext context, int index){
-                      //         return GestureDetector(
-                      //           child: Padding(
-                      //             padding: const EdgeInsets.all(10.0),
-                      //             child: Container(
-                      //               margin: EdgeInsets.all(0.2),
-                      //               decoration: BoxDecoration(
-                      //                 borderRadius: BorderRadius.all(Radius.circular(10)),
-                      //                 color: listOfSliderSticker[index].color == "" ? getColorFromHex(GlobalColors().colorWhite):
-                      //                 getColorFromHex(listOfSliderSticker[index].color),
-                      //                 boxShadow: [
-                      //                   BoxShadow(
-                      //                     color: listOfSliderSticker[index].color == "" ? getColorFromHex(GlobalColors().colorWhite):
-                      //                     getColorFromHex(listOfSliderSticker[index].color),
-                      //                     blurRadius: 1.0,
-                      //                     spreadRadius: 0.2,
-                      //                   )
-                      //                 ],
-                      //               ),
-                      //               child: Row(
-                      //                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      //                 children: [
-                      //                    CachedNetworkImage(
-                      //                      imageUrl: '${listOfSliderSticker[index].trayimageFile}',
-                      //                      width: 40.0.w,
-                      //                    ),
-                      //                   Center(
-                      //                     child: Column(
-                      //                       mainAxisAlignment: MainAxisAlignment.center,
-                      //                       children: [
-                      //                         Text('${listOfSliderSticker[index].name}', style: TextStyle(fontWeight: FontWeight.w500,
-                      //                             fontSize: 17,
-                      //                             color: getColorFromHex(GlobalColors().colorText)),
-                      //                         ),
-                      //                         Text('${listOfSliderSticker[index].publisher}', style: TextStyle(fontWeight: FontWeight.w500,
-                      //                             fontSize: 17,
-                      //                             color: getColorFromHex(GlobalColors().colorText)),
-                      //                         ),
-                      //                       ],
-                      //                     ),
-                      //                   ),
-                      //                   SizedBox(width: 7,),
-                      //                   Column(
-                      //                     mainAxisAlignment: MainAxisAlignment.center,
-                      //                     children: [
-                      //                       Text('${listOfSliderSticker[index].sticker.length}', style: TextStyle(fontWeight: FontWeight.w500,
-                      //                           fontSize: 33,
-                      //                           color: getColorFromHex(GlobalColors().colorText)),
-                      //                       ),
-                      //                       Text('Stickers', style: TextStyle(fontWeight: FontWeight.w500,
-                      //                           fontSize: 12,
-                      //                           color: getColorFromHex(GlobalColors().colorText)),
-                      //                       ),
-                      //                     ],
-                      //                   ),
-                      //                   SizedBox(width: 4.0.w,)
-                      //                  ],
-                      //               ),
-                      //             ),
-                      //           ),
-                      //           onTap: (){
-                      //             pushPage(context, WaStickerDetail(pack: listOfSliderSticker[index],));
-                      //           },
-                      //         );
-                      //       }
-                      //   ),
-                      // ),
+            
                       SizedBox(height: size.height * 0.25, child: WaCategory()),
                       Container(
                         child: Column(
