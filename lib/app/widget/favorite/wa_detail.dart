@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_stickers_internet/app/model/stickerPack.dart';
-import 'package:flutter_stickers_internet/app/model/stickerPack.dart';
+
 import 'package:flutter_stickers_internet/app/widget/favorite/wa_favorite.dart';
-import 'package:flutter_stickers_internet/app/widget/favorite/wa_favorite.dart';
+
 
 
 class WaDetail extends ChangeNotifier{

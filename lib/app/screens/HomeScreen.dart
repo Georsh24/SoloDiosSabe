@@ -1,10 +1,7 @@
 //import 'package:esys_flutter_share/esys_flutter_share.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_stickers_internet/app/view/bottom_bar/item/category.dart';
-import 'package:flutter_stickers_internet/app/view/bottom_bar/item/favorite.dart';
-
 import 'HomePage.dart';
-import '../back/screens/MyStickers.dart';
 import 'PerfilPage.dart';
 
 class HomeScreen extends StatefulWidget {

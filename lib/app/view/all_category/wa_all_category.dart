@@ -14,7 +14,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_meedu/router.dart' as router;
 
-
 import 'package:http/http.dart' as http;
 
 class WaAllCategory extends StatefulWidget {
@@ -25,7 +24,6 @@ class WaAllCategory extends StatefulWidget {
 class _WaAllCategoryState extends State<WaAllCategory> {
   List<Category> listOfCategory = [];
   bool isLoading = true;
-  
 
   // InterstitialAd _interstitialAd;
 
@@ -52,7 +50,6 @@ class _WaAllCategoryState extends State<WaAllCategory> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     // _interstitialAd = InterstitialAd(
     //   adUnitId: AdManager.interstitialAdUnitId,
@@ -69,7 +66,6 @@ class _WaAllCategoryState extends State<WaAllCategory> {
 
   @override
   void dispose() {
-    // TODO: implement dispose
     super.dispose();
     // _interstitialAd?.dispose();
   }
@@ -82,78 +78,77 @@ class _WaAllCategoryState extends State<WaAllCategory> {
     final size = MediaQuery.of(context).size;
     return Material(
         child: Scaffold(
-      
             appBar: AppBar(
-          toolbarHeight: size.height * 0.10,
-          automaticallyImplyLeading: false,
-          // actions: [
-          //   Container(
-          //     padding: EdgeInsets.only(right: 30),
-          //     child: GestureDetector(
-          //         onTap: () async {
-          //           if (details.favorite) {
-          //             details.removeFavorite(int.parse(widget.pack.identifier));
-          //           } else {
-          //             details.addFavorite(int.parse(widget.pack.identifier));
-          //           }
-          //           // router.pop();
-          //           loadigFav(context);
-          //         },
-          //         child: Icon(
-          //           details.favorite ? Icons.favorite : Icons.favorite,
-          //           color: details.favorite ? Colors.red : Colors.black38,
-          //           size: size.width * 0.050,
-          //         )),
-          //   )
-          // ],
-          leading: IconButton(
-            padding: EdgeInsets.all(30),
-            icon: Icon(
-              Icons.arrow_back,
-              color: Colors.grey,
-              size: size.width * 0.05,
-            ),
-            onPressed: () {
-              router.pop();
-            },
-          ),
-          centerTitle: true,
-          title: Image.asset(
-            '$logoimg',
-            fit: BoxFit.contain,
-            height: size.height * 0.09,
-          ),
-          flexibleSpace: Container(
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                begin: Alignment.topLeft,
-                end: Alignment.topRight,
-                stops: [
-                  0.1,
-                  0.80,
-                ],
-                colors: [
-                  HexColor('00ff00'),
-                  HexColor('05d0ae'),
-                ],
-              ),
-              border: Border(
-                bottom: BorderSide(
-                  width: 3,
+              toolbarHeight: size.height * 0.10,
+              automaticallyImplyLeading: false,
+              // actions: [
+              //   Container(
+              //     padding: EdgeInsets.only(right: 30),
+              //     child: GestureDetector(
+              //         onTap: () async {
+              //           if (details.favorite) {
+              //             details.removeFavorite(int.parse(widget.pack.identifier));
+              //           } else {
+              //             details.addFavorite(int.parse(widget.pack.identifier));
+              //           }
+              //           // router.pop();
+              //           loadigFav(context);
+              //         },
+              //         child: Icon(
+              //           details.favorite ? Icons.favorite : Icons.favorite,
+              //           color: details.favorite ? Colors.red : Colors.black38,
+              //           size: size.width * 0.050,
+              //         )),
+              //   )
+              // ],
+              leading: IconButton(
+                padding: EdgeInsets.all(30),
+                icon: Icon(
+                  Icons.arrow_back,
                   color: Colors.grey,
-                  style: BorderStyle.none,
+                  size: size.width * 0.05,
+                ),
+                onPressed: () {
+                  router.pop();
+                },
+              ),
+              centerTitle: true,
+              title: Image.asset(
+                '$logoimg',
+                fit: BoxFit.contain,
+                height: size.height * 0.09,
+              ),
+              flexibleSpace: Container(
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    begin: Alignment.topLeft,
+                    end: Alignment.topRight,
+                    stops: [
+                      0.1,
+                      0.80,
+                    ],
+                    colors: [
+                      HexColor('00ff00'),
+                      HexColor('05d0ae'),
+                    ],
+                  ),
+                  border: Border(
+                    bottom: BorderSide(
+                      width: 3,
+                      color: Colors.grey,
+                      style: BorderStyle.none,
+                    ),
+                  ),
                 ),
               ),
+              elevation: 4,
             ),
-          ),
-          elevation: 4,
-        ),
             body: Column(
-              
               children: [
-                SizedBox(height: 20,),
+                SizedBox(
+                  height: 20,
+                ),
                 Container(
-                  
                   child: GridView.builder(
                       shrinkWrap: true,
                       physics: NeverScrollableScrollPhysics(),
@@ -168,49 +163,56 @@ class _WaAllCategoryState extends State<WaAllCategory> {
                           tag: listOfCategory[i],
                           child: GestureDetector(
                             // child: Column(
-                              child:  Padding(
-                      padding: const EdgeInsets.all(5),
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(15),
-                        child: Column(
-                          children: [
-                            Container(
-                              width: 31.0.w,
-                              height: 15.0.h,
-                              margin: EdgeInsets.all(0.2),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.all(Radius.circular(10)),
-                                color:  listOfCategory[i].color == ""
-                                          ? getColorFromHex(GlobalColors().bgSticker)
-                                          : getColorFromHex(listOfCategory[i].color),
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: listOfCategory[i].color == "" ? getColorFromHex(GlobalColors().colorWhite) :
-                                    getColorFromHex(listOfCategory[i].color),
-                                    blurRadius: 1.0,
-                                    spreadRadius: 0.2,
-                                  )
-                                ],
-                              ),
-                              child: CachedNetworkImage(
-                                imageUrl: listOfCategory[i].photo_cat,
-                                
-                                width: size.width * 0.5,
-                                height: 15.0.h,
+                            child: Padding(
+                              padding: const EdgeInsets.all(5),
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(15),
+                                child: Column(
+                                  children: [
+                                    Container(
+                                      width: 31.0.w,
+                                      height: 15.0.h,
+                                      margin: EdgeInsets.all(0.2),
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(10)),
+                                        color: listOfCategory[i].color == ""
+                                            ? getColorFromHex(
+                                                GlobalColors().bgSticker)
+                                            : getColorFromHex(
+                                                listOfCategory[i].color),
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: listOfCategory[i].color == ""
+                                                ? getColorFromHex(
+                                                    GlobalColors().colorWhite)
+                                                : getColorFromHex(
+                                                    listOfCategory[i].color),
+                                            blurRadius: 1.0,
+                                            spreadRadius: 0.2,
+                                          )
+                                        ],
+                                      ),
+                                      child: CachedNetworkImage(
+                                        imageUrl: listOfCategory[i].photo_cat,
+                                        width: size.width * 0.5,
+                                        height: 15.0.h,
+                                      ),
+                                    ),
+                                    Center(
+                                      child: Text(
+                                        '${listOfCategory[i].name}',
+                                        style: TextStyle(
+                                            color: getColorFromHex(GlobalColors()
+                                                .searchIconColor), //ebookTheme.themeMode().ratingBar,
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 16),
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               ),
                             ),
-                            Center(
-                              child: Text(
-                                '${listOfCategory[i].name}',
-                                style: TextStyle(color: getColorFromHex(GlobalColors().searchIconColor), //ebookTheme.themeMode().ratingBar,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 16),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
                             //   children: [
                             //     Container(
                             //       margin: EdgeInsets.all(2),
@@ -223,15 +225,15 @@ class _WaAllCategoryState extends State<WaAllCategory> {
                             //       child: Column(
                             //         children: [
                             //           Container(
-                                        
+
                             //             child: Image.network(
                             //               listOfCategory[i].photo_cat,
-                                          
+
                             //             ),
                             //           ),
-                                    
+
                             //           // Align(
-                                      
+
                             //           //   child: Text(
                             //           //     '${listOfCategory[i].name}',
                             //           //     style: TextStyle(
@@ -250,7 +252,7 @@ class _WaAllCategoryState extends State<WaAllCategory> {
                             //           // ),
                             //         ],
                             //       ),
-                                  
+
                             //     ),
                             //       Text('${listOfCategory[i].name}'),
                             //   ],

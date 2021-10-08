@@ -15,8 +15,9 @@ class PerfilPage extends ConsumerWidget {
   Widget build(BuildContext context, watch) {
     // final sessionController = watch(sessionProvider);
     // final user = sessionController.user!;
-
-    return Scaffold(
+  return WillPopScope(
+    onWillPop: ()async =>false,
+    child:  Scaffold(
       extendBodyBehindAppBar: true,
       extendBody: true,
       appBar: AppBar(
@@ -32,7 +33,10 @@ class PerfilPage extends ConsumerWidget {
           settings(context),
         ],
       ),
+    ) 
+    
     );
+   
   }
 }
 
@@ -41,6 +45,12 @@ Widget buildProfile(BuildContext context, watch) {
   final user = sessionController.user!;
   final displayname = user.displayName ?? '';
   final email = user.email ?? '';
+    final colorshex1 = Theme.of(context).brightness == Brightness.dark
+        ? '3A3E98'
+        : '00ff00';
+         final colorshex2 = Theme.of(context).brightness == Brightness.dark
+        ? '4AB1D8'
+        : '05d0ae';
 
   return Stack(
     clipBehavior: Clip.none,
@@ -60,8 +70,8 @@ Widget buildProfile(BuildContext context, watch) {
                   0.80,
                 ],
                 colors: [
-                  HexColor('00ff00'),
-                  HexColor('05d0ae'),
+                  HexColor('$colorshex1'),
+                  HexColor('$colorshex2'),
                 ]),
           ),
         ),

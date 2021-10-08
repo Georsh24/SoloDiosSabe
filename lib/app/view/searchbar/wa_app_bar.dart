@@ -2,11 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_stickers_internet/app/controller/search/wa_search.dart';
-import 'package:flutter_stickers_internet/app/view/navigation/wa_navigation.dart';
+
 import 'package:flutter_stickers_internet/app/widget/global_colors.dart';
 import 'package:flutter_stickers_internet/app/widget/hex_colors.dart';
 
-import 'package:http/http.dart' as http;
 import 'package:sizer/sizer.dart';
 
 

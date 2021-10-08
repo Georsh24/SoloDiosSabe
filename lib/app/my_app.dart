@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_stickers_internet/app/provider/ThemeProvider.dart';
-import 'package:flutter_stickers_internet/app/services/AuthService.dart';
 import 'package:flutter_stickers_internet/app/services/NotificationsService.dart';
 import 'package:flutter_stickers_internet/app/ui/routes/app_routes.dart';
 import 'package:flutter_stickers_internet/app/ui/routes/routes.dart';

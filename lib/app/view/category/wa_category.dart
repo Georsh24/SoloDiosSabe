@@ -39,7 +39,7 @@ class _WaCategoryState extends State<WaCategory> {
 
   @override
   void initState() {
-    // TODO: implement initState
+
     super.initState();
     loading = true;
     getCategory();
@@ -94,7 +94,7 @@ class _WaCategoryState extends State<WaCategory> {
                           children: [
                             Container(
                               width: size.width * 0.2,
-                              height: size.height * 0.15,
+                              height: size.height * 0.12,
                               margin: EdgeInsets.all(0.2),
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.all(Radius.circular(10)),

@@ -15,6 +15,7 @@ import 'package:hexcolor/hexcolor.dart';
 import 'controller/reset_password_controller.dart';
 import 'package:flutter_meedu/router.dart' as router;
 
+
 final resetPasswordProvider = SimpleProvider(
   (_) => ResetPasswordController(),
 );
@@ -24,6 +25,7 @@ class ResetPasswordPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    
     return ProviderListener<ResetPasswordController>(
       provider: resetPasswordProvider,
       builder: (_, controller) {
@@ -92,6 +94,12 @@ class _ResetForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+     final colorshex1 = Theme.of(context).brightness == Brightness.dark
+        ? '3A3E98'
+        : '00ff00';
+         final colorshex2 = Theme.of(context).brightness == Brightness.dark
+        ? '4AB1D8'
+        : '05d0ae';
     return ProviderListener<ResetPasswordController>(
       provider: resetPasswordProvider,
       builder: (_, controller) {
@@ -120,8 +128,8 @@ class _ResetForm extends StatelessWidget {
                       0.80,
                     ],
                     colors: [
-                      HexColor('00ff00'),
-                      HexColor('05d0ae'),
+                      HexColor('$colorshex1'),
+                      HexColor('$colorshex2'),
                     ],
                   ),
                 ),

@@ -96,7 +96,14 @@ class _LoginForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorshex1 = Theme.of(context).brightness == Brightness.dark
+        ? '3A3E98'
+        : '00ff00';
+         final colorshex2 = Theme.of(context).brightness == Brightness.dark
+        ? '4AB1D8'
+        : '05d0ae';
     return ProviderListener<LoginController>(
+      
       provider: loginProvider,
       builder: (_, controller) {
         return Container(
@@ -147,8 +154,8 @@ class _LoginForm extends StatelessWidget {
                             0.80,
                           ],
                           colors: [
-                            HexColor('00ff00'),
-                            HexColor('05d0ae'),
+                            HexColor('$colorshex1'),
+                            HexColor('$colorshex2'),
                           ])),
                   child: MaterialButton(
                     shape: RoundedRectangleBorder(

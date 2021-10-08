@@ -40,7 +40,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
         child: Stack(
           children: [
-            _tapiz(size: size),
+            _Tapiz(size: size),
             Padding(
       padding: EdgeInsets.symmetric(horizontal: 30),
       child: Container(
@@ -263,8 +263,8 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 }
 
-class _tapiz extends StatelessWidget {
-  const _tapiz({
+class _Tapiz extends StatelessWidget {
+  const _Tapiz({
     Key? key,
     required this.size,
   }) : super(key: key);
@@ -281,97 +281,97 @@ class _tapiz extends StatelessWidget {
         children: [
           // 1, 1
           Positioned(
-            child: _logoTapiz(),
+            child: _LogoTapiz(),
             top: size.height * 0.05,
             left: size.width * 0.05,
           ),
           // 1,2
           Positioned(
-            child: _logoTapiz(),
+            child: _LogoTapiz(),
             top: size.height * 0.05,
             left: size.width * 0.55,
           ),
           //2,1
           Positioned(
-            child: _logoTapiz(),
+            child: _LogoTapiz(),
             top: size.height * 0.2,
             left: size.width * -0.25,
           ), 
           // 2,2
           Positioned(
-            child: _logoTapiz(),
+            child: _LogoTapiz(),
             top: size.height * 0.2,
             left: size.width * 0.3,
           ), 
           //2,3
            Positioned(
-            child: _logoTapiz(),
+            child: _LogoTapiz(),
             top: size.height * 0.2,
             left: size.width * 0.8,
           ),
           Positioned(
-            child: _logoTapiz(),
+            child: _LogoTapiz(),
             top: size.height * 0.35,
             left: size.width * 0.1,
           ),
           Positioned(
-            child: _logoTapiz(),
+            child: _LogoTapiz(),
             top: size.height * 0.35,
             left: size.width * 0.6,
           ),
             Positioned(
-            child: _logoTapiz(),
+            child: _LogoTapiz(),
             top: size.height * 0.5,
             left: size.width * -0.1,
           ),
           Positioned(
-            child: _logoTapiz(),
+            child: _LogoTapiz(),
             top: size.height * 0.5,
             left: size.width * 0.4,
           ),
           Positioned(
-            child: _logoTapiz(),
+            child: _LogoTapiz(),
             top: size.height * 0.5,
             left: size.width * 0.9,
           ),
          
            Positioned(
-            child: _logoTapiz(),
+            child: _LogoTapiz(),
             top: size.height * 0.65,
             left: size.width * 0.15,
           ),  Positioned(
-            child: _logoTapiz(),
+            child: _LogoTapiz(),
             top: size.height * 0.65,
             left: size.width * 0.65,
           ),
            Positioned(
-            child: _logoTapiz(),
+            child: _LogoTapiz(),
             top: size.height * 0.8,
             left: size.width * -0.1,
           ),
           Positioned(
-            child: _logoTapiz(),
+            child: _LogoTapiz(),
             top: size.height * 0.8,
             left: size.width * 0.4,
           ),
           
           Positioned(
-            child: _logoTapiz(),
+            child: _LogoTapiz(),
             top: size.height * 0.8,
             left: size.width * 0.9,
           ),
             Positioned(
-            child: _logoTapiz(),
+            child: _LogoTapiz(),
             top: size.height * 0.95,
             left: size.width * -0.3,
           ),
            Positioned(
-            child: _logoTapiz(),
+            child: _LogoTapiz(),
             top: size.height * 0.95,
             left: size.width * 0.2,
           ),
            Positioned(
-            child: _logoTapiz(),
+            child: _LogoTapiz(),
             top: size.height * 0.95,
             left: size.width * 0.7,
           ),
@@ -384,8 +384,8 @@ class _tapiz extends StatelessWidget {
   }
 }
 
-class _logoTapiz extends StatelessWidget {
-  const _logoTapiz({Key? key}) : super(key: key);
+class _LogoTapiz extends StatelessWidget {
+  const _LogoTapiz({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

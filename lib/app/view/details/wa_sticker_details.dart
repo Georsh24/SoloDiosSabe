@@ -1,7 +1,6 @@
 import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dio/dio.dart';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
@@ -9,16 +8,13 @@ import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_stickers_internet/app/controller/api/api_constant.dart';
 import 'package:flutter_stickers_internet/app/model/stickerPack.dart';
-import 'package:flutter_stickers_internet/app/back/screens/StickerDetails.dart';
 import 'package:flutter_stickers_internet/app/ui/global_controllers/session_controller.dart';
 import 'package:flutter_stickers_internet/app/ui/routes/routes.dart';
 import 'package:flutter_stickers_internet/app/widget/favorite/wa_detail.dart';
 import 'package:flutter_stickers_internet/app/widget/global_colors.dart';
 import 'package:flutter_stickers_internet/app/widget/global_padding.dart';
 import 'package:flutter_stickers_internet/app/widget/hex_colors.dart';
-import 'package:flutter_stickers_internet/app/widgets/CardContainer.dart';
 import 'package:hexcolor/hexcolor.dart';
-import 'package:package_info/package_info.dart';
 import 'package:path/path.dart' as pathbasename;
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -26,14 +22,15 @@ import 'package:provider/provider.dart';
 import 'package:flutter_meedu/router.dart' as router;
 import 'package:flutter_meedu/flutter_meedu.dart' as medu;
 import 'package:pay/pay.dart';
-
 import 'package:sizer/sizer.dart';
+
 FirebaseFirestore firestore = FirebaseFirestore.instance;
 String getuid = '';
 String getidcompra = '';
 String comprado = "init";
-String package_name = "none";
+String packagename = "none";
 
+// ignore: must_be_immutable
 class WaStickerDetail extends StatefulWidget {
   StickerPack pack;
 
@@ -46,7 +43,7 @@ class WaStickerDetail extends StatefulWidget {
 class _WaStickerDetailState extends State<WaStickerDetail> {
   List<String> imageList = [];
   List<String> downloadList = [];
-   bool downloading = true;
+  bool downloading = true;
   late Dio dio;
   late Dio dioDownload;
   bool isFav = false;
@@ -60,7 +57,7 @@ class _WaStickerDetailState extends State<WaStickerDetail> {
       Provider.of<WaDetail>(context, listen: false)
           .checkFav(int.parse(widget.pack.identifier));
     });
-     Future.delayed(Duration(milliseconds: 100), () {
+    Future.delayed(Duration(milliseconds: 100), () {
       getCompras();
     });
     // _bannerAd = BannerAd(
@@ -167,13 +164,13 @@ class _WaStickerDetailState extends State<WaStickerDetail> {
             padding: const EdgeInsets.all(8.0),
             child: Stack(
               children: [
-                medu.Consumer(builder: (_, watch, __){
+                medu.Consumer(builder: (_, watch, __) {
                   final user = watch(sessionProvider).user!;
 
-                getuid = user.uid;
-                getidcompra = widget.pack.identiFier;
-                package_name = widget.pack.name;
-                return SizedBox.shrink();
+                  getuid = user.uid;
+                  getidcompra = widget.pack.identiFier;
+                  packagename = widget.pack.name;
+                  return SizedBox.shrink();
                 }),
                 SingleChildScrollView(
                   child: Column(
@@ -358,50 +355,50 @@ class _WaStickerDetailState extends State<WaStickerDetail> {
                 //                           ],
                 //                         ),
                 Positioned(
-                    child: Align(
-                  alignment: Alignment.bottomCenter,
-                  child: Container(
-                    width: size.width * 0.8,
-                    height: size.height * 0.05,
-                    decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    gradient: LinearGradient(
-                        begin: Alignment.topLeft,
-                        end: Alignment.topRight,
-                        stops: [
-                          0.1,
-                          0.80,
-                        ],
-                        colors: [
-                          HexColor('00ff00'),
-                          HexColor('05d0ae'),
-                        ])),
-                    child: MaterialButton(
-                      padding: const EdgeInsets.all(5.0),
-                      child: Text(
-                        'Lo Quiero',
-                        style: TextStyle(
-                            color: getColorFromHex(GlobalColors().colorWhite),
-                            fontSize: 25),
+                  child: Align(
+                    alignment: Alignment.bottomCenter,
+                    child: Container(
+                      width: size.width * 0.8,
+                      height: size.height * 0.05,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          gradient: LinearGradient(
+                              begin: Alignment.topLeft,
+                              end: Alignment.topRight,
+                              stops: [
+                                0.1,
+                                0.80,
+                              ],
+                              colors: [
+                                HexColor('00ff00'),
+                                HexColor('05d0ae'),
+                              ])),
+                      child: MaterialButton(
+                        padding: const EdgeInsets.all(5.0),
+                        child: Text(
+                          'Lo Quiero',
+                          style: TextStyle(
+                              color: getColorFromHex(GlobalColors().colorWhite),
+                              fontSize: 25),
+                        ),
+                        onPressed: () {
+                          if (getCompras() == "comprado") {
+                            if (!downloadList
+                                .contains(widget.pack.identiFier)) {
+                              downloading = false;
+                              downloadStickers(widget.pack, context);
+                            } else {
+                              addStickersToWa(widget.pack);
+                            }
+                          } else {
+                            print("valor if");
+                            print(comprado);
+                            comprar(context);
+                          }
+                        },
                       ),
-                      onPressed: (){
-                         if (getCompras() == "comprado"){
-                    if (!downloadList.contains(widget.pack.identiFier)) {
-                      downloading = false;
-                      downloadStickers(widget.pack, context);
-                    } else {
-                      addStickersToWa(widget.pack);
-                    }
-                    }
-                    else{
-                      print("valor if");
-                      print(comprado);
-                      comprar(context);
-                  }
-                      },
                     ),
                   ),
-                ),
                 ),
               ],
             ),
@@ -539,6 +536,7 @@ class _WaStickerDetailState extends State<WaStickerDetail> {
     );
   }
 }
+
 void addUserr() {
   firestore
       .collection("Compras")
@@ -546,6 +544,7 @@ void addUserr() {
     print(value.id);
   });
 }
+
 String getCompras() {
   firestore
       .collection("Compras")
@@ -569,59 +568,54 @@ String getCompras() {
 
   return comprado;
 }
+
 void comprar(BuildContext context) {
   const _paymentItems = [
-  PaymentItem(
-    label: 'Total',
-    amount: '1.00',
-    status: PaymentItemStatus.final_price,
-  )
-];
+    PaymentItem(
+      label: 'Total',
+      amount: '1.00',
+      status: PaymentItemStatus.final_price,
+    )
+  ];
   showDialog(
-    
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          content:
-              contents(context),
-          
+          content: contents(context),
           actions: [
-            
             MaterialButton(
                 child: Text('comprar'),
                 onPressed: () {
                   //addUserr();
                   router.pushNamed(Routes.BUY);
                 }),
-
-GooglePayButton(
-  paymentConfigurationAsset: 'gpay.json',
-  paymentItems: _paymentItems,
-  width: 200,
-  height: 50,
-  style: GooglePayButtonStyle.black,
-  type: GooglePayButtonType.pay,
-  margin: const EdgeInsets.only(top: 15.0),
-  onPaymentResult: (data){
-    print("Pagado");
-    addUserr();
-  },
-  loadingIndicator: const Center(
-    child: CircularProgressIndicator(),
-  ),
-),
+            GooglePayButton(
+              paymentConfigurationAsset: 'gpay.json',
+              paymentItems: _paymentItems,
+              width: 200,
+              height: 50,
+              style: GooglePayButtonStyle.black,
+              type: GooglePayButtonType.pay,
+              margin: const EdgeInsets.only(top: 15.0),
+              onPaymentResult: (data) {
+                print("Pagado");
+                addUserr();
+              },
+              loadingIndicator: const Center(
+                child: CircularProgressIndicator(),
+              ),
+            ),
           ],
         );
       });
 }
 
 contents(BuildContext context) {
-   final size = MediaQuery.of(context).size;
+  final size = MediaQuery.of(context).size;
   return Container(
     height: size.height * 0.25,
     child: Center(
-      
-      child: Text(package_name),
+      child: Text(packagename),
     ),
   );
 }
@@ -641,26 +635,23 @@ void loadigFav(BuildContext context) {
   showDialog(
       context: context,
       barrierDismissible: false,
-
       builder: (BuildContext context) {
-        
-                        Future.delayed(Duration(seconds: 5), () {
-                          Navigator.of(context).pop(true);
-                        });
+        Future.delayed(Duration(seconds: 5), () {
+          Navigator.of(context).pop(true);
+        });
         return AlertDialog(
-      content: Row(
-        children: <Widget>[
-          CircularProgressIndicator(),
-          SizedBox(
-            width: 10,
+          content: Row(
+            children: <Widget>[
+              CircularProgressIndicator(),
+              SizedBox(
+                width: 10,
+              ),
+              Text(" shdghgd"),
+            ],
           ),
-          Text(" shdghgd"),
-        ],
-      ),
-    );
+        );
       });
 }
-
 
 void onApplePayResult(paymentResult) {
   // Send the resulting Apple Pay token to your server / PSP

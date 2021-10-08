@@ -154,6 +154,7 @@ class MyThemes {
           fontFamily: 'arial'),
     ),
     scaffoldBackgroundColor: Colors.grey.shade800,
+    backgroundColor: Colors.grey.shade800,
     cardColor: Colors.grey.shade900,
     hintColor: Colors.yellow,
     brightness: Brightness.dark,

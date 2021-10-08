@@ -19,6 +19,7 @@ class AuthBackround extends StatelessWidget {
 }
 
 class _HeaderIcon extends StatelessWidget {
+  
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -45,7 +46,7 @@ class _RedBox extends StatelessWidget {
     return Container(
       width: double.infinity,
       height: size.height * 0.4,
-      decoration: _redBackground(),
+      decoration: _redBackground(context),
       child: Stack(
         children: [
           Positioned(
@@ -78,11 +79,17 @@ class _RedBox extends StatelessWidget {
     );
   }
 
-  BoxDecoration _redBackground() {
+  BoxDecoration _redBackground(context) {
+    final colorshex1 = Theme.of(context).brightness == Brightness.dark
+        ? '3A3E98'
+        : '00ff00';
+         final colorshex2 = Theme.of(context).brightness == Brightness.dark
+        ? '4AB1D8'
+        : '05d0ae';
     return BoxDecoration(
         gradient: LinearGradient(colors: [
-      HexColor('00ff00'),
-      HexColor('05d0ae'),
+      HexColor('$colorshex1'),
+      HexColor('$colorshex2'),
     ]));
   }
 }
