@@ -20,8 +20,11 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     final pages = [
       Container(
+        height: double.infinity,
+        width: double.infinity,
         decoration: BoxDecoration(
             gradient: LinearGradient(
                 begin: Alignment.topLeft,
@@ -34,25 +37,59 @@ class _SplashScreenState extends State<SplashScreen> {
               HexColor('00ff00'),
               HexColor('05d0ae'),
             ])),
+
         child: Stack(
           children: [
-            Positioned(
-              child: ClipPath(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Image.asset(
-                      'assets/logowhite.png',
-                      width: 500,
-                    ),
-                  ],
-                ),
+            _tapiz(size: size),
+            Padding(
+      padding: EdgeInsets.symmetric(horizontal: 30),
+      child: Container(
+        width: double.infinity,
+        padding: EdgeInsets.all(20),
+        child: Column(
+          children: [
+            SizedBox(height: size.width * 0.50,),
+            Container(
+              color: Colors.white,
+              width: size.width * 0.75,
+              child: Column(
+                children: [
+                  Text('')
+                ],
               ),
             )
           ],
         ),
+ 
+      ),
+    ),
+          ],
+        ),
+
+        // child: Center(
+        //   child: Stack(
+
+        //     children: [
+
+        //       Positioned(
+        //         child: ClipPath(
+        //           child: Column(
+        //             mainAxisAlignment: MainAxisAlignment.center,
+        //             children: [
+        //               Image.asset(
+        //                 'assets/logowhite.png',
+        //                 width: 500,
+        //               ),
+        //             ],
+        //           ),
+        //         ),
+        //       )
+        //     ],
+        //   ),
+        // ),
       ),
       Container(
+        width: double.infinity,
         decoration: BoxDecoration(
             gradient: LinearGradient(
                 begin: Alignment.topLeft,
@@ -84,6 +121,7 @@ class _SplashScreenState extends State<SplashScreen> {
         ),
       ),
       Container(
+        width: double.infinity,
         decoration: BoxDecoration(
             gradient: LinearGradient(
                 begin: Alignment.topLeft,
@@ -115,6 +153,7 @@ class _SplashScreenState extends State<SplashScreen> {
         ),
       ),
       Container(
+        width: double.infinity,
         decoration: BoxDecoration(
             gradient: LinearGradient(
                 begin: Alignment.topLeft,
@@ -221,5 +260,144 @@ class _SplashScreenState extends State<SplashScreen> {
         isDarkGlobal = false;
       }
     });
+  }
+}
+
+class _tapiz extends StatelessWidget {
+  const _tapiz({
+    Key? key,
+    required this.size,
+  }) : super(key: key);
+
+  final Size size;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: double.infinity,
+      height: double.infinity,
+    
+      child: Stack(
+        children: [
+          // 1, 1
+          Positioned(
+            child: _logoTapiz(),
+            top: size.height * 0.05,
+            left: size.width * 0.05,
+          ),
+          // 1,2
+          Positioned(
+            child: _logoTapiz(),
+            top: size.height * 0.05,
+            left: size.width * 0.55,
+          ),
+          //2,1
+          Positioned(
+            child: _logoTapiz(),
+            top: size.height * 0.2,
+            left: size.width * -0.25,
+          ), 
+          // 2,2
+          Positioned(
+            child: _logoTapiz(),
+            top: size.height * 0.2,
+            left: size.width * 0.3,
+          ), 
+          //2,3
+           Positioned(
+            child: _logoTapiz(),
+            top: size.height * 0.2,
+            left: size.width * 0.8,
+          ),
+          Positioned(
+            child: _logoTapiz(),
+            top: size.height * 0.35,
+            left: size.width * 0.1,
+          ),
+          Positioned(
+            child: _logoTapiz(),
+            top: size.height * 0.35,
+            left: size.width * 0.6,
+          ),
+            Positioned(
+            child: _logoTapiz(),
+            top: size.height * 0.5,
+            left: size.width * -0.1,
+          ),
+          Positioned(
+            child: _logoTapiz(),
+            top: size.height * 0.5,
+            left: size.width * 0.4,
+          ),
+          Positioned(
+            child: _logoTapiz(),
+            top: size.height * 0.5,
+            left: size.width * 0.9,
+          ),
+         
+           Positioned(
+            child: _logoTapiz(),
+            top: size.height * 0.65,
+            left: size.width * 0.15,
+          ),  Positioned(
+            child: _logoTapiz(),
+            top: size.height * 0.65,
+            left: size.width * 0.65,
+          ),
+           Positioned(
+            child: _logoTapiz(),
+            top: size.height * 0.8,
+            left: size.width * -0.1,
+          ),
+          Positioned(
+            child: _logoTapiz(),
+            top: size.height * 0.8,
+            left: size.width * 0.4,
+          ),
+          
+          Positioned(
+            child: _logoTapiz(),
+            top: size.height * 0.8,
+            left: size.width * 0.9,
+          ),
+            Positioned(
+            child: _logoTapiz(),
+            top: size.height * 0.95,
+            left: size.width * -0.3,
+          ),
+           Positioned(
+            child: _logoTapiz(),
+            top: size.height * 0.95,
+            left: size.width * 0.2,
+          ),
+           Positioned(
+            child: _logoTapiz(),
+            top: size.height * 0.95,
+            left: size.width * 0.7,
+          ),
+           
+           
+         
+        ],
+      ),
+    );
+  }
+}
+
+class _logoTapiz extends StatelessWidget {
+  const _logoTapiz({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+      final size = MediaQuery.of(context).size;
+    return Container(
+
+   
+      width: size.width * 0.35,
+      child: Opacity(
+        opacity: 0.3,
+        child: Image(image: AssetImage('assets/logoblack.png')),
+      ),
+    );
   }
 }

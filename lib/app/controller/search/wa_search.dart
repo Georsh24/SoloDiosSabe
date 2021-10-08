@@ -202,24 +202,24 @@ class WaSearchAction extends SearchDelegate<String>{
                                 ],
                               ),
                               Spacer(),
-                              Container(
-                                decoration: BoxDecoration(
-                                    color: getColorFromHex(GlobalColors().waColor),
-                                    borderRadius: BorderRadius.all(Radius.circular(8)),
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color: getColorFromHex(GlobalColors().waColor),
-                                        spreadRadius: 0.4,
-                                      )
-                                    ]
-                                ),
-                                child: Padding(
-                                  padding: const EdgeInsets.all(5.0),
-                                  child: Text('Download', style: TextStyle(
-                                      color: getColorFromHex(GlobalColors().colorWhite), fontSize: 12
-                                  ),),
-                                ),
-                              ),
+                              // Container(
+                              //   decoration: BoxDecoration(
+                              //       color: getColorFromHex(GlobalColors().waColor),
+                              //       borderRadius: BorderRadius.all(Radius.circular(8)),
+                              //       boxShadow: [
+                              //         BoxShadow(
+                              //           color: getColorFromHex(GlobalColors().waColor),
+                              //           spreadRadius: 0.4,
+                              //         )
+                              //       ]
+                              //   ),
+                              //   child: Padding(
+                              //     padding: const EdgeInsets.all(5.0),
+                              //     child: Text('Download', style: TextStyle(
+                              //         color: getColorFromHex(GlobalColors().colorWhite), fontSize: 12
+                              //     ),),
+                              //   ),
+                              // ),
                               SizedBox(width: 6,)
                             ],
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -350,24 +350,24 @@ class WaSearchAction extends SearchDelegate<String>{
                                 ],
                               ),
                               Spacer(),
-                              Container(
-                                decoration: BoxDecoration(
-                                    color: getColorFromHex(GlobalColors().waColor),
-                                    borderRadius: BorderRadius.all(Radius.circular(8)),
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color: getColorFromHex(GlobalColors().waColor),
-                                        spreadRadius: 0.4,
-                                      )
-                                    ]
-                                ),
-                                child: Padding(
-                                  padding: const EdgeInsets.all(5.0),
-                                  child: Text('Download', style: TextStyle(
-                                      color: getColorFromHex(GlobalColors().colorWhite), fontSize: 12
-                                  ),),
-                                ),
-                              ),
+                              // Container(
+                              //   decoration: BoxDecoration(
+                              //       color: getColorFromHex(GlobalColors().waColor),
+                              //       borderRadius: BorderRadius.all(Radius.circular(8)),
+                              //       boxShadow: [
+                              //         BoxShadow(
+                              //           color: getColorFromHex(GlobalColors().waColor),
+                              //           spreadRadius: 0.4,
+                              //         )
+                              //       ]
+                              //   ),
+                              //   child: Padding(
+                              //     padding: const EdgeInsets.all(5.0),
+                              //     child: Text('Download', style: TextStyle(
+                              //         color: getColorFromHex(GlobalColors().colorWhite), fontSize: 12
+                              //     ),),
+                              //   ),
+                              // ),
                               SizedBox(width: 6,)
                             ],
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,

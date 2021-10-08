@@ -6,13 +6,19 @@ import 'package:flutter_stickers_internet/app/inject_dependencies.dart';
 import 'package:flutter_meedu/router.dart' as router;
 import 'package:flutter_stickers_internet/app/view/details/wa_sticker_details.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:flutter/services.dart';
 //import 'package:provider/provider.dart';
 import 'app/my_app.dart';
 
 
 
 void main() async {
+
   WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown
+  ]);
   await Firebase.initializeApp();
   await injectDependencies();
   // final dir = Directory(getTemporaryDirectory());

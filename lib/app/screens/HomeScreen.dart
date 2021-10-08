@@ -1,5 +1,6 @@
 //import 'package:esys_flutter_share/esys_flutter_share.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_stickers_internet/app/view/bottom_bar/item/category.dart';
 import 'package:flutter_stickers_internet/app/view/bottom_bar/item/favorite.dart';
 
 import 'HomePage.dart';
@@ -16,7 +17,7 @@ class _HomeScreenState extends State<HomeScreen> {
   List<Widget> _paginas = <Widget>[
 //como esten ordenadas aqui las paginas estaran en las tabs son como urls
     MyHomePage(),
-    Favorite(),
+    CategoryItem(),
     PerfilPage(),
   ];
 
@@ -42,25 +43,25 @@ class _HomeScreenState extends State<HomeScreen> {
           BottomNavigationBarItem(
               label: 'Home', icon: Icon(Icons.apps_outlined)),
           BottomNavigationBarItem(
-              label: 'My Stickers',
+              label: 'Categories',
               icon: Stack(
                 children: [
-                  Icon(Icons.celebration),
-                  Positioned(
-                    top: 0,
-                    left: .0,
-                    child: Container(
-                      child: Text('12',
-                          style: TextStyle(color: Colors.white, fontSize: 8)),
-                      alignment: Alignment.center,
-                      width: 15,
-                      height: 15,
-                      decoration: BoxDecoration(
-                        color: Colors.red,
-                        shape: BoxShape.circle,
-                      ),
-                    ),
-                  )
+                  Icon(Icons.category_outlined),
+                  // Positioned(
+                  //   top: 0,
+                  //   left: .0,
+                  //   child: Container(
+                  //     child: Text('12',
+                  //         style: TextStyle(color: Colors.white, fontSize: 8)),
+                  //     alignment: Alignment.center,
+                  //     width: 15,
+                  //     height: 15,
+                  //     decoration: BoxDecoration(
+                  //       color: Colors.red,
+                  //       shape: BoxShape.circle,
+                  //     ),
+                  //   ),
+                  // )
                 ],
               )),
           BottomNavigationBarItem(

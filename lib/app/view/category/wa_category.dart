@@ -47,6 +47,7 @@ class _WaCategoryState extends State<WaCategory> {
 
   @override
   Widget build(BuildContext context) {
+       final size = MediaQuery.of(context).size;
     return Container(
       child: loading ? Center(child: CircularProgressIndicator(strokeWidth: 1.5,)) : Column(
         children: [
@@ -92,6 +93,8 @@ class _WaCategoryState extends State<WaCategory> {
                         child: Column(
                           children: [
                             Container(
+                              width: size.width * 0.2,
+                              height: size.height * 0.15,
                               margin: EdgeInsets.all(0.2),
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.all(Radius.circular(10)),
@@ -108,8 +111,8 @@ class _WaCategoryState extends State<WaCategory> {
                               ),
                               child: CachedNetworkImage(
                                 imageUrl: categories[index].photo_cat,
-                                fit: BoxFit.cover,
-                                width: 30.0.w,
+                                
+                                width: size.width * 0.5,
                                 height: 15.0.h,
                               ),
                             ),

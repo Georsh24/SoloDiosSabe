@@ -19,8 +19,8 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(create: (_) => ThemeProvider()),
         ChangeNotifierProvider(create: (_) => AuthService()),
-         ChangeNotifierProvider(create: (_) => WaFavoriteNotif()),
-      ChangeNotifierProvider(create: (_) => WaDetail()),
+          ChangeNotifierProvider(create: (_) => WaFavoriteNotif()),
+       ChangeNotifierProvider(create: (_) => WaDetail()),
       ],
       child: MaterilAppTheme(),
     );
@@ -31,10 +31,13 @@ class MaterilAppTheme extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final themeProvider = Provider.of<ThemeProvider>(context);
-    
+      // final orientationn = Orientation.portrait;
         return Sizer(
-      builder: (context, orientation, deviceType) {
+     
+      builder: (context, portrait, deviceType) {
+   
         return  MaterialApp(
+    
        key: router.appKey,
        title: 'Sticker Fun',
        navigatorKey: router.navigatorKey,

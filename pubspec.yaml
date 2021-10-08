@@ -27,7 +27,7 @@ dependencies:
   json_annotation: ^4.0.1
   liquid_swipe: ^2.1.0
   path_provider: ^2.0.2
-  permission_handler: ^8.1.4+2
+  permission_handler: ^8.2.2
   provider: ^5.0.0
   flutter_meedu: "^4.2.0"
   freezed: ^0.14.3
@@ -61,8 +61,8 @@ dev_dependencies:
 flutter_icons:
   android: "launcher_icon"
   ios: true
-  image_path: "assets/icon/icon.png"
-  adaptive_icon_background: "assets/icon/icon.png"
+  image_path: "assets/icon/IconFondo.png"
+  adaptive_icon_background: "assets/icon/IconFondo.png"
   remove_alpha_ios: true
 
 # For information on the generic Dart part of this file, see the

@@ -1,21 +1,22 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_stickers_internet/app/model/stickerPack.dart';
+import 'package:flutter_stickers_internet/app/model/stickerPack.dart';
 import 'package:flutter_stickers_internet/app/widget/favorite/wa_favorite.dart';
 import 'package:flutter_stickers_internet/app/widget/favorite/wa_favorite.dart';
-
-
 
 
 class WaDetail extends ChangeNotifier{
 
   bool favorite = false, loading = true;
-  int favorites = 0;
+  late int favorites;
   var waFav = WaFavorite();
 
   checkFav(int id) async {
-    List? list = await waFav.check({'id': id });
-    print ('check fav');
-    print(checkFav(id));
+    List list = await waFav.check({'id': id.toString()});
+    print('me traer');
+    print(id);
+    print('wadetail');
+    print(list);
     if (list.isNotEmpty) {
       setFav(true);
     }else{
@@ -23,35 +24,26 @@ class WaDetail extends ChangeNotifier{
     }
   }
 
-  // removeFavorite(int id) async {
-  //   waFav.remove({'id': id});
-  //   checkFav(id);
-  // }
-  removeFavorite(int id) async {
-    waFav.remove({'id': id}).then((v) {
-      print('remove to favorito wa detail');
-      print(id);
-      print('variable v');
-      print(v);
-      print('metodo remove');
-      print(removeFavorite(id));
-      checkFav(v);
-    });
+  removeFavorite(int id, StickerPack ebookModel) async {
+    waFav.remove({'id': id.toString(), 'item': ebookModel.toJson()});
+     print('me traer');
+    print(id);
+    print('remove wa detail');
+    print(waFav);
+    checkFav(id);
   }
 
-  addFavorite(int id,) async {
-    await waFav.addFavorites({'id': id, });
-    print('add favorito del wall detail');
-    print(id);
-    print ('metodo add favorites wadetail');
-    print(addFavorite(id));
+  addFavorite(int id, StickerPack ebookModel) async {
+    await waFav.addFavorites({'id': id.toString(), 'item': ebookModel.toJson()});
     checkFav(id);
+      print(id);
+    print('add wa fav');
+    print(waFav);
+  
   }
 
   void setFav(value){
     favorite = value;
-    print('Favorito de wa detail');
-    print(favorite);
     notifyListeners();
   }
 

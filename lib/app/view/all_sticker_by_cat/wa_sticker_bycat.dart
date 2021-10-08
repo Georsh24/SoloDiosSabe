@@ -14,12 +14,15 @@ import 'package:flutter_stickers_internet/app/view/details/wa_sticker_details.da
 import 'package:flutter_stickers_internet/app/widget/global_colors.dart';
 import 'package:flutter_stickers_internet/app/widget/global_padding.dart';
 import 'package:flutter_stickers_internet/app/widget/hex_colors.dart';
+import 'package:hexcolor/hexcolor.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 import 'package:sizer/sizer.dart';
 import 'package:http/http.dart' as http;
+import 'package:flutter_meedu/router.dart' as router;
+import 'package:flutter_meedu/flutter_meedu.dart' as medu;
 
 
 class WaAllStickerByCat extends StatefulWidget {
@@ -96,19 +99,78 @@ class _WaAllStickerByCatState extends State<WaAllStickerByCat>  with TickerProvi
 
   @override
   Widget build(BuildContext context) {
+     final logoimg = Theme.of(context).brightness == Brightness.dark
+        ? 'assets/logoblack.png'
+        : 'assets/logowhite.png';
+    final size = MediaQuery.of(context).size;
     return Material(
         child: Scaffold(
-          backgroundColor: getColorFromHex(GlobalColors().colorWhite),
+        
           appBar: AppBar(
-            backgroundColor: getColorFromHex(GlobalColors().colorWhite),
-            elevation: 0.0,
-            title: Text('All Stickers', style: TextStyle(color: getColorFromHex(GlobalColors().colorText)),),
-            leading: IconButton(
-              onPressed: (){
-                Navigator.pop(context);
-              },
-              icon: Icon(Icons.arrow_back_ios, color: getColorFromHex(GlobalColors().activeIconBottom),),),
+          toolbarHeight: size.height * 0.10,
+          automaticallyImplyLeading: false,
+          // actions: [
+          //   Container(
+          //     padding: EdgeInsets.only(right: 30),
+          //     child: GestureDetector(
+          //         onTap: () async {
+          //           if (details.favorite) {
+          //             details.removeFavorite(int.parse(widget.pack.identifier));
+          //           } else {
+          //             details.addFavorite(int.parse(widget.pack.identifier));
+          //           }
+          //           // router.pop();
+          //           loadigFav(context);
+          //         },
+          //         child: Icon(
+          //           details.favorite ? Icons.favorite : Icons.favorite,
+          //           color: details.favorite ? Colors.red : Colors.black38,
+          //           size: size.width * 0.050,
+          //         )),
+          //   )
+          // ],
+          leading: IconButton(
+            padding: EdgeInsets.all(30),
+            icon: Icon(
+              Icons.arrow_back,
+              color: Colors.grey,
+              size: size.width * 0.05,
+            ),
+            onPressed: () {
+              router.pop();
+            },
           ),
+          centerTitle: true,
+          title: Image.asset(
+            '$logoimg',
+            fit: BoxFit.contain,
+            height: size.height * 0.09,
+          ),
+          flexibleSpace: Container(
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topLeft,
+                end: Alignment.topRight,
+                stops: [
+                  0.1,
+                  0.80,
+                ],
+                colors: [
+                  HexColor('00ff00'),
+                  HexColor('05d0ae'),
+                ],
+              ),
+              border: Border(
+                bottom: BorderSide(
+                  width: 3,
+                  color: Colors.grey,
+                  style: BorderStyle.none,
+                ),
+              ),
+            ),
+          ),
+          elevation: 4,
+        ),
           floatingActionButton: Container(
             width: 50.0,
             height: 50.0,
@@ -124,6 +186,7 @@ class _WaAllStickerByCatState extends State<WaAllStickerByCat>  with TickerProvi
             ),
           ),
           body: Container(
+            padding: EdgeInsetsDirectional.all(12),
             child: SingleChildScrollView(
               controller: _scrollController,
               child: listOfStickerPack.length == 0 ? Align(
@@ -211,71 +274,71 @@ class _WaAllStickerByCatState extends State<WaAllStickerByCat>  with TickerProvi
                                   },
                                 ),
                                 Spacer(),
-                                Stack(
-                                  children: [
-                                    if(!downloadList.contains(listOfStickerPack[index].identiFier))...[
-                                      id == index && !downloading ? Center(
-                                        child: Container(
-                                          child: CircularProgressIndicator(strokeWidth: 1,),height: 2.0.h, width: 4.0.w,),
-                                      ) :
-                                      GestureDetector(
-                                        child: Container(
-                                          decoration: BoxDecoration(
-                                              color: getColorFromHex(GlobalColors().waColor),
-                                              borderRadius: BorderRadius.all(Radius.circular(8)),
-                                              boxShadow: [
-                                                BoxShadow(
-                                                  color: getColorFromHex(GlobalColors().waColor),
-                                                  spreadRadius: 0.4,
-                                                )
-                                              ]
-                                          ),
-                                          child: Padding(
-                                            padding: const EdgeInsets.all(5.0),
-                                            child: Text('Download', style: TextStyle(
-                                                color: getColorFromHex(GlobalColors().colorWhite), fontSize: 12
-                                            ),),
-                                          ),
-                                        ),
-                                        onTap: (){
-                                          setState(() {
-                                            id = index;
-                                            downloading = false;
-                                            downloadStickers(listOfStickerPack[index]);
-                                          });
-                                        },
-                                      ),
-                                    ],
-                                    if(downloadList.contains(listOfStickerPack[index].identiFier))...[
-                                      GestureDetector(
-                                        child: Container(
-                                          decoration: BoxDecoration(
-                                              color: getColorFromHex(GlobalColors().waColor),
-                                              borderRadius: BorderRadius.all(Radius.circular(8)),
-                                              boxShadow: [
-                                                BoxShadow(
-                                                  color: getColorFromHex(GlobalColors().waColor),
-                                                  spreadRadius: 0.4,
-                                                )
-                                              ]
-                                          ),
-                                          child: Padding(
-                                            padding: const EdgeInsets.all(5.0),
-                                            child: Text('Add to Whats app', style: TextStyle(
-                                                color: getColorFromHex(GlobalColors().colorWhite), fontSize: 12
-                                            ),),
-                                          ),
-                                        ),
-                                        onTap: (){
-                                          setState(() {
-                                            id = index;
-                                            addStickersToWa(listOfStickerPack[index]);
-                                          });
-                                        },
-                                      ),
-                                    ]
-                                  ],
-                                ),
+                                // Stack(
+                                //   children: [
+                                //     if(!downloadList.contains(listOfStickerPack[index].identiFier))...[
+                                //       id == index && !downloading ? Center(
+                                //         child: Container(
+                                //           child: CircularProgressIndicator(strokeWidth: 1,),height: 2.0.h, width: 4.0.w,),
+                                //       ) :
+                                //       GestureDetector(
+                                //         child: Container(
+                                //           decoration: BoxDecoration(
+                                //               color: getColorFromHex(GlobalColors().waColor),
+                                //               borderRadius: BorderRadius.all(Radius.circular(8)),
+                                //               boxShadow: [
+                                //                 BoxShadow(
+                                //                   color: getColorFromHex(GlobalColors().waColor),
+                                //                   spreadRadius: 0.4,
+                                //                 )
+                                //               ]
+                                //           ),
+                                //           child: Padding(
+                                //             padding: const EdgeInsets.all(5.0),
+                                //             child: Text('Download', style: TextStyle(
+                                //                 color: getColorFromHex(GlobalColors().colorWhite), fontSize: 12
+                                //             ),),
+                                //           ),
+                                //         ),
+                                //         onTap: (){
+                                //           setState(() {
+                                //             id = index;
+                                //             downloading = false;
+                                //             downloadStickers(listOfStickerPack[index]);
+                                //           });
+                                //         },
+                                //       ),
+                                //     ],
+                                //     if(downloadList.contains(listOfStickerPack[index].identiFier))...[
+                                //       GestureDetector(
+                                //         child: Container(
+                                //           decoration: BoxDecoration(
+                                //               color: getColorFromHex(GlobalColors().waColor),
+                                //               borderRadius: BorderRadius.all(Radius.circular(8)),
+                                //               boxShadow: [
+                                //                 BoxShadow(
+                                //                   color: getColorFromHex(GlobalColors().waColor),
+                                //                   spreadRadius: 0.4,
+                                //                 )
+                                //               ]
+                                //           ),
+                                //           child: Padding(
+                                //             padding: const EdgeInsets.all(5.0),
+                                //             child: Text('Add to Whats app', style: TextStyle(
+                                //                 color: getColorFromHex(GlobalColors().colorWhite), fontSize: 12
+                                //             ),),
+                                //           ),
+                                //         ),
+                                //         onTap: (){
+                                //           setState(() {
+                                //             id = index;
+                                //             addStickersToWa(listOfStickerPack[index]);
+                                //           });
+                                //         },
+                                //       ),
+                                //     ]
+                                //   ],
+                                // ),
                                 SizedBox(width: 6,)
                               ],
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,

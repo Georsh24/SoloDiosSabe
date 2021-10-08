@@ -4,7 +4,7 @@ import 'package:flutter_stickers_internet/app/widget/favorite/wa_favorite.dart';
 
 class WaFavoriteNotif extends ChangeNotifier{
 
-   List list =[]; 
+  List list = [];
   bool loading = true;
   var dbFavorite = WaFavorite();
 
@@ -18,13 +18,11 @@ class WaFavoriteNotif extends ChangeNotifier{
 
   setLoading(value){
     loading = value;
-    print(setLoading(value));
     notifyListeners();
   }
 
   setList(value){
     list = value;
-    print(setList(value));
     notifyListeners();
   }
 

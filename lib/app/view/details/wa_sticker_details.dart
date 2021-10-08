@@ -99,27 +99,27 @@ class _WaStickerDetailState extends State<WaStickerDetail> {
         appBar: AppBar(
           toolbarHeight: size.height * 0.10,
           automaticallyImplyLeading: false,
-          actions: [
-            Container(
-              padding: EdgeInsets.only(right: 30),
-              child: GestureDetector(
-                  onTap: () async {
-                    if (details.favorite) {
-                      details.removeFavorite(int.parse(widget.pack.identifier));
-                    } else {
-                      details.addFavorite(
-                          int.parse(widget.pack.identifier));
-                    }
-                    // router.pop();
-                    loadigFav(context);
-                  },
-                  child: Icon(
-                    details.favorite ? Icons.favorite : Icons.favorite,
-                    color: details.favorite ? Colors.red : Colors.black38,
-                    size: size.width * 0.050,
-                  )),
-            )
-          ],
+          // actions: [
+          //   Container(
+          //     padding: EdgeInsets.only(right: 30),
+          //     child: GestureDetector(
+          //         onTap: () async {
+          //           if (details.favorite) {
+          //             details.removeFavorite(int.parse(widget.pack.identifier), widget.pack);
+          //           } else {
+          //             details.addFavorite(
+          //                 int.parse(widget.pack.identifier),widget.pack);
+          //           }
+          //           // router.pop();r
+          //           loadigFav(context);
+          //         },
+          //         child: Icon(
+          //           details.favorite ? Icons.favorite : Icons.favorite,
+          //           color: details.favorite ? Colors.red : Colors.black38,
+          //           size: size.width * 0.050,
+          //         )),
+          //   )
+          // ],
           leading: IconButton(
             padding: EdgeInsets.all(30),
             icon: Icon(
@@ -670,4 +670,3 @@ void onGooglePayResult(paymentResult) {
   debugPrint(paymentResult.toString());
   // Send the resulting Google Pay token to your server / PSP
 }
-
