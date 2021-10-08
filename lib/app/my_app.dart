@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => ThemeProvider()),
-        ChangeNotifierProvider(create: (_) => AuthService()),
+        
           ChangeNotifierProvider(create: (_) => WaFavoriteNotif()),
        ChangeNotifierProvider(create: (_) => WaDetail()),
       ],

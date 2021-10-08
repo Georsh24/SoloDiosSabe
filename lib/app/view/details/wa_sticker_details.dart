@@ -9,7 +9,7 @@ import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_stickers_internet/app/controller/api/api_constant.dart';
 import 'package:flutter_stickers_internet/app/model/stickerPack.dart';
-import 'package:flutter_stickers_internet/app/screens/StickerDetails.dart';
+import 'package:flutter_stickers_internet/app/back/screens/StickerDetails.dart';
 import 'package:flutter_stickers_internet/app/ui/global_controllers/session_controller.dart';
 import 'package:flutter_stickers_internet/app/ui/routes/routes.dart';
 import 'package:flutter_stickers_internet/app/widget/favorite/wa_detail.dart';

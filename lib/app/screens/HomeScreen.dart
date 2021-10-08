@@ -4,7 +4,7 @@ import 'package:flutter_stickers_internet/app/view/bottom_bar/item/category.dart
 import 'package:flutter_stickers_internet/app/view/bottom_bar/item/favorite.dart';
 
 import 'HomePage.dart';
-import 'MyStickers.dart';
+import '../back/screens/MyStickers.dart';
 import 'PerfilPage.dart';
 
 class HomeScreen extends StatefulWidget {
