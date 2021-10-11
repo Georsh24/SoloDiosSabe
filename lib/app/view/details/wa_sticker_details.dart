@@ -22,6 +22,8 @@ import 'package:provider/provider.dart';
 import 'package:flutter_meedu/router.dart' as router;
 import 'package:flutter_meedu/flutter_meedu.dart' as medu;
 import 'package:pay/pay.dart';
+import 'package:whatsapp_stickers/exceptions.dart';
+import 'package:whatsapp_stickers/whatsapp_stickers.dart';
 import 'package:sizer/sizer.dart';
 
 FirebaseFirestore firestore = FirebaseFirestore.instance;
@@ -386,7 +388,8 @@ class _WaStickerDetailState extends State<WaStickerDetail> {
                             if (!downloadList
                                 .contains(widget.pack.identiFier)) {
                               downloading = false;
-                              downloadStickers(widget.pack, context);
+                             // downloadStickers(widget.pack, context);
+                               downloadStickers(widget.pack, context);
                             } else {
                               addStickersToWa(widget.pack);
                             }
@@ -473,20 +476,36 @@ class _WaStickerDetailState extends State<WaStickerDetail> {
           print("dio second: $percentage");
         });
       }
+      // try {
+      //   ApiConstant.methodChannel.invokeMapMethod("addTOJson", {
+      //     "identiFier": pack.identiFier,
+      //     "name": pack.names,
+      //     "publisher": pack.publisher,
+      //     "trayimagefile": pathbasename.basename(pack.trayimageFile),
+      //     "publisheremail": pack.publisherEmail,
+      //     "publisherwebsite": pack.publisherWebsite,
+      //     "privacypolicywebsite": pack.privacyPolicyWebsite,
+      //     "licenseagreementwebsite": pack.licenseAgreementWebsite,
+      //     "sticker_image": imageList,
+      //   });
+      // } on PlatformException catch (error) {
+      //   print(error.message);
+      // }
+        var stickerpack = WhatsappStickers(
+           identifier: pack.identiFier,
+          name: pack.names,
+          publisher: pack.publisher,
+          trayImageFileName: WhatsappStickerImage.fromAsset(pack.trayimageFile),
+         // publisheremail: pack.publisherEmail,
+          publisherWebsite: pack.publisherWebsite,
+          privacyPolicyWebsite: pack.privacyPolicyWebsite,
+          licenseAgreementWebsite: pack.licenseAgreementWebsite,
+           stickers: imageList,
+          );
       try {
-        ApiConstant.methodChannel.invokeMapMethod("addTOJson", {
-          "identiFier": pack.identiFier,
-          "name": pack.names,
-          "publisher": pack.publisher,
-          "trayimagefile": pathbasename.basename(pack.trayimageFile),
-          "publisheremail": pack.publisherEmail,
-          "publisherwebsite": pack.publisherWebsite,
-          "privacypolicywebsite": pack.privacyPolicyWebsite,
-          "licenseagreementwebsite": pack.licenseAgreementWebsite,
-          "sticker_image": imageList,
-        });
-      } on PlatformException catch (error) {
-        print(error.message);
+          await stickerpack.sendToWhatsApp();
+      }on WhatsappStickersException catch (e){
+        print(e.cause);
       }
 
       setState(() {
@@ -498,6 +517,71 @@ class _WaStickerDetailState extends State<WaStickerDetail> {
       Navigator.of(ctx).pop();
     }
   }
+  // Future<void> downloadStickerst(StickerPack pack, ctx) async {
+  //   showProgressDownload(ctx);
+  //   imageList.clear();
+  //   if (!downloadList.contains(pack.identiFier)) {
+  //     await Permission.storage.request();
+  //     dioDownload = new Dio();
+  //     var saveToDirectory = await getApplicationDocumentsDirectory();
+  //     var paths = await Directory(saveToDirectory.path +
+  //             "/" +
+  //             "stickers_asset" +
+  //             "/" +
+  //             pack.identiFier +
+  //             "/")
+  //         .create(recursive: true);
+  //     var trayImgPath = await Directory(saveToDirectory.path +
+  //             "/" +
+  //             "stickers_asset" +
+  //             "/" +
+  //             pack.identiFier +
+  //             "/try/")
+  //         .create(recursive: true);
+  //     String tray =
+  //         trayImgPath.path + pathbasename.basename(pack.trayimageFile);
+
+  //     await dioDownload.download(pack.trayimageFile, tray,
+  //         onReceiveProgress: (receive, totals) {
+  //       int percentage = ((receive / totals) * 100).floor();
+  //       print("dio download: $percentage");
+  //     });
+
+  //     for (int i = 0; i < pack.sticker.length; i++) {
+  //       String pathFile =
+  //           paths.path + pathbasename.basename(pack.sticker[i].imageFile);
+  //       imageList.add(pathbasename.basename(pack.sticker[i].imageFile));
+  //       await dioDownload.download(pack.sticker[i].imageFile, pathFile,
+  //           onReceiveProgress: (receive, totals) {
+  //         int percentage = ((receive / totals) * 100).floor();
+  //         print("dio second: $percentage");
+  //       });
+  //     }
+  //     try {
+  //       ApiConstant.methodChannel.invokeMapMethod("addTOJsonT", {
+  //         "identiFier": pack.identiFier,
+  //         "name": pack.names,
+  //         "publisher": pack.publisher,
+  //         "trayimagefile": pathbasename.basename(pack.trayimageFile),
+  //         "publisheremail": pack.publisherEmail,
+  //         "publisherwebsite": pack.publisherWebsite,
+  //         "privacypolicywebsite": pack.privacyPolicyWebsite,
+  //         "licenseagreementwebsite": pack.licenseAgreementWebsite,
+  //         "sticker_image": imageList,
+  //       });
+  //     } on PlatformException catch (error) {
+  //       print(error.message);
+  //     }
+
+  //     setState(() {
+  //       downloading = true;
+  //       if (!downloadList.contains(pack.identiFier)) {
+  //         downloadList.add(pack.identiFier);
+  //       }
+  //     });
+  //     Navigator.of(ctx).pop();
+  //   }
+  // }
 
   Future<void> showProgressDownload(context) {
     CupertinoAlertDialog s = CupertinoAlertDialog(

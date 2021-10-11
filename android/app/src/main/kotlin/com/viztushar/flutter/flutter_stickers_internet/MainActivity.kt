@@ -171,5 +171,21 @@ class MainActivity : FlutterActivity(), MethodChannel.MethodCallHandler {
         } else if (call.method == "addStickerPackToWhatsApp") {
             addStickerPackToWhatsApp(call.argument("identifier"), call.argument("name"))
         }
+        //para ver si se puede agregar telegram
+        //  else if (call.method == "addTOJsonT") {
+        //     Log.d(TAG, "onMethodCall: " + call.argument("identiFier"))
+        //     Log.d(TAG,
+        //             call.argument<Any>("identiFier").toString() + " " + call.argument("name") + " " +
+        //                     call.argument("publisher") + " " + call.argument("trayimagefile") + " " +
+        //                     call.argument("publisheremail") + " " + call.argument("publisherwebsite") + " " +
+        //                     call.argument("privacypolicywebsite") + " " + call.argument("licenseagreementwebsite") + " " +
+        //                     call.argument("sticker_image")
+        //     )
+        //     addToJson(call.argument("identiFier"), call.argument("name"),
+        //             call.argument("publisher"), call.argument("trayimagefile"),
+        //             call.argument("publisheremail"), call.argument("publisherwebsite"),
+        //             call.argument("privacypolicywebsite"), call.argument("licenseagreementwebsite"),
+        //             Objects.requireNonNull(call.argument("sticker_image")))
+        // } 
     }
 }

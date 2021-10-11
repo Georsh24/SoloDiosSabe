@@ -11,7 +11,7 @@ import 'package:flutter_stickers_internet/app/view/all_sticker_by_cat/wa_sticker
 import 'package:flutter_stickers_internet/app/widget/global_colors.dart';
 import 'package:flutter_stickers_internet/app/widget/hex_colors.dart';
 import 'package:http/http.dart' as http;
-import 'package:sizer/sizer.dart';
+
 
 
 class WaCategory extends StatefulWidget {
@@ -93,8 +93,8 @@ class _WaCategoryState extends State<WaCategory> {
                         child: Column(
                           children: [
                             Container(
-                              width: size.width * 0.2,
-                              height: size.height * 0.12,
+                              width: size.width * 0.25,
+                              height: size.height * 0.115,
                               margin: EdgeInsets.all(0.2),
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.all(Radius.circular(10)),
@@ -112,8 +112,8 @@ class _WaCategoryState extends State<WaCategory> {
                               child: CachedNetworkImage(
                                 imageUrl: categories[index].photo_cat,
                                 
-                                width: size.width * 0.5,
-                                height: 15.0.h,
+                               fit: BoxFit.contain,
+                              
                               ),
                             ),
                             Center(

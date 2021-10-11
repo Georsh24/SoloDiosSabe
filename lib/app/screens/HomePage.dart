@@ -29,7 +29,6 @@ import 'package:sizer/sizer.dart';
 import 'package:http/http.dart' as http;
 
 class MyHomePage extends StatefulWidget {
-
   @override
   _MyHomePageState createState() => _MyHomePageState();
 }
@@ -108,7 +107,6 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   void initState() {
-  
     super.initState();
     loading = true;
     loadingSlider = true;
@@ -126,7 +124,6 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   void dispose() {
-  
     //widget.scrollController.dispose();
     super.dispose();
   }
@@ -193,7 +190,6 @@ class _MyHomePageState extends State<MyHomePage> {
           body: Container(
             child: Center(
               child: SingleChildScrollView(
-             
                 child: loadingSlider
                     ? Container(
                         child: Align(
@@ -350,8 +346,9 @@ class _MyHomePageState extends State<MyHomePage> {
                           ),
                           Container(
                             child: SizedBox(
-                                height: size.height * 0.20,
-                                child: WaCategory()),
+                              height: size.height * 0.21,
+                              child: WaCategory(),
+                            ),
                           ),
                           Container(
                             child: Column(
@@ -496,7 +493,6 @@ class _MyHomePageState extends State<MyHomePage> {
                                                                   index]
                                                               .publisher,
                                                           style: TextStyle(
-                                                             
                                                               fontSize: 18),
                                                         ),
                                                         Text(

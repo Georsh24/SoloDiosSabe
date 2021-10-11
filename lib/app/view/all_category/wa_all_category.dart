@@ -9,7 +9,6 @@ import 'package:flutter_stickers_internet/app/view/all_sticker_by_cat/wa_sticker
 import 'package:flutter_stickers_internet/app/widget/global_colors.dart';
 import 'package:flutter_stickers_internet/app/widget/hex_colors.dart';
 import 'package:hexcolor/hexcolor.dart';
-import 'package:sizer/sizer.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_meedu/router.dart' as router;
@@ -51,6 +50,8 @@ class _WaAllCategoryState extends State<WaAllCategory> {
   @override
   void initState() {
     super.initState();
+    isLoading = true;
+    getAllCategory();
     // _interstitialAd = InterstitialAd(
     //   adUnitId: AdManager.interstitialAdUnitId,
     // );
@@ -60,15 +61,13 @@ class _WaAllCategoryState extends State<WaAllCategory> {
     //       anchorType: AnchorType.bottom,
     //       anchorOffset: 0.0,
     //       horizontalCenterOffset: 0.0);
-    isLoading = true;
-    getAllCategory();
   }
 
-  @override
-  void dispose() {
-    super.dispose();
-    // _interstitialAd?.dispose();
-  }
+  // @override
+  // void dispose() {
+  //   super.dispose();
+  //   // _interstitialAd?.dispose();
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -77,198 +76,158 @@ class _WaAllCategoryState extends State<WaAllCategory> {
         : 'assets/logowhite.png';
     final size = MediaQuery.of(context).size;
     return Material(
-        child: Scaffold(
-            appBar: AppBar(
-              toolbarHeight: size.height * 0.10,
-              automaticallyImplyLeading: false,
-              // actions: [
-              //   Container(
-              //     padding: EdgeInsets.only(right: 30),
-              //     child: GestureDetector(
-              //         onTap: () async {
-              //           if (details.favorite) {
-              //             details.removeFavorite(int.parse(widget.pack.identifier));
-              //           } else {
-              //             details.addFavorite(int.parse(widget.pack.identifier));
-              //           }
-              //           // router.pop();
-              //           loadigFav(context);
-              //         },
-              //         child: Icon(
-              //           details.favorite ? Icons.favorite : Icons.favorite,
-              //           color: details.favorite ? Colors.red : Colors.black38,
-              //           size: size.width * 0.050,
-              //         )),
-              //   )
-              // ],
-              leading: IconButton(
-                padding: EdgeInsets.all(30),
-                icon: Icon(
-                  Icons.arrow_back,
-                  color: Colors.grey,
-                  size: size.width * 0.05,
-                ),
-                onPressed: () {
-                  router.pop();
-                },
-              ),
-              centerTitle: true,
-              title: Image.asset(
-                '$logoimg',
-                fit: BoxFit.contain,
-                height: size.height * 0.09,
-              ),
-              flexibleSpace: Container(
-                decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    begin: Alignment.topLeft,
-                    end: Alignment.topRight,
-                    stops: [
-                      0.1,
-                      0.80,
-                    ],
-                    colors: [
-                      HexColor('00ff00'),
-                      HexColor('05d0ae'),
-                    ],
-                  ),
-                  border: Border(
-                    bottom: BorderSide(
-                      width: 3,
-                      color: Colors.grey,
-                      style: BorderStyle.none,
-                    ),
-                  ),
-                ),
-              ),
-              elevation: 4,
+      child: Scaffold(
+        appBar: AppBar(
+          toolbarHeight: size.height * 0.10,
+          automaticallyImplyLeading: false,
+          // actions: [
+          //   Container(
+          //     padding: EdgeInsets.only(right: 30),
+          //     child: GestureDetector(
+          //         onTap: () async {
+          //           if (details.favorite) {
+          //             details.removeFavorite(int.parse(widget.pack.identifier));
+          //           } else {
+          //             details.addFavorite(int.parse(widget.pack.identifier));
+          //           }
+          //           // router.pop();
+          //           loadigFav(context);
+          //         },
+          //         child: Icon(
+          //           details.favorite ? Icons.favorite : Icons.favorite,
+          //           color: details.favorite ? Colors.red : Colors.black38,
+          //           size: size.width * 0.050,
+          //         )),
+          //   )
+          // ],
+          leading: IconButton(
+            padding: EdgeInsets.all(30),
+            icon: Icon(
+              Icons.arrow_back,
+              color: Colors.grey,
+              size: size.width * 0.05,
             ),
-            body: Column(
-              children: [
-                SizedBox(
-                  height: 20,
+            onPressed: () {
+              router.pop();
+            },
+          ),
+          centerTitle: true,
+          title: Image.asset(
+            '$logoimg',
+            fit: BoxFit.contain,
+            height: size.height * 0.09,
+          ),
+          flexibleSpace: Container(
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topLeft,
+                end: Alignment.topRight,
+                stops: [
+                  0.1,
+                  0.80,
+                ],
+                colors: [
+                  HexColor('00ff00'),
+                  HexColor('05d0ae'),
+                ],
+              ),
+              border: Border(
+                bottom: BorderSide(
+                  width: 3,
+                  color: Colors.grey,
+                  style: BorderStyle.none,
                 ),
-                Container(
-                  child: GridView.builder(
-                      shrinkWrap: true,
-                      physics: NeverScrollableScrollPhysics(),
-                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 3,
-                          childAspectRatio: 8.0 / 9.0,
-                          crossAxisSpacing: 10.0,
-                          mainAxisSpacing: 3.0),
-                      itemCount: listOfCategory.length,
-                      itemBuilder: (ctx, i) {
-                        return Hero(
-                          tag: listOfCategory[i],
-                          child: GestureDetector(
-                            // child: Column(
-                            child: Padding(
-                              padding: const EdgeInsets.all(5),
-                              child: ClipRRect(
-                                borderRadius: BorderRadius.circular(15),
-                                child: Column(
-                                  children: [
-                                    Container(
-                                      width: 31.0.w,
-                                      height: 15.0.h,
-                                      margin: EdgeInsets.all(0.2),
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(10)),
+              ),
+            ),
+          ),
+          elevation: 4,
+        ),
+        body: Column(
+          children: [
+            SizedBox(
+              height: 20,
+            ),
+            Container(
+              child: GridView.builder(
+                  shrinkWrap: true,
+                  physics: NeverScrollableScrollPhysics(),
+                  
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 3,
+                      childAspectRatio: 8.5 / 9.0,
+                      crossAxisSpacing: 0.0,
+                      mainAxisSpacing: 2.0),
+                  itemCount: listOfCategory.length,
+                  itemBuilder: (ctx, i) {
+                    return Hero(
+                      tag: listOfCategory[i],
+                      child: GestureDetector(
+                        // child: Column(
+                        child: Padding(
+                          padding: const EdgeInsets.all(5),
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(15),
+                            child: Column(
+                              children: [
+                                Container(
+                                  
+                                  width: size.width * 0.27,
+                                  height: size.height * 0.14,
+                                  margin: EdgeInsets.all(0.2),
+                                  decoration: BoxDecoration(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(10)),
+                                    color: listOfCategory[i].color == ""
+                                        ? getColorFromHex(
+                                            GlobalColors().bgSticker)
+                                        : getColorFromHex(
+                                            listOfCategory[i].color),
+                                    boxShadow: [
+                                      BoxShadow(
                                         color: listOfCategory[i].color == ""
                                             ? getColorFromHex(
-                                                GlobalColors().bgSticker)
+                                                GlobalColors().colorWhite)
                                             : getColorFromHex(
                                                 listOfCategory[i].color),
-                                        boxShadow: [
-                                          BoxShadow(
-                                            color: listOfCategory[i].color == ""
-                                                ? getColorFromHex(
-                                                    GlobalColors().colorWhite)
-                                                : getColorFromHex(
-                                                    listOfCategory[i].color),
-                                            blurRadius: 1.0,
-                                            spreadRadius: 0.2,
-                                          )
-                                        ],
-                                      ),
-                                      child: CachedNetworkImage(
-                                        imageUrl: listOfCategory[i].photo_cat,
-                                        width: size.width * 0.5,
-                                        height: 15.0.h,
-                                      ),
-                                    ),
-                                    Center(
-                                      child: Text(
-                                        '${listOfCategory[i].name}',
-                                        style: TextStyle(
-                                            color: getColorFromHex(GlobalColors()
-                                                .searchIconColor), //ebookTheme.themeMode().ratingBar,
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 16),
-                                      ),
-                                    ),
-                                  ],
+                                        blurRadius: 1.0,
+                                        spreadRadius: 0.2,
+                                      )
+                                    ],
+                                  ),
+                                  child: CachedNetworkImage(
+                                    imageUrl: listOfCategory[i].photo_cat,
+                                  
+                                  ),
                                 ),
-                              ),
+                                Center(
+                                  child: Text(
+                                    '${listOfCategory[i].name}',
+                                    style: TextStyle(
+                                        color: getColorFromHex(GlobalColors()
+                                            .searchIconColor), //ebookTheme.themeMode().ratingBar,
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 16),
+                                  ),
+                                ),
+                              ],
                             ),
-                            //   children: [
-                            //     Container(
-                            //       margin: EdgeInsets.all(2),
-                            //       decoration: BoxDecoration(
-                            //           color: listOfCategory[i].color == ""
-                            //               ? getColorFromHex(GlobalColors().bgSticker)
-                            //               : getColorFromHex(listOfCategory[i].color),
-                            //           borderRadius:
-                            //               BorderRadius.all(Radius.circular(15))),
-                            //       child: Column(
-                            //         children: [
-                            //           Container(
-
-                            //             child: Image.network(
-                            //               listOfCategory[i].photo_cat,
-
-                            //             ),
-                            //           ),
-
-                            //           // Align(
-
-                            //           //   child: Text(
-                            //           //     '${listOfCategory[i].name}',
-                            //           //     style: TextStyle(
-                            //           //         color: getColorFromHex(GlobalColors()
-                            //           //             .colorText), //ebookTheme.themeMode().ratingBar,
-                            //           //         fontWeight: FontWeight.bold,
-                            //           //         fontSize: 20),
-                            //           //   ),
-                            //           // ),
-                            //           // Center(
-                            //           //   child: Image.network(
-                            //           //     listOfCategory[i].photo_cat,
-                            //           //     height: 25.0.h,
-                            //           //     width: 25.0.w,
-                            //           //   ),
-                            //           // ),
-                            //         ],
-                            //       ),
-
-                            //     ),
-                            //       Text('${listOfCategory[i].name}'),
-                            //   ],
-                            // ),
-                            onTap: () {
-                              pushPage(
-                                  context,
-                                  WaAllStickerByCat(
-                                    id: listOfCategory[i].cat_id,
-                                  ));
-                            },
                           ),
-                        );
-                      }),
-                ),
-              ],
-            )));
+                        ),
+
+                        onTap: () {
+                          pushPage(
+                              context,
+                              WaAllStickerByCat(
+                                id: listOfCategory[i].cat_id,
+                              ));
+                        },
+                      ),
+                    );
+                  }),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }

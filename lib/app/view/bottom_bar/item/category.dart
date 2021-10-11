@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_stickers_internet/app/controller/api/api_constant.dart';
 import 'package:flutter_stickers_internet/app/model/category.dart';
 import 'package:flutter_stickers_internet/app/model/wa_model_cat.dart';
@@ -7,7 +8,6 @@ import 'package:flutter_stickers_internet/app/view/all_sticker_by_cat/wa_sticker
 import 'package:flutter_stickers_internet/app/widget/global_colors.dart';
 import 'package:flutter_stickers_internet/app/widget/hex_colors.dart';
 import 'package:hexcolor/hexcolor.dart';
-import 'package:sizer/sizer.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -58,114 +58,130 @@ class _CategoryItemState extends State<CategoryItem> {
         : 'assets/logowhite.png';
     final size = MediaQuery.of(context).size;
     return WillPopScope(
-        onWillPop: () async => false,
+      onWillPop: () async => false,
+      child: Material(
         child: Scaffold(
-            appBar: AppBar(
-              toolbarHeight: size.height * 0.10,
-              automaticallyImplyLeading: false,
-              centerTitle: true,
-              title: Image.asset(
-                '$logoimg',
-                fit: BoxFit.contain,
-                height: size.height * 0.09,
-              ),
-              flexibleSpace: Container(
-                decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    begin: Alignment.topLeft,
-                    end: Alignment.topRight,
-                    stops: [
-                      0.1,
-                      0.80,
-                    ],
-                    colors: [
-                      HexColor('00ff00'),
-                      HexColor('05d0ae'),
-                    ],
-                  ),
-                  border: Border(
-                    bottom: BorderSide(
-                      width: 3,
-                      color: Colors.grey,
-                      style: BorderStyle.none,
-                    ),
-                  ),
-                ),
-              ),
-              elevation: 4,
+          appBar: AppBar(
+            toolbarHeight: size.height * 0.10,
+            automaticallyImplyLeading: false,
+            centerTitle: true,
+            title: Image.asset(
+              '$logoimg',
+              fit: BoxFit.contain,
+              height: size.height * 0.09,
             ),
-            body: Column(
-              children: [
-                SizedBox(
-                  height: 15,
+            flexibleSpace: Container(
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.topLeft,
+                  end: Alignment.topRight,
+                  stops: [
+                    0.1,
+                    0.80,
+                  ],
+                  colors: [
+                    HexColor('00ff00'),
+                    HexColor('05d0ae'),
+                  ],
                 ),
-                Container(
-                  child: isLoading
-                      ? Center(
-                          child: Container(
-                          child: CircularProgressIndicator(
-                            strokeWidth: 1.5,
-                          ),
-                        ))
-                      : GridView.builder(
-                          shrinkWrap: true,
-                          physics: NeverScrollableScrollPhysics(),
-                          gridDelegate:
-                              SliverGridDelegateWithFixedCrossAxisCount(
-                                  crossAxisCount: 3,
-                                  childAspectRatio: 8.0 / 9.0,
-                                  crossAxisSpacing: 10.0,
-                                  mainAxisSpacing: 10.0),
-                          itemCount: listOfCategory.length,
-                          itemBuilder: (ctx, i) {
-                            return Hero(
-                              tag: listOfCategory[i],
-                              child: GestureDetector(
-                                child: Container(
-                                  margin: EdgeInsets.all(2),
+                border: Border(
+                  bottom: BorderSide(
+                    width: 3,
+                    color: Colors.grey,
+                    style: BorderStyle.none,
+                  ),
+                ),
+              ),
+            ),
+            elevation: 4,
+          ),
+           body: Column(
+          children: [
+            SizedBox(
+              height: 20,
+            ),
+            Container(
+              child: GridView.builder(
+                  shrinkWrap: true,
+                  physics: NeverScrollableScrollPhysics(),
+                  
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 3,
+                      childAspectRatio: 8.5 / 9.0,
+                      crossAxisSpacing: 0.0,
+                      mainAxisSpacing: 2.0),
+                  itemCount: listOfCategory.length,
+                  itemBuilder: (ctx, i) {
+                    return Hero(
+                      tag: listOfCategory[i],
+                      child: GestureDetector(
+                        // child: Column(
+                        child: Padding(
+                          padding: const EdgeInsets.all(5),
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(15),
+                            child: Column(
+                              children: [
+                                Container(
+                                  
+                                  width: size.width * 0.27,
+                                  height: size.height * 0.14,
+                                  margin: EdgeInsets.all(0.2),
                                   decoration: BoxDecoration(
-                                      color: listOfCategory[i].color == ""
-                                          ? getColorFromHex(
-                                              GlobalColors().bgSticker)
-                                          : getColorFromHex(
-                                              listOfCategory[i].color),
-                                      borderRadius: BorderRadius.all(
-                                          Radius.circular(15))),
-                                  child: Stack(
-                                    children: [
-                                      Align(
-                                        alignment: Alignment.bottomCenter,
-                                        child: Text(
-                                          '${listOfCategory[i].name}',
-                                          style: TextStyle(
-                                              color: getColorFromHex(GlobalColors()
-                                                  .colorText), //ebookTheme.themeMode().ratingBar,
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 20),
-                                        ),
-                                      ),
-                                      Center(
-                                        child: Image.network(
-                                          listOfCategory[i].photo_cat,
-                                          height: 25.0.h,
-                                          width: 25.0.w,
-                                        ),
-                                      ),
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(10)),
+                                    color: listOfCategory[i].color == ""
+                                        ? getColorFromHex(
+                                            GlobalColors().bgSticker)
+                                        : getColorFromHex(
+                                            listOfCategory[i].color),
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: listOfCategory[i].color == ""
+                                            ? getColorFromHex(
+                                                GlobalColors().colorWhite)
+                                            : getColorFromHex(
+                                                listOfCategory[i].color),
+                                        blurRadius: 1.0,
+                                        spreadRadius: 0.2,
+                                      )
                                     ],
                                   ),
+                                  child: CachedNetworkImage(
+                                    imageUrl: listOfCategory[i].photo_cat,
+                                  
+                                  ),
                                 ),
-                                onTap: () {
-                                  pushPage(
-                                      context,
-                                      WaAllStickerByCat(
-                                        id: listOfCategory[i].cat_id,
-                                      ));
-                                },
-                              ),
-                            );
-                          }),
-                ),
-              ],
-            )));
+                                Center(
+                                  child: Text(
+                                    '${listOfCategory[i].name}',
+                                    style: TextStyle(
+                                        color: getColorFromHex(GlobalColors()
+                                            .searchIconColor), //ebookTheme.themeMode().ratingBar,
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 16),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+
+                        onTap: () {
+                          pushPage(
+                              context,
+                              WaAllStickerByCat(
+                                id: listOfCategory[i].cat_id,
+                              ));
+                        },
+                      ),
+                    );
+                  }),
+            ),
+          ],
+        ),
+        ),
+      ),
+    );
   }
 }
