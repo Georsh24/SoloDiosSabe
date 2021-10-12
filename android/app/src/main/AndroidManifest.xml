@@ -14,7 +14,10 @@
         android:label="Sticker Fun"
         android:usesCleartextTraffic="true"
         android:icon="@mipmap/launcher_icon"
-        tools:ignore="GoogleAppIndexingWarning">
+        tools:ignore="GoogleAppIndexingWarning"  
+        tools:replace="android:name"
+        >
+      
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"

@@ -117,10 +117,14 @@ class _WaAllStickerState extends State<WaAllSticker>
     final logoimg = Theme.of(context).brightness == Brightness.dark
         ? 'assets/logoblack.png'
         : 'assets/logowhite.png';
+          final colorshex1 =
+        Theme.of(context).brightness == Brightness.dark ? '3A3E98' : '00ff00';
+    final colorshex2 =
+        Theme.of(context).brightness == Brightness.dark ? '4AB1D8' : '05d0ae';
     final size = MediaQuery.of(context).size;
     return Material(
         child: Scaffold(
-      backgroundColor: getColorFromHex(GlobalColors().colorWhite),
+   
       appBar: AppBar(
         toolbarHeight: size.height * 0.10,
         automaticallyImplyLeading: false,
@@ -171,8 +175,8 @@ class _WaAllStickerState extends State<WaAllSticker>
                 0.80,
               ],
               colors: [
-                HexColor('00ff00'),
-                HexColor('05d0ae'),
+                HexColor('$colorshex1'),
+                HexColor('$colorshex2'),
               ],
             ),
             border: Border(
@@ -202,7 +206,9 @@ class _WaAllStickerState extends State<WaAllSticker>
           ),
         ),
       ),
+  
       body: Container(
+        padding: EdgeInsetsDirectional.only(top: 25),
         child: SingleChildScrollView(
           controller: _scrollController,
           child: ListView.builder(
@@ -216,7 +222,7 @@ class _WaAllStickerState extends State<WaAllSticker>
                     margin: EdgeInsets.all(4),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.all(Radius.circular(10)),
-                      color: Colors.white,
+                     color: Theme.of(context).cardColor,
                       boxShadow: [
                         BoxShadow(
                           color: Colors.grey,
@@ -301,94 +307,13 @@ class _WaAllStickerState extends State<WaAllSticker>
                               },
                             ),
                             Spacer(),
-                            Stack(
-                              children: [
-                                if (!downloadList.contains(
-                                    listOfStickerPack[index].identiFier)) ...[
-                                  id == index && !downloading
-                                      ? Center(
-                                          child: Container(
-                                            child: CircularProgressIndicator(
-                                              strokeWidth: 1,
-                                            ),
-                                            height: 2.0.h,
-                                            width: 4.0.w,
-                                          ),
-                                        )
-                                      : GestureDetector(
-                                          child: Container(
-                                            decoration: BoxDecoration(
-                                                color: getColorFromHex(
-                                                    GlobalColors().waColor),
-                                                borderRadius: BorderRadius.all(
-                                                    Radius.circular(8)),
-                                                boxShadow: [
-                                                  BoxShadow(
-                                                    color: getColorFromHex(
-                                                        GlobalColors().waColor),
-                                                    spreadRadius: 0.4,
-                                                  )
-                                                ]),
-                                            child: Padding(
-                                              padding:
-                                                  const EdgeInsets.all(5.0),
-                                              child: Text(
-                                                'Download',
-                                                style: TextStyle(
-                                                    color: getColorFromHex(
-                                                        GlobalColors()
-                                                            .colorWhite),
-                                                    fontSize: 12),
-                                              ),
-                                            ),
-                                          ),
-                                          onTap: () {
-                                            setState(() {
-                                              id = index;
-                                              downloading = false;
-                                              downloadStickers(
-                                                  listOfStickerPack[index]);
-                                            });
-                                          },
-                                        ),
-                                ],
-                                if (downloadList.contains(
-                                    listOfStickerPack[index].identiFier)) ...[
-                                  GestureDetector(
-                                    child: Container(
-                                      decoration: BoxDecoration(
-                                          color: getColorFromHex(
-                                              GlobalColors().waColor),
-                                          borderRadius: BorderRadius.all(
-                                              Radius.circular(8)),
-                                          boxShadow: [
-                                            BoxShadow(
-                                              color: getColorFromHex(
-                                                  GlobalColors().waColor),
-                                              spreadRadius: 0.4,
-                                            )
-                                          ]),
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(5.0),
-                                        child: Text(
-                                          'Add to Whats app',
-                                          style: TextStyle(
-                                              color: getColorFromHex(
-                                                  GlobalColors().colorWhite),
-                                              fontSize: 12),
-                                        ),
-                                      ),
-                                    ),
-                                    onTap: () {
-                                      setState(() {
-                                        id = index;
-                                        addStickersToWa(
-                                            listOfStickerPack[index]);
-                                      });
-                                    },
-                                  ),
-                                ]
-                              ],
+                            Container(
+                              width: 70,
+                              height: 50,
+                              color: Colors.red,
+                              margin: EdgeInsets.only(right: 70),
+                               child: Center(child: Text('9.00', style: TextStyle(fontSize: 27),)),
+                             
                             ),
                             SizedBox(
                               width: 6,

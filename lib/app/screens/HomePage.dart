@@ -24,7 +24,7 @@ import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:carousel_slider/carousel_slider.dart';
-
+import 'package:flutter_stickers_internet/app/widgets/ChangeThemeButtonWidget.dart';
 import 'package:sizer/sizer.dart';
 import 'package:http/http.dart' as http;
 
@@ -273,19 +273,8 @@ class _MyHomePageState extends State<MyHomePage> {
                                             child: Column(
                                               mainAxisAlignment:
                                                   MainAxisAlignment.center,
-                                              children: [
-                                                Text(
+                                              children: [Text(
                                                   '${listOfSliderSticker[index].name}',
-                                                  style: TextStyle(
-                                                      fontWeight:
-                                                          FontWeight.w500,
-                                                      fontSize: 17,
-                                                      color: getColorFromHex(
-                                                          GlobalColors()
-                                                              .colorText)),
-                                                ),
-                                                Text(
-                                                  '${listOfSliderSticker[index].publisher}',
                                                   style: TextStyle(
                                                       fontWeight:
                                                           FontWeight.w500,
@@ -295,6 +284,11 @@ class _MyHomePageState extends State<MyHomePage> {
                                                           GlobalColors()
                                                               .colorText)),
                                                 ),
+                                                Text(
+                                                  '${listOfSliderSticker[index].publisher}',
+                                                  style: Theme.of(context).textTheme.bodyText1
+                                                ),
+                                                
                                               ],
                                             ),
                                           ),
@@ -307,21 +301,11 @@ class _MyHomePageState extends State<MyHomePage> {
                                             children: [
                                               Text(
                                                 '${listOfSliderSticker[index].sticker.length}',
-                                                style: TextStyle(
-                                                    fontWeight: FontWeight.w500,
-                                                    fontSize: size.width * 0.05,
-                                                    color: getColorFromHex(
-                                                        GlobalColors()
-                                                            .colorText)),
+                                                style: Theme.of(context).textTheme.bodyText1
                                               ),
                                               Text(
                                                 'Stickers',
-                                                style: TextStyle(
-                                                    fontWeight: FontWeight.w500,
-                                                    fontSize: 12,
-                                                    color: getColorFromHex(
-                                                        GlobalColors()
-                                                            .colorText)),
+                                               style: Theme.of(context).textTheme.bodyText1
                                               ),
                                             ],
                                           ),
@@ -362,10 +346,11 @@ class _MyHomePageState extends State<MyHomePage> {
                                       child: Text(
                                         'Latest stickers',
                                         style: TextStyle(
-                                            fontWeight: FontWeight.w500,
-                                            fontSize: 17,
-                                            color: getColorFromHex(
-                                                GlobalColors().colorText)),
+                                          fontWeight: FontWeight.w500,
+                                          fontSize: 17,
+                                          color: getColorFromHex(
+                                              GlobalColors().colorText),
+                                        ),
                                       ),
                                     ),
                                     GestureDetector(
@@ -400,12 +385,23 @@ class _MyHomePageState extends State<MyHomePage> {
                                             borderRadius: BorderRadius.all(
                                               Radius.circular(10),
                                             ),
-                                            color: Colors.white,
+                                            color: Theme.of(context).cardColor,
                                             boxShadow: [
                                               BoxShadow(
-                                                color: Colors.grey,
-                                                blurRadius: 1.0,
-                                                spreadRadius: 0.2,
+                                                  color: shadowSlider
+                                                ? Colors.grey.shade900
+                                                : Colors.grey.shade500,
+                                            // color: listOfSliderSticker[index]
+                                            //             .color ==
+                                            //         ""
+                                            //     ? getColorFromHex(
+                                            //         GlobalColors().colorWhite)
+                                            //     : getColorFromHex(
+                                            //         listOfSliderSticker[index]
+                                            //             .color),
+                                            blurRadius: 4.0,
+                                            spreadRadius: 2,
+                                          
                                               )
                                             ],
                                           ),
@@ -451,19 +447,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                                                       .color),
                                                           boxShadow: [
                                                             BoxShadow(
-                                                              color: listOfStickerPack[
-                                                                              index]
-                                                                          .color ==
-                                                                      ""
-                                                                  ? getColorFromHex(
-                                                                      GlobalColors()
-                                                                          .colorWhite)
-                                                                  : getColorFromHex(
-                                                                      listOfStickerPack[
-                                                                              index]
-                                                                          .color),
-                                                              blurRadius: 1.0,
-                                                              spreadRadius: 0.3,
+                                                            
                                                             )
                                                           ]),
                                                       height: 9.0.h,
@@ -491,18 +475,15 @@ class _MyHomePageState extends State<MyHomePage> {
                                                         Text(
                                                           listOfStickerPack[
                                                                   index]
-                                                              .publisher,
+                                                              .name,
                                                           style: TextStyle(
                                                               fontSize: 18),
                                                         ),
                                                         Text(
                                                           listOfStickerPack[
                                                                   index]
-                                                              .name,
-                                                          style: TextStyle(
-                                                              color:
-                                                                  Colors.grey,
-                                                              fontSize: 15),
+                                                              .publisher,
+                                                          style: Theme.of(context).textTheme.bodyText1,
                                                         )
                                                       ],
                                                     ),
@@ -546,6 +527,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                                                   const EdgeInsets
                                                                       .all(2),
                                                               child: Container(
+                                                              
                                                                 child: Image
                                                                     .network(
                                                                   listOfStickerPack[
@@ -562,9 +544,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                                                 ),
                                                                 decoration:
                                                                     BoxDecoration(
-                                                                  color: getColorFromHex(
-                                                                      GlobalColors()
-                                                                          .bgSticker),
+                                                                  color: Theme.of(context).cardColor,
                                                                   borderRadius:
                                                                       BorderRadius
                                                                           .all(

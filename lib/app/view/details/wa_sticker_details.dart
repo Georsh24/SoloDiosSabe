@@ -22,9 +22,9 @@ import 'package:provider/provider.dart';
 import 'package:flutter_meedu/router.dart' as router;
 import 'package:flutter_meedu/flutter_meedu.dart' as medu;
 import 'package:pay/pay.dart';
-import 'package:whatsapp_stickers/exceptions.dart';
-import 'package:whatsapp_stickers/whatsapp_stickers.dart';
 import 'package:sizer/sizer.dart';
+// import 'package:whatsapp_stickers/exceptions.dart';
+// import 'package:whatsapp_stickers/whatsapp_stickers.dart';
 
 FirebaseFirestore firestore = FirebaseFirestore.instance;
 String getuid = '';
@@ -80,11 +80,16 @@ class _WaStickerDetailState extends State<WaStickerDetail> {
     final logoimg = Theme.of(context).brightness == Brightness.dark
         ? 'assets/logoblack.png'
         : 'assets/logowhite.png';
+    final colorshex1 =
+        Theme.of(context).brightness == Brightness.dark ? '3A3E98' : '00ff00';
+    final colorshex2 =
+        Theme.of(context).brightness == Brightness.dark ? '4AB1D8' : '05d0ae';
     final size = MediaQuery.of(context).size;
+    final shadowSlider = Theme.of(context).brightness == Brightness.dark;
     return Consumer<WaDetail>(builder: (context, details, _) {
       return Scaffold(
         key: _scaffoldKey,
-        backgroundColor: getColorFromHex(GlobalColors().colorWhite),
+
         // appBar: AppBar(
         //   backgroundColor: getColorFromHex(GlobalColors().colorWhite),
         //   elevation: 0.0,
@@ -146,8 +151,8 @@ class _WaStickerDetailState extends State<WaStickerDetail> {
                   0.80,
                 ],
                 colors: [
-                  HexColor('00ff00'),
-                  HexColor('05d0ae'),
+                  HexColor('$colorshex1'),
+                  HexColor('$colorshex2'),
                 ],
               ),
               border: Border(
@@ -163,7 +168,8 @@ class _WaStickerDetailState extends State<WaStickerDetail> {
         ),
         body: Container(
           child: Padding(
-            padding: const EdgeInsets.all(8.0),
+            
+            padding: const EdgeInsets.symmetric(horizontal: 8),
             child: Stack(
               children: [
                 medu.Consumer(builder: (_, watch, __) {
@@ -175,12 +181,23 @@ class _WaStickerDetailState extends State<WaStickerDetail> {
                   return SizedBox.shrink();
                 }),
                 SingleChildScrollView(
+                  padding: EdgeInsets.only(top: 20),
                   child: Column(
                     children: [
                       Stack(
                         children: [
                           Container(
+                          margin: EdgeInsets.symmetric(horizontal: 10),
                             decoration: BoxDecoration(
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: shadowSlider
+                                        ? Colors.grey.shade900
+                                        : Colors.grey.shade500,
+                                    blurRadius: 4.0,
+                                    spreadRadius: 2,
+                                  )
+                                ],
                                 color: widget.pack.color == ""
                                     ? getColorFromHex(GlobalColors().searchBar)
                                     : getColorFromHex(widget.pack.color),
@@ -217,13 +234,9 @@ class _WaStickerDetailState extends State<WaStickerDetail> {
                                           ),
                                           Text(
                                             widget.pack.publisher,
-                                            style: TextStyle(
-                                                fontSize: 18,
-                                                fontStyle: FontStyle.normal,
-                                                decoration: TextDecoration.none,
-                                                color: getColorFromHex(
-                                                    GlobalColors()
-                                                        .searchIconColor)),
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .bodyText1,
                                           ),
                                         ],
                                       ),
@@ -245,9 +258,10 @@ class _WaStickerDetailState extends State<WaStickerDetail> {
                                               fontSize: 14,
                                               fontStyle: FontStyle.normal,
                                               decoration: TextDecoration.none,
-                                              color: getColorFromHex(
-                                                  GlobalColors()
-                                                      .searchIconColor)),
+                                              color: Theme.of(context)
+                                                  .textTheme
+                                                  .bodyText1!
+                                                  .color),
                                         ),
                                       ],
                                     )
@@ -275,8 +289,7 @@ class _WaStickerDetailState extends State<WaStickerDetail> {
                             itemBuilder: (ctx, i) {
                               return Container(
                                 decoration: BoxDecoration(
-                                    color: getColorFromHex(
-                                        GlobalColors().bgSticker),
+                                    color: Theme.of(context).cardColor,
                                     borderRadius:
                                         BorderRadius.all(Radius.circular(20))),
                                 child: Image.network(
@@ -357,52 +370,59 @@ class _WaStickerDetailState extends State<WaStickerDetail> {
                 //                           ],
                 //                         ),
                 Positioned(
+              
                   child: Align(
                     alignment: Alignment.bottomCenter,
-                    child: Container(
-                      width: size.width * 0.8,
-                      height: size.height * 0.05,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          gradient: LinearGradient(
-                              begin: Alignment.topLeft,
-                              end: Alignment.topRight,
-                              stops: [
-                                0.1,
-                                0.80,
-                              ],
-                              colors: [
-                                HexColor('00ff00'),
-                                HexColor('05d0ae'),
-                              ])),
-                      child: MaterialButton(
-                        padding: const EdgeInsets.all(5.0),
-                        child: Text(
-                          'Lo Quiero',
-                          style: TextStyle(
-                              color: getColorFromHex(GlobalColors().colorWhite),
-                              fontSize: 25),
-                        ),
-                        onPressed: () {
-                          if (getCompras() == "comprado") {
-                            if (!downloadList
-                                .contains(widget.pack.identiFier)) {
-                              downloading = false;
-                             // downloadStickers(widget.pack, context);
-                               downloadStickers(widget.pack, context);
-                            } else {
-                              addStickersToWa(widget.pack);
-                            }
-                          } else {
-                            print("valor if");
-                            print(comprado);
-                            comprar(context);
-                          }
-                        },
-                      ),
-                    ),
+                    
+                  
                   ),
                 ),
+                  Positioned(
+                    left: 0,
+                    right: 0,
+                    bottom: 30,
+                    child: Container(
+                        width: size.width * 0.7,
+                        height: size.height * 0.06,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            gradient: LinearGradient(
+                                begin: Alignment.topLeft,
+                                end: Alignment.topRight,
+                                stops: [
+                                  0.1,
+                                  0.80,
+                                ],
+                                colors: [
+                                  HexColor('$colorshex1'),
+                                  HexColor('$colorshex2'),
+                                ])),
+                        child: MaterialButton(
+                          padding: const EdgeInsets.all(5.0),
+                          child: Text(
+                            'Lo Quiero',
+                            style: TextStyle(
+                                color: getColorFromHex(GlobalColors().colorWhite),
+                                fontSize: 25),
+                          ),
+                          onPressed: () {
+                            if (getCompras() == "comprado") {
+                              if (!downloadList
+                                  .contains(widget.pack.identiFier)) {
+                                downloading = false;
+                                downloadStickers(widget.pack, context);
+                              } else {
+                                addStickersToWa(widget.pack);
+                              }
+                            } else {
+                              print("valor if");
+                              print(comprado);
+                              comprar(context);
+                            }
+                          },
+                        ),
+                      ),
+                  ),
               ],
             ),
           ),
@@ -437,6 +457,17 @@ class _WaStickerDetailState extends State<WaStickerDetail> {
   }
 
   Future<void> downloadStickers(StickerPack pack, ctx) async {
+    //   var applicationDocumentsDirectory = await getApplicationDocumentsDirectory();
+    //   var stickersDirectory = Directory('${applicationDocumentsDirectory.path}/stickers');
+    //   await stickersDirectory.create(recursive: true);
+    //   final dio = Dio();
+    //   final downloads = <Future>[];
+    //  pack.stickers.forEach((stickers) {
+    //     downloads.add(
+    //       dio.download(Im)age.network(src)
+    //     )
+    //  });
+
     showProgressDownload(ctx);
     imageList.clear();
     if (!downloadList.contains(pack.identiFier)) {
@@ -476,37 +507,44 @@ class _WaStickerDetailState extends State<WaStickerDetail> {
           print("dio second: $percentage");
         });
       }
-      // try {
-      //   ApiConstant.methodChannel.invokeMapMethod("addTOJson", {
-      //     "identiFier": pack.identiFier,
-      //     "name": pack.names,
-      //     "publisher": pack.publisher,
-      //     "trayimagefile": pathbasename.basename(pack.trayimageFile),
-      //     "publisheremail": pack.publisherEmail,
-      //     "publisherwebsite": pack.publisherWebsite,
-      //     "privacypolicywebsite": pack.privacyPolicyWebsite,
-      //     "licenseagreementwebsite": pack.licenseAgreementWebsite,
-      //     "sticker_image": imageList,
-      //   });
-      // } on PlatformException catch (error) {
-      //   print(error.message);
-      // }
-        var stickerpack = WhatsappStickers(
-           identifier: pack.identiFier,
-          name: pack.names,
-          publisher: pack.publisher,
-          trayImageFileName: WhatsappStickerImage.fromAsset(pack.trayimageFile),
-         // publisheremail: pack.publisherEmail,
-          publisherWebsite: pack.publisherWebsite,
-          privacyPolicyWebsite: pack.privacyPolicyWebsite,
-          licenseAgreementWebsite: pack.licenseAgreementWebsite,
-           stickers: imageList,
-          );
       try {
-          await stickerpack.sendToWhatsApp();
-      }on WhatsappStickersException catch (e){
-        print(e.cause);
+        ApiConstant.methodChannel.invokeMapMethod("addTOJson", {
+          "identiFier": pack.identiFier,
+          "name": pack.names,
+          "publisher": pack.publisher,
+          "trayimagefile": pathbasename.basename(pack.trayimageFile),
+          "publisheremail": pack.publisherEmail,
+          "publisherwebsite": pack.publisherWebsite,
+          "privacypolicywebsite": pack.privacyPolicyWebsite,
+          "licenseagreementwebsite": pack.licenseAgreementWebsite,
+          "sticker_image": imageList,
+        });
+      } on PlatformException catch (error) {
+        print(error.message);
       }
+
+      // var stickerpacks = WhatsappStickers(
+
+      //   identifier: pack.identiFier,
+      //   name: pack.name,
+      //   publisher: pack.publisher,
+      //   trayImageFileName: (pack.trayimagefile),
+      //   publisherWebsite: pack.publisherwebsite,
+      //   privacyPolicyWebsite: pack.privacypolicywebsite,
+
+      // );
+      //  List<String> emojis = ['😡', '😤'];
+
+      //   pack.stickers.forEach((sticker) {
+      //     stickerpacks.addSticker(WhatsappStickerImage.fromFile(sticker.imagefile), emojis);
+      //    });
+      // try{
+
+      //   await stickerpacks.sendToWhatsApp();
+
+      //     }on WhatsappStickersException catch (e){
+      //       print(e.cause);
+      //     }
 
       setState(() {
         downloading = true;
@@ -517,71 +555,6 @@ class _WaStickerDetailState extends State<WaStickerDetail> {
       Navigator.of(ctx).pop();
     }
   }
-  // Future<void> downloadStickerst(StickerPack pack, ctx) async {
-  //   showProgressDownload(ctx);
-  //   imageList.clear();
-  //   if (!downloadList.contains(pack.identiFier)) {
-  //     await Permission.storage.request();
-  //     dioDownload = new Dio();
-  //     var saveToDirectory = await getApplicationDocumentsDirectory();
-  //     var paths = await Directory(saveToDirectory.path +
-  //             "/" +
-  //             "stickers_asset" +
-  //             "/" +
-  //             pack.identiFier +
-  //             "/")
-  //         .create(recursive: true);
-  //     var trayImgPath = await Directory(saveToDirectory.path +
-  //             "/" +
-  //             "stickers_asset" +
-  //             "/" +
-  //             pack.identiFier +
-  //             "/try/")
-  //         .create(recursive: true);
-  //     String tray =
-  //         trayImgPath.path + pathbasename.basename(pack.trayimageFile);
-
-  //     await dioDownload.download(pack.trayimageFile, tray,
-  //         onReceiveProgress: (receive, totals) {
-  //       int percentage = ((receive / totals) * 100).floor();
-  //       print("dio download: $percentage");
-  //     });
-
-  //     for (int i = 0; i < pack.sticker.length; i++) {
-  //       String pathFile =
-  //           paths.path + pathbasename.basename(pack.sticker[i].imageFile);
-  //       imageList.add(pathbasename.basename(pack.sticker[i].imageFile));
-  //       await dioDownload.download(pack.sticker[i].imageFile, pathFile,
-  //           onReceiveProgress: (receive, totals) {
-  //         int percentage = ((receive / totals) * 100).floor();
-  //         print("dio second: $percentage");
-  //       });
-  //     }
-  //     try {
-  //       ApiConstant.methodChannel.invokeMapMethod("addTOJsonT", {
-  //         "identiFier": pack.identiFier,
-  //         "name": pack.names,
-  //         "publisher": pack.publisher,
-  //         "trayimagefile": pathbasename.basename(pack.trayimageFile),
-  //         "publisheremail": pack.publisherEmail,
-  //         "publisherwebsite": pack.publisherWebsite,
-  //         "privacypolicywebsite": pack.privacyPolicyWebsite,
-  //         "licenseagreementwebsite": pack.licenseAgreementWebsite,
-  //         "sticker_image": imageList,
-  //       });
-  //     } on PlatformException catch (error) {
-  //       print(error.message);
-  //     }
-
-  //     setState(() {
-  //       downloading = true;
-  //       if (!downloadList.contains(pack.identiFier)) {
-  //         downloadList.add(pack.identiFier);
-  //       }
-  //     });
-  //     Navigator.of(ctx).pop();
-  //   }
-  // }
 
   Future<void> showProgressDownload(context) {
     CupertinoAlertDialog s = CupertinoAlertDialog(

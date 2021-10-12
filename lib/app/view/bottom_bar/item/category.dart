@@ -56,6 +56,10 @@ class _CategoryItemState extends State<CategoryItem> {
     final logoimg = Theme.of(context).brightness == Brightness.dark
         ? 'assets/logoblack.png'
         : 'assets/logowhite.png';
+          final colorshex1 =
+        Theme.of(context).brightness == Brightness.dark ? '3A3E98' : '00ff00';
+    final colorshex2 =
+        Theme.of(context).brightness == Brightness.dark ? '4AB1D8' : '05d0ae';
     final size = MediaQuery.of(context).size;
     return WillPopScope(
       onWillPop: () async => false,
@@ -80,8 +84,8 @@ class _CategoryItemState extends State<CategoryItem> {
                     0.80,
                   ],
                   colors: [
-                    HexColor('00ff00'),
-                    HexColor('05d0ae'),
+                    HexColor('$colorshex1'),
+                    HexColor('$colorshex2'),
                   ],
                 ),
                 border: Border(

@@ -48,7 +48,7 @@ dependencies:
   cached_network_image: ^3.1.0
   #whatsappstickerapi: ^0.0.2
   telegram_stickers_import:
-  whatsapp_stickers: ^0.0.4
+  #whatsapp_stickers: ^0.0.4
 
 dev_dependencies:
   build_runner: ^2.1.2

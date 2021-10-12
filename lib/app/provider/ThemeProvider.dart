@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/painting.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_meedu/meedu.dart';
 import 'package:flutter_stickers_internet/app/domain/repositories/preferences_repository.dart';
@@ -153,20 +154,28 @@ class MyThemes {
           fontSize: 20,
           fontFamily: 'arial'),
     ),
-    scaffoldBackgroundColor: Colors.grey.shade800,
-    backgroundColor: Colors.grey.shade800,
-    cardColor: Colors.grey.shade900,
+    scaffoldBackgroundColor: Colors.grey.shade700,
+    backgroundColor: Colors.grey.shade700,
+    cardColor: Colors.grey.shade800,
     hintColor: Colors.yellow,
     brightness: Brightness.dark,
   );
 
   static final lightTheme = ThemeData(
-    scaffoldBackgroundColor: Colors.grey.shade100,
-    backgroundColor: Colors.grey.shade100,
-    cardTheme: CardTheme(color: Colors.white),
+        cardColor: Colors.grey.shade100,
+    scaffoldBackgroundColor: Colors.grey.shade300,
+    backgroundColor: Colors.grey.shade300,
+    
     hintColor: Colors.blue,
     brightness: Brightness.light,
     textTheme: TextTheme(
+      bodyText1: TextStyle(
+        color: Colors.yellow,
+        overflow: TextOverflow.ellipsis,
+        fontWeight:FontWeight.bold,
+
+      ),
+
         overline: TextStyle(
             color: Colors.black,
             decorationColor: Colors.yellow,
