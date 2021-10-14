@@ -21,6 +21,8 @@ class StickerPack {
   String licenseagreementwebsite;
   @JsonKey(name: 'color')
   String color;
+   @JsonKey(name: 'cost')
+  String cost;
   @JsonKey(name: 'stickers')
   List<Sticker> stickers;
 
@@ -34,6 +36,7 @@ class StickerPack {
       this.privacypolicywebsite = '',
       this.licenseagreementwebsite= '',
       this.color = '',
+      this.cost = '',
       required this.stickers});
 
   factory StickerPack.fromJson(Map<String, dynamic> json) =>
@@ -50,6 +53,7 @@ class StickerPack {
   String get privacyPolicyWebsite => privacypolicywebsite;
   String get licenseAgreementWebsite => licenseagreementwebsite;
   String get coloR => color;
+  String get cosT => cost;
   List<Sticker> get sticker => stickers;
 
   set identiFier(String identifier){
@@ -84,7 +88,10 @@ class StickerPack {
     this.licenseagreementwebsite = licenseagreementwebsite;
   }
 
-  set coloR(String coloR){
+  set coloR(String cosT){
+    this.cost = cosT;
+  }
+   set pricE(String coloR){
     this.color = coloR;
   }
 

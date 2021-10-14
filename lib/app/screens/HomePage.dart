@@ -80,6 +80,8 @@ class _MyHomePageState extends State<MyHomePage> {
   Future getDataFromJson() async {
     var response = await http.get(
       Uri.parse(ApiConstant.BASE_URL + ApiConstant.JSON + ApiConstant.HOME),
+      // Uri.parse(
+      //     "https://gist.githubusercontent.com/Georsh24/3344ad16660b8e274573d1e6b8350449/raw/bb85bed91b75ced919bcd1ae0282903331169d11/price.json"),
       headers: {"Accept": "application/json"},
     );
     setState(() {
@@ -101,6 +103,7 @@ class _MyHomePageState extends State<MyHomePage> {
             privacypolicywebsite: maps['privacy_policy_website'],
             licenseagreementwebsite: maps['license_agreement_website'],
             color: maps['color'],
+            cost: maps['cost'],
             stickers: listOfStickers));
       }
       loading = false;
@@ -383,7 +386,8 @@ class _MyHomePageState extends State<MyHomePage> {
                                   return ClipRRect(
                                     borderRadius: BorderRadius.circular(5.0),
                                     child: Container(
-                                      margin: EdgeInsets.symmetric(horizontal: 4, vertical: 6),
+                                      margin: EdgeInsets.symmetric(
+                                          horizontal: 4, vertical: 6),
                                       decoration: BoxDecoration(
                                         borderRadius: BorderRadius.all(
                                           Radius.circular(10),
@@ -504,6 +508,20 @@ class _MyHomePageState extends State<MyHomePage> {
                                                 },
                                               ),
                                               Spacer(),
+                                              Container(
+                                                width: 70,
+                                                height: 50,
+                                                color: Colors.red,
+                                                margin:
+                                                    EdgeInsets.only(right: 70),
+                                                child: Center(
+                                                    child: Text(
+                                                  listOfStickerPack[index]
+                                                      .cost,
+                                                  style:
+                                                      TextStyle(fontSize: 27),
+                                                )),
+                                              ),
                                               SizedBox(
                                                 width: 6,
                                               )
