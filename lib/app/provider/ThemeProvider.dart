@@ -147,7 +147,12 @@ class MyThemes {
     //  visualDensity: VisualDensity(horizontal: 0)
 
     textTheme: TextTheme(
-      bodyText1: TextStyle(color: Colors.white),
+      bodyText1: TextStyle(
+        color: Colors.white,
+        overflow: TextOverflow.ellipsis,
+        fontWeight:FontWeight.bold,
+
+      ),
       overline: TextStyle(
           color: Colors.yellow,
           decorationColor: Colors.yellow,
@@ -170,7 +175,7 @@ class MyThemes {
     brightness: Brightness.light,
     textTheme: TextTheme(
       bodyText1: TextStyle(
-        color: Colors.yellow,
+        color: Colors.black,
         overflow: TextOverflow.ellipsis,
         fontWeight:FontWeight.bold,
 

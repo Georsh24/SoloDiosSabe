@@ -119,9 +119,15 @@ class _WaCategoryState extends State<WaCategory> {
                             Center(
                               child: Text(
                                 '${categories[index].name}',
-                                style: TextStyle(color: getColorFromHex(GlobalColors().searchIconColor), //ebookTheme.themeMode().ratingBar,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 16),
+                                // style: TextStyle(color: getColorFromHex(GlobalColors().searchIconColor), //ebookTheme.themeMode().ratingBar,
+                                //     fontWeight: FontWeight.bold,
+                                //     fontSize: 16),
+                                           style: TextStyle(
+
+                                        color: Theme.of(context).textTheme.bodyText1!.color,
+                                        fontWeight: FontWeight.w200,
+                                        
+                                        fontSize: 15),
                               ),
                             ),
                           ],

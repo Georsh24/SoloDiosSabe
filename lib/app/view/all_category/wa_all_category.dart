@@ -211,9 +211,11 @@ class _WaAllCategoryState extends State<WaAllCategory> {
                                     '${listOfCategory[i].name}',
                                       overflow: TextOverflow.ellipsis,
                                       style: TextStyle(
-                                           //ebookTheme.themeMode().ratingBar,
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 12),
+
+                                        color: Theme.of(context).textTheme.bodyText1!.color,
+                                        fontWeight: FontWeight.w200,
+                                        
+                                        fontSize: 15),
                                     ),
                                   ),
                                 ),

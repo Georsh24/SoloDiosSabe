@@ -287,14 +287,20 @@ class _WaAllStickerState extends State<WaAllSticker>
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    listOfStickerPack[index].publisher,
-                                    style: TextStyle(
-                                        color: Colors.black, fontSize: 18),
+                                    listOfStickerPack[index].name,
+                                   style: TextStyle(
+                                                            color: Theme.of(context).textTheme.bodyText1!.color,
+                                                            fontWeight: FontWeight.bold,
+                                                              fontSize: 18),
                                   ),
                                   Text(
-                                    listOfStickerPack[index].name,
-                                    style: TextStyle(
-                                        color: Colors.grey, fontSize: 15),
+                                    listOfStickerPack[index].publisher,
+                                      style: TextStyle(
+
+                                        color: Theme.of(context).textTheme.bodyText1!.color,
+                                        fontWeight: FontWeight.w100,
+                                        
+                                        fontSize: 15),
                                   )
                                 ],
                               ),
@@ -345,8 +351,7 @@ class _WaAllStickerState extends State<WaAllSticker>
                                             width: widthHeightSticker().w,
                                           ),
                                           decoration: BoxDecoration(
-                                              color: getColorFromHex(
-                                                  GlobalColors().bgSticker),
+                                              color: Theme.of(context).cardColor,
                                               borderRadius: BorderRadius.all(
                                                   Radius.circular(20))),
                                           height: widthHeightContainer().h,

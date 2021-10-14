@@ -5,6 +5,8 @@ import 'package:dio/dio.dart';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/painting.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_stickers_internet/app/controller/api/api_constant.dart';
 import 'package:flutter_stickers_internet/app/controller/search/wa_search.dart';
@@ -143,106 +145,250 @@ class _MyHomePageState extends State<MyHomePage> {
     return WillPopScope(
       onWillPop: () async => false,
       child: Scaffold(
-          appBar: AppBar(
-            toolbarHeight: size.height * 0.15,
-            automaticallyImplyLeading: false,
-            // leading: IconButton(
-            //   icon: Icon(
-            //     Icons.chevron_left_outlined,
-            //     color: Colors.grey.shade400,
-            //     size: size.width * 0.1,
-            //   ),
-            //   onPressed: () {
-            //     router.pop();
-            //   },
-            // ),
-            centerTitle: true,
-            title: Image.asset(
-              '$logoimg',
-              fit: BoxFit.contain,
-              height: size.height * 0.09,
-            ),
-            flexibleSpace: Container(
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment.topLeft,
-                  end: Alignment.topRight,
-                  stops: [
-                    0.1,
-                    0.80,
-                  ],
-                  colors: [
-                    HexColor('$colorshex1'),
-                    HexColor('$colorshex2'),
-                  ],
-                ),
-                border: Border(
-                  bottom: BorderSide(
-                    width: 3,
-                    color: Colors.grey,
-                    style: BorderStyle.none,
-                  ),
+        appBar: AppBar(
+          toolbarHeight: size.height * 0.15,
+          automaticallyImplyLeading: false,
+          // leading: IconButton(
+          //   icon: Icon(
+          //     Icons.chevron_left_outlined,
+          //     color: Colors.grey.shade400,
+          //     size: size.width * 0.1,
+          //   ),
+          //   onPressed: () {
+          //     router.pop();
+          //   },
+          // ),
+          centerTitle: true,
+          title: Image.asset(
+            '$logoimg',
+            fit: BoxFit.contain,
+            height: size.height * 0.09,
+          ),
+          flexibleSpace: Container(
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topLeft,
+                end: Alignment.topRight,
+                stops: [
+                  0.1,
+                  0.80,
+                ],
+                colors: [
+                  HexColor('$colorshex1'),
+                  HexColor('$colorshex2'),
+                ],
+              ),
+              border: Border(
+                bottom: BorderSide(
+                  width: 3,
+                  color: Colors.grey,
+                  style: BorderStyle.none,
                 ),
               ),
             ),
-            elevation: 4,
           ),
-          body: Container(
-            child: Center(
-              child: SingleChildScrollView(
-                child: loadingSlider
-                    ? Container(
-                        child: Align(
-                            alignment: Alignment.bottomCenter,
-                            child: CircularProgressIndicator(
-                              strokeWidth: 1.5,
-                              backgroundColor: Colors.red,
-                            )),
-                      )
-                    : Column(
-                        children: [
-                          SizedBox(
-                            height: 10,
-                          ),
-                          SizedBox(
-                            height: size.height * 0.195,
-                            width: size.width * 1,
-                            child: Container(
-                              child: CarouselSlider.builder(
-                                itemCount: listOfSliderSticker.length,
-                                options: CarouselOptions(
-                                  height: size.height * 0.17,
-                                  autoPlay: true,
-                                  aspectRatio: 16 / 9,
-                                  enlargeCenterPage: true,
-                                  viewportFraction: 0.8,
-                                ),
-                                itemBuilder: (context, index, realIndex) {
-                                  return GestureDetector(
-                                    child: Container(
-                                      width: size.width * 1,
-                                      //padding: EdgeInsets.all(0.10),
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(10)),
-                                        // color: listOfSliderSticker[index].color ==
-                                        //         ""
-                                        //     ? getColorFromHex(
-                                        //         GlobalColors().colorWhite)
-                                        //     : getColorFromHex(
-                                        //         listOfSliderSticker[index].color),
-                                        gradient: LinearGradient(
-                                          begin: Alignment.topLeft,
-                                          end: Alignment.topRight,
-                                          stops: [
-                                            0.1,
-                                            0.80,
-                                          ],
-                                          colors: [
-                                            HexColor('$colorshex1'),
-                                            HexColor('$colorshex2'),
+          elevation: 4,
+        ),
+        body: Container(
+          child: Center(
+            child: SingleChildScrollView(
+              child: loadingSlider
+                  ? Container(
+                      child: Align(
+                          alignment: Alignment.bottomCenter,
+                          child: CircularProgressIndicator(
+                            strokeWidth: 1.5,
+                            backgroundColor: Colors.red,
+                          )),
+                    )
+                  : Column(
+                      children: [
+                        SizedBox(
+                          height: 10,
+                        ),
+                        SizedBox(
+                          height: size.height * 0.195,
+                          width: size.width * 1,
+                          child: Container(
+                            child: CarouselSlider.builder(
+                              itemCount: listOfSliderSticker.length,
+                              options: CarouselOptions(
+                                height: size.height * 0.17,
+                                autoPlay: true,
+                                aspectRatio: 16 / 9,
+                                enlargeCenterPage: true,
+                                viewportFraction: 0.8,
+                              ),
+                              itemBuilder: (context, index, realIndex) {
+                                return GestureDetector(
+                                  child: Container(
+                                    width: size.width * 1,
+                                    //padding: EdgeInsets.all(0.10),
+                                    decoration: BoxDecoration(
+                                      borderRadius:
+                                          BorderRadius.all(Radius.circular(10)),
+                                      // color: listOfSliderSticker[index].color ==
+                                      //         ""
+                                      //     ? getColorFromHex(
+                                      //         GlobalColors().colorWhite)
+                                      //     : getColorFromHex(
+                                      //         listOfSliderSticker[index].color),
+                                      gradient: LinearGradient(
+                                        begin: Alignment.topLeft,
+                                        end: Alignment.topRight,
+                                        stops: [
+                                          0.1,
+                                          0.80,
+                                        ],
+                                        colors: [
+                                          HexColor('$colorshex1'),
+                                          HexColor('$colorshex2'),
+                                        ],
+                                      ),
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: shadowSlider
+                                              ? Colors.grey.shade900
+                                              : Colors.grey.shade500,
+                                          // color: listOfSliderSticker[index]
+                                          //             .color ==
+                                          //         ""
+                                          //     ? getColorFromHex(
+                                          //         GlobalColors().colorWhite)
+                                          //     : getColorFromHex(
+                                          //         listOfSliderSticker[index]
+                                          //             .color),
+                                          blurRadius: 4.0,
+                                          spreadRadius: 2,
+                                        )
+                                      ],
+                                    ),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceEvenly,
+                                      children: [
+                                        CachedNetworkImage(
+                                            imageUrl:
+                                                '${listOfSliderSticker[index].trayimageFile}',
+                                            width: size.width * 0.2),
+                                        Center(
+                                          child: Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              Text(
+                                                '${listOfSliderSticker[index].name}',
+                                                style: TextStyle(
+                                                    fontWeight: FontWeight.w500,
+                                                    fontSize: size.width * 0.05,
+                                                    color: getColorFromHex(
+                                                        GlobalColors()
+                                                            .colorText)),
+                                              ),
+                                              Text(
+                                                  '${listOfSliderSticker[index].publisher}',
+                                                  style: Theme.of(context)
+                                                      .textTheme
+                                                      .bodyText1),
+                                            ],
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          width: 10,
+                                        ),
+                                        Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            Text(
+                                                '${listOfSliderSticker[index].sticker.length}',
+                                                style: Theme.of(context)
+                                                    .textTheme
+                                                    .bodyText1),
+                                            Text('Stickers',
+                                                style: Theme.of(context)
+                                                    .textTheme
+                                                    .bodyText1),
                                           ],
                                         ),
+                                        SizedBox(
+                                          width: 5.0.w,
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                  onTap: () {
+                                    pushPage(
+                                      context,
+                                      WaStickerDetail(
+                                        pack: listOfSliderSticker[index],
+                                      ),
+                                    );
+                                  },
+                                );
+                              },
+                            ),
+                          ),
+                        ),
+                        Container(
+                          child: SizedBox(
+                            height: size.height * 0.21,
+                            child: WaCategory(),
+                          ),
+                        ),
+                        Container(
+                          child: Column(
+                            children: [
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Text(
+                                      'Latest stickers',
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.w500,
+                                        fontSize: 17,
+                                        color: getColorFromHex(
+                                            GlobalColors().colorText),
+                                      ),
+                                    ),
+                                  ),
+                                  GestureDetector(
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Text(
+                                        'See all',
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.w500,
+                                          fontSize: 17,
+                                          color: getColorFromHex(
+                                            GlobalColors().colorText,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    onTap: () {
+                                      pushPage(context, WaAllSticker());
+                                    },
+                                  ),
+                                ],
+                              ),
+                              ListView.builder(
+                                itemCount: listOfStickerPack.length,
+                                shrinkWrap: true,
+                                physics: NeverScrollableScrollPhysics(),
+                                itemBuilder: (context, index) {
+                                  return ClipRRect(
+                                    borderRadius: BorderRadius.circular(5.0),
+                                    child: Container(
+                                      margin: EdgeInsets.symmetric(horizontal: 4, vertical: 6),
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.all(
+                                          Radius.circular(10),
+                                        ),
+                                        color: Theme.of(context).cardColor,
                                         boxShadow: [
                                           BoxShadow(
                                             color: shadowSlider
@@ -256,346 +402,207 @@ class _MyHomePageState extends State<MyHomePage> {
                                             //     : getColorFromHex(
                                             //         listOfSliderSticker[index]
                                             //             .color),
-                                            blurRadius: 4.0,
+                                            blurRadius: 1.0,
                                             spreadRadius: 2,
                                           )
                                         ],
                                       ),
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceEvenly,
+                                      child: Column(
                                         children: [
-                                          CachedNetworkImage(
-                                              imageUrl:
-                                                  '${listOfSliderSticker[index].trayimageFile}',
-                                              width: size.width * 0.2),
-                                          Center(
-                                            child: Column(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
-                                              children: [Text(
-                                                  '${listOfSliderSticker[index].name}',
-                                                  style: TextStyle(
-                                                      fontWeight:
-                                                          FontWeight.w500,
-                                                      fontSize:
-                                                          size.width * 0.05,
-                                                      color: getColorFromHex(
-                                                          GlobalColors()
-                                                              .colorText)),
-                                                ),
-                                                Text(
-                                                  '${listOfSliderSticker[index].publisher}',
-                                                  style: Theme.of(context).textTheme.bodyText1
-                                                ),
-                                                
-                                              ],
-                                            ),
-                                          ),
-                                          SizedBox(
-                                            width: 10,
-                                          ),
-                                          Column(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
+                                          Row(
                                             children: [
-                                              Text(
-                                                '${listOfSliderSticker[index].sticker.length}',
-                                                style: Theme.of(context).textTheme.bodyText1
+                                              GestureDetector(
+                                                child: Container(
+                                                  child: Padding(
+                                                    padding:
+                                                        const EdgeInsets.all(3),
+                                                    child: ClipRRect(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              20),
+                                                      child: Image.network(
+                                                        listOfStickerPack[index]
+                                                            .trayimagefile,
+                                                        height: 80,
+                                                        width: 80,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  decoration: BoxDecoration(
+                                                      borderRadius:
+                                                          BorderRadius.all(
+                                                              Radius.circular(
+                                                                  10)),
+                                                      color: listOfStickerPack[
+                                                                      index]
+                                                                  .color ==
+                                                              ""
+                                                          ? getColorFromHex(
+                                                              GlobalColors()
+                                                                  .colorWhite)
+                                                          : getColorFromHex(
+                                                              listOfStickerPack[
+                                                                      index]
+                                                                  .color),
+                                                      boxShadow: [BoxShadow()]),
+                                                  height: 9.0.h,
+                                                  width: 9.0.h,
+                                                ),
+                                                onTap: () {
+                                                  pushPage(
+                                                    context,
+                                                    WaStickerDetail(
+                                                      pack: listOfStickerPack[
+                                                          index],
+                                                    ),
+                                                  );
+                                                },
                                               ),
-                                              Text(
-                                                'Stickers',
-                                               style: Theme.of(context).textTheme.bodyText1
+                                              SizedBox(
+                                                width: 8,
                                               ),
-                                            ],
-                                          ),
-                                          SizedBox(
-                                            width: 5.0.w,
-                                          )
-                                        ],
-                                      ),
-                                    ),
-                                    onTap: () {
-                                      pushPage(
-                                        context,
-                                        WaStickerDetail(
-                                          pack: listOfSliderSticker[index],
-                                        ),
-                                      );
-                                    },
-                                  );
-                                },
-                              ),
-                            ),
-                          ),
-                          Container(
-                            child: SizedBox(
-                              height: size.height * 0.21,
-                              child: WaCategory(),
-                            ),
-                          ),
-                          Container(
-                            child: Column(
-                              children: [
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: Text(
-                                        'Latest stickers',
-                                        style: TextStyle(
-                                          fontWeight: FontWeight.w500,
-                                          fontSize: 17,
-                                          color: getColorFromHex(
-                                              GlobalColors().colorText),
-                                        ),
-                                      ),
-                                    ),
-                                    GestureDetector(
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(8.0),
-                                        child: Text(
-                                          'See all',
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.w500,
-                                              fontSize: 17,
-                                              color: getColorFromHex(
-                                                  GlobalColors().colorText)),
-                                        ),
-                                      ),
-                                      onTap: () {
-                                        pushPage(context, WaAllSticker());
-                                      },
-                                    ),
-                                  ],
-                                ),
-                                ListView.builder(
-                                    itemCount: listOfStickerPack.length,
-                                    shrinkWrap: true,
-                                    physics: NeverScrollableScrollPhysics(),
-                                    itemBuilder: (context, index) {
-                                      return ClipRRect(
-                                        borderRadius:
-                                            BorderRadius.circular(5.0),
-                                        child: Container(
-                                          margin: EdgeInsets.all(4),
-                                          decoration: BoxDecoration(
-                                            borderRadius: BorderRadius.all(
-                                              Radius.circular(10),
-                                            ),
-                                            color: Theme.of(context).cardColor,
-                                            boxShadow: [
-                                              BoxShadow(
-                                                  color: shadowSlider
-                                                ? Colors.grey.shade900
-                                                : Colors.grey.shade500,
-                                            // color: listOfSliderSticker[index]
-                                            //             .color ==
-                                            //         ""
-                                            //     ? getColorFromHex(
-                                            //         GlobalColors().colorWhite)
-                                            //     : getColorFromHex(
-                                            //         listOfSliderSticker[index]
-                                            //             .color),
-                                            blurRadius: 4.0,
-                                            spreadRadius: 2,
-                                          
+                                              GestureDetector(
+                                                child: Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    Text(
+                                                      listOfStickerPack[index]
+                                                          .name,
+                                                      style: TextStyle(
+                                                        color: Theme.of(context)
+                                                            .textTheme
+                                                            .bodyText1!
+                                                            .color,
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                        fontSize: 18,
+                                                      ),
+                                                    ),
+                                                    Text(
+                                                      listOfStickerPack[index]
+                                                          .publisher,
+                                                      style: TextStyle(
+                                                          color:
+                                                              Theme.of(context)
+                                                                  .textTheme
+                                                                  .bodyText1!
+                                                                  .color,
+                                                          fontWeight:
+                                                              FontWeight.w100,
+                                                          fontSize: 15),
+                                                    )
+                                                  ],
+                                                ),
+                                                onTap: () {
+                                                  pushPage(
+                                                      context,
+                                                      WaStickerDetail(
+                                                          pack:
+                                                              listOfStickerPack[
+                                                                  index]));
+                                                },
+                                              ),
+                                              Spacer(),
+                                              SizedBox(
+                                                width: 6,
                                               )
                                             ],
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
                                           ),
-                                          child: Column(
-                                            children: [
-                                              Row(
+                                          SizedBox(
+                                            height: 8,
+                                          ),
+                                          Hero(
+                                            tag: listOfStickerPack[index],
+                                            child: GestureDetector(
+                                              child: Row(
                                                 children: [
-                                                  GestureDetector(
-                                                    child: Container(
-                                                      child: Padding(
-                                                        padding:
-                                                            const EdgeInsets
-                                                                .all(3),
-                                                        child: ClipRRect(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(20),
-                                                          child: Image.network(
-                                                            listOfStickerPack[
-                                                                    index]
-                                                                .trayimagefile,
-                                                            height: 80,
-                                                            width: 80,
+                                                  for (int i = 0;
+                                                      i <
+                                                          listOfStickerPack[
+                                                                  index]
+                                                              .sticker
+                                                              .length;
+                                                      i++)
+                                                    if (i < 6)
+                                                      Flexible(
+                                                        child: Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                  .all(2),
+                                                          child: Container(
+                                                            child:
+                                                                Image.network(
+                                                              listOfStickerPack[
+                                                                      index]
+                                                                  .sticker[i]
+                                                                  .imagefile,
+                                                              height:
+                                                                  widthHeightSticker()
+                                                                      .h,
+                                                              width:
+                                                                  widthHeightSticker()
+                                                                      .w,
+                                                            ),
+                                                            decoration:
+                                                                BoxDecoration(
+                                                              color: Theme.of(
+                                                                      context)
+                                                                  .cardColor,
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .all(
+                                                                Radius.circular(
+                                                                    20),
+                                                              ),
+                                                            ),
+                                                            height:
+                                                                widthHeightContainer()
+                                                                    .h,
+                                                            width:
+                                                                widthHeightContainer()
+                                                                    .h,
                                                           ),
                                                         ),
                                                       ),
-                                                      decoration: BoxDecoration(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .all(Radius
-                                                                      .circular(
-                                                                          10)),
-                                                          color: listOfStickerPack[
-                                                                          index]
-                                                                      .color ==
-                                                                  ""
-                                                              ? getColorFromHex(
-                                                                  GlobalColors()
-                                                                      .colorWhite)
-                                                              : getColorFromHex(
-                                                                  listOfStickerPack[
-                                                                          index]
-                                                                      .color),
-                                                          boxShadow: [
-                                                            BoxShadow(
-                                                            
-                                                            )
-                                                          ]),
-                                                      height: 9.0.h,
-                                                      width: 9.0.h,
-                                                    ),
-                                                    onTap: () {
-                                                      pushPage(
-                                                          context,
-                                                          WaStickerDetail(
-                                                            pack:
-                                                                listOfStickerPack[
-                                                                    index],
-                                                          ));
-                                                    },
-                                                  ),
-                                                  SizedBox(
-                                                    width: 8,
-                                                  ),
-                                                  GestureDetector(
-                                                    child: Column(
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .start,
-                                                      children: [
-                                                        Text(
-                                                          listOfStickerPack[
-                                                                  index]
-                                                              .name,
-                                                          style: TextStyle(
-                                                              fontSize: 18),
-                                                        ),
-                                                        Text(
-                                                          listOfStickerPack[
-                                                                  index]
-                                                              .publisher,
-                                                          style: Theme.of(context).textTheme.bodyText1,
-                                                        )
-                                                      ],
-                                                    ),
-                                                    onTap: () {
-                                                      pushPage(
-                                                          context,
-                                                          WaStickerDetail(
-                                                              pack:
-                                                                  listOfStickerPack[
-                                                                      index]));
-                                                    },
-                                                  ),
-                                                  Spacer(),
-                                                  SizedBox(
-                                                    width: 6,
-                                                  )
                                                 ],
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceBetween,
                                               ),
-                                              SizedBox(
-                                                height: 8,
-                                              ),
-                                              Hero(
-                                                tag: listOfStickerPack[index],
-                                                child: GestureDetector(
-                                                  child: Row(
-                                                    children: [
-                                                      for (int i = 0;
-                                                          i <
-                                                              listOfStickerPack[
-                                                                      index]
-                                                                  .sticker
-                                                                  .length;
-                                                          i++)
-                                                        if (i < 6)
-                                                          Flexible(
-                                                            child: Padding(
-                                                              padding:
-                                                                  const EdgeInsets
-                                                                      .all(2),
-                                                              child: Container(
-                                                              
-                                                                child: Image
-                                                                    .network(
-                                                                  listOfStickerPack[
-                                                                          index]
-                                                                      .sticker[
-                                                                          i]
-                                                                      .imagefile,
-                                                                  height:
-                                                                      widthHeightSticker()
-                                                                          .h,
-                                                                  width:
-                                                                      widthHeightSticker()
-                                                                          .w,
-                                                                ),
-                                                                decoration:
-                                                                    BoxDecoration(
-                                                                  color: Theme.of(context).cardColor,
-                                                                  borderRadius:
-                                                                      BorderRadius
-                                                                          .all(
-                                                                    Radius
-                                                                        .circular(
-                                                                            20),
-                                                                  ),
-                                                                ),
-                                                                height:
-                                                                    widthHeightContainer()
-                                                                        .h,
-                                                                width:
-                                                                    widthHeightContainer()
-                                                                        .h,
-                                                              ),
-                                                            ),
-                                                          ),
-                                                    ],
+                                              onTap: () {
+                                                pushPage(
+                                                  context,
+                                                  WaStickerDetail(
+                                                    pack: listOfStickerPack[
+                                                        index],
                                                   ),
-                                                  onTap: () {
-                                                    pushPage(
-                                                        context,
-                                                        WaStickerDetail(
-                                                          pack:
-                                                              listOfStickerPack[
-                                                                  index],
-                                                        ));
-                                                  },
-                                                ),
-                                              ),
-                                            ],
+                                                );
+                                              },
+                                            ),
                                           ),
-                                        ),
-                                      );
-                                    }),
-                              ],
-                            ),
+                                        ],
+                                      ),
+                                    ),
+                                  );
+                                },
+                              ),
+                            ],
                           ),
-                        ],
-                      ),
-              ),
+                        ),
+                      ],
+                    ),
             ),
           ),
-          floatingActionButton: FloatingActionButton(
-            elevation: 8,
-            isExtended: true,
-            child: WaSearch(),
-            onPressed: () {
-              WaSearch();
-            },
-          )),
+        ),
+        floatingActionButton: FloatingActionButton(
+          elevation: 8,
+          isExtended: true,
+          child: WaSearch(),
+          onPressed: () {
+            WaSearch();
+          },
+        ),
+      ),
     );
   }
 

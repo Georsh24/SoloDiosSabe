@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 Future<String?> showInputDialog(
   BuildContext context, {
@@ -8,27 +9,27 @@ Future<String?> showInputDialog(
   String value = initialValue ?? '';
   TextEditingController controller = TextEditingController();
   controller.text = value;
-  final result = await showCupertinoDialog<String>(
+  final result = await showDialog<String>(
     context: context,
-    builder: (context) => CupertinoAlertDialog(
+    builder: (context) =>  AlertDialog(
       title: title != null ? Text(title) : null,
-      content: CupertinoTextField(
+      content: TextField(
         controller: controller,
         onChanged: (text) {
           value = text;
         },
       ),
       actions: [
-        CupertinoDialogAction(
+        TextButton(
           child: Text('Save'),
-          isDefaultAction: true,
+          //isDefaultAction: true,
           onPressed: () {
             Navigator.pop(context, value);
           },
         ),
-        CupertinoDialogAction(
+       TextButton(
           child: Text('Cancel'),
-          isDefaultAction: true,
+         // isDefaultAction: true,
           onPressed: () {
             Navigator.pop(
               context,
