@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_stickers_internet/app/controller/api/api_constant.dart';
 import 'package:flutter_stickers_internet/app/controller/search/wa_search.dart';
 import 'package:flutter_stickers_internet/app/model/sticker.dart';
@@ -509,18 +510,29 @@ class _MyHomePageState extends State<MyHomePage> {
                                               ),
                                               Spacer(),
                                               Container(
-                                                width: 70,
+                                                width: size.height * 0.08,
                                                 height: 50,
-                                                color: Colors.red,
+                                               
+                                                decoration: BoxDecoration(
+                                                  color: Colors.red,
+                                                  borderRadius: BorderRadius.circular(20)
+                                                ),
                                                 margin:
                                                     EdgeInsets.only(right: 70),
                                                 child: Center(
-                                                    child: Text(
+                                                    child: Row(
+                                                      crossAxisAlignment: CrossAxisAlignment.center,
+                                                      mainAxisAlignment: MainAxisAlignment.center,
+                                                      children: [
+                                                        Icon(Icons.attach_money_outlined),
+                                                        Text(
                                                   listOfStickerPack[index]
-                                                      .cost,
+                                                          .cost,
                                                   style:
-                                                      TextStyle(fontSize: 27),
-                                                )),
+                                                          TextStyle(fontSize: size.width * 0.025, overflow: TextOverflow.ellipsis ),
+                                                ),
+                                                      ],
+                                                    )),
                                               ),
                                               SizedBox(
                                                 width: 6,

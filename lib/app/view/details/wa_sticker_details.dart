@@ -4,8 +4,10 @@ import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_stickers_internet/app/controller/api/api_constant.dart';
 import 'package:flutter_stickers_internet/app/model/stickerPack.dart';
 import 'package:flutter_stickers_internet/app/ui/global_controllers/session_controller.dart';
@@ -28,9 +30,12 @@ import 'package:sizer/sizer.dart';
 
 FirebaseFirestore firestore = FirebaseFirestore.instance;
 String getuid = '';
+String price = '1';
 String getidcompra = '';
 String comprado = "init";
 String packagename = "none";
+String publisher = "No Publisher";
+String mainImage = ' ';
 
 // ignore: must_be_immutable
 class WaStickerDetail extends StatefulWidget {
@@ -168,7 +173,6 @@ class _WaStickerDetailState extends State<WaStickerDetail> {
         ),
         body: Container(
           child: Padding(
-            
             padding: const EdgeInsets.symmetric(horizontal: 8),
             child: Stack(
               children: [
@@ -178,6 +182,9 @@ class _WaStickerDetailState extends State<WaStickerDetail> {
                   getuid = user.uid;
                   getidcompra = widget.pack.identiFier;
                   packagename = widget.pack.name;
+                  price = widget.pack.cost;
+                  publisher = widget.pack.publisher;
+                  mainImage = widget.pack.trayimagefile;
                   return SizedBox.shrink();
                 }),
                 SingleChildScrollView(
@@ -187,7 +194,7 @@ class _WaStickerDetailState extends State<WaStickerDetail> {
                       Stack(
                         children: [
                           Container(
-                          margin: EdgeInsets.symmetric(horizontal: 10),
+                            margin: EdgeInsets.symmetric(horizontal: 10),
                             decoration: BoxDecoration(
                                 boxShadow: [
                                   BoxShadow(
@@ -209,28 +216,46 @@ class _WaStickerDetailState extends State<WaStickerDetail> {
                           Hero(
                             tag: widget.pack,
                             child: Container(
+                              //color: Colors.blue,
                               child: Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceAround,
                                   children: [
-                                    Image.network(
-                                      widget.pack.trayimageFile,
-                                      height: 17.0.h,
-                                      width: 30.0.w,
+                                    Container(
+                                      width: size.width * 0.22,
+                                      height: size.height * 0.17,
+                                     // color: Colors.red,
+                                      child: Image.network(
+                                        widget.pack.trayimageFile,
+                                        height: 17.0.h,
+                                        width: 30.0.w,
+                                        //color: Colors.yellow,
+                                      ),
                                     ),
-                                    Flexible(
+                                    Container(
+                                      width: size.width * 0.22,
+                                      height: size.height * 0.17,
+                                     // color: Colors.green,
                                       child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
                                         children: [
-                                          Text(
-                                            widget.pack.name,
-                                            style: TextStyle(
-                                                fontSize: 21,
-                                                fontStyle: FontStyle.normal,
-                                                decoration: TextDecoration.none,
-                                                color: getColorFromHex(
-                                                    GlobalColors().colorText)),
+                                          Container(
+                                            child: Text(
+                                              widget.pack.name,
+                                              style: TextStyle(
+                                                  fontSize: 21,
+                                                  fontStyle: FontStyle.normal,
+                                                  decoration:
+                                                      TextDecoration.none,
+                                                  color: getColorFromHex(
+                                                      GlobalColors()
+                                                          .colorText)),
+                                            ),
                                           ),
                                           Text(
                                             widget.pack.publisher,
@@ -241,29 +266,66 @@ class _WaStickerDetailState extends State<WaStickerDetail> {
                                         ],
                                       ),
                                     ),
-                                    Column(
-                                      children: [
-                                        Text(
-                                          "${widget.pack.stickers.length}",
-                                          style: TextStyle(
-                                              fontSize: 35,
-                                              fontStyle: FontStyle.normal,
-                                              decoration: TextDecoration.none,
-                                              color: getColorFromHex(
-                                                  GlobalColors().colorText)),
-                                        ),
-                                        Text(
-                                          "Stickers",
-                                          style: TextStyle(
-                                              fontSize: 14,
-                                              fontStyle: FontStyle.normal,
-                                              decoration: TextDecoration.none,
-                                              color: Theme.of(context)
-                                                  .textTheme
-                                                  .bodyText1!
-                                                  .color),
-                                        ),
-                                      ],
+                                    Container(
+                                      width: size.width * 0.22,
+                                      height: size.height * 0.17,
+                                     // color: Colors.red,
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Text(
+                                            "${widget.pack.stickers.length}",
+                                            style: TextStyle(
+                                                fontSize: 35,
+                                                fontStyle: FontStyle.normal,
+                                                decoration: TextDecoration.none,
+                                                color: getColorFromHex(
+                                                    GlobalColors().colorText)),
+                                          ),
+                                          Text(
+                                            "Stickers",
+                                            style: TextStyle(
+                                                fontSize: 14,
+                                                fontStyle: FontStyle.normal,
+                                                decoration: TextDecoration.none,
+                                                color: Theme.of(context)
+                                                    .textTheme
+                                                    .bodyText1!
+                                                    .color),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    Container(
+                                      height: size.height * 0.17,
+                                      width: size.width * 0.22,
+                                      //color: Colors.grey,
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Container(
+                                            child: Text('Price', style: TextStyle(fontSize: 15, overflow: TextOverflow.ellipsis),),
+                                          ),
+                                          Row(crossAxisAlignment: CrossAxisAlignment.center,
+                                          mainAxisAlignment: MainAxisAlignment.center,
+                                            children: [
+                                            
+                                            Container(
+                                              child: Icon(Icons.attach_money_outlined, size: size.width * 0.05,),
+                                            ),
+                                            Container(
+                                              child:
+                                                  Text("${widget.pack.cost}", style: TextStyle(fontSize: 40, overflow: TextOverflow.ellipsis, fontWeight: FontWeight.w600),),
+                                            )
+                                          ])
+                                        ],
+                                      ),
                                     )
                                   ],
                                 ),
@@ -306,123 +368,57 @@ class _WaStickerDetailState extends State<WaStickerDetail> {
                     ],
                   ),
                 ),
-                //  Stack(
-                //                           children: [
-                //                             if(!downloadList.contains(widget.pack.identiFier))...[
-                //                               !downloading ? Center(
-                //                                 child: Container(
-                //                                   child: CircularProgressIndicator(strokeWidth: 1,),height: 2.0.h, width: 4.0.w,),
-                //                               ) :
-                //                               GestureDetector(
-                //                                 child: Container(
-                //                                   decoration: BoxDecoration(
-                //                                       color: getColorFromHex(GlobalColors().waColor),
-                //                                       borderRadius: BorderRadius.all(Radius.circular(8)),
-                //                                       boxShadow: [
-                //                                         BoxShadow(
-                //                                           color: getColorFromHex(GlobalColors().waColor),
-                //                                           spreadRadius: 0.4,
-                //                                         )
-                //                                       ]
-                //                                   ),
-                //                                   child: Padding(
-                //                                     padding: const EdgeInsets.all(5.0),
-                //                                     child: Text('Download', style: TextStyle(
-                //                                         color: getColorFromHex(GlobalColors().colorWhite), fontSize: 12
-                //                                     ),),
-                //                                   ),
-                //                                 ),
-                //                                 onTap: (){
-                //                                   setState(() {
-                //                                     downloading = false;
-                //                                     downloadStickers(widget.pack, context);
-                //                                   });
-                //                                 },
-                //                               ),
-                //                             ],
-                //                             if(downloadList.contains(widget.pack.identiFier))...[
-                //                               GestureDetector(
-                //                                 child: Container(
-                //                                   decoration: BoxDecoration(
-                //                                       color: getColorFromHex(GlobalColors().waColor),
-                //                                       borderRadius: BorderRadius.all(Radius.circular(8)),
-                //                                       boxShadow: [
-                //                                         BoxShadow(
-                //                                           color: getColorFromHex(GlobalColors().waColor),
-                //                                           spreadRadius: 0.4,
-                //                                         )
-                //                                       ]
-                //                                   ),
-                //                                   child: Padding(
-                //                                     padding: const EdgeInsets.all(5.0),
-                //                                     child: Text('Add to Whats app', style: TextStyle(
-                //                                         color: getColorFromHex(GlobalColors().colorWhite), fontSize: 12
-                //                                     ),),
-                //                                   ),
-                //                                 ),
-                //                                 onTap: (){
-                //                                   setState(() {
-                //                                     addStickersToWa(widget.pack);
-                //                                   });
-                //                                 },
-                //                               ),
-                //                             ]
-                //                           ],
-                //                         ),
+                
                 Positioned(
-              
                   child: Align(
                     alignment: Alignment.bottomCenter,
-                    
-                  
                   ),
                 ),
-                  Positioned(
-                    left: 0,
-                    right: 0,
-                    bottom: 30,
-                    child: Container(
-                        width: size.width * 0.7,
-                        height: size.height * 0.06,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            gradient: LinearGradient(
-                                begin: Alignment.topLeft,
-                                end: Alignment.topRight,
-                                stops: [
-                                  0.1,
-                                  0.80,
-                                ],
-                                colors: [
-                                  HexColor('$colorshex1'),
-                                  HexColor('$colorshex2'),
-                                ])),
-                        child: MaterialButton(
-                          padding: const EdgeInsets.all(5.0),
-                          child: Text(
-                            'Lo Quiero',
-                            style: TextStyle(
-                                color: getColorFromHex(GlobalColors().colorWhite),
-                                fontSize: 25),
-                          ),
-                          onPressed: () {
-                            if (getCompras() == "comprado") {
-                              if (!downloadList
-                                  .contains(widget.pack.identiFier)) {
-                                downloading = false;
-                                downloadStickers(widget.pack, context);
-                              } else {
-                                addStickersToWa(widget.pack);
-                              }
-                            } else {
-                              print("valor if");
-                              print(comprado);
-                              comprar(context);
-                            }
-                          },
-                        ),
+                Positioned(
+                  left: 0,
+                  right: 0,
+                  bottom: 30,
+                  child: Container(
+                    width: size.width * 0.7,
+                    height: size.height * 0.06,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        gradient: LinearGradient(
+                            begin: Alignment.topLeft,
+                            end: Alignment.topRight,
+                            stops: [
+                              0.1,
+                              0.80,
+                            ],
+                            colors: [
+                              HexColor('$colorshex1'),
+                              HexColor('$colorshex2'),
+                            ])),
+                    child: MaterialButton(
+                      padding: const EdgeInsets.all(5.0),
+                      child: Text(
+                        'Lo Quiero',
+                        style: TextStyle(
+                            color: getColorFromHex(GlobalColors().colorWhite),
+                            fontSize: 25),
                       ),
+                      onPressed: () {
+                        if (getCompras() == "comprado") {
+                          if (!downloadList.contains(widget.pack.identiFier)) {
+                            downloading = false;
+                            downloadStickers(widget.pack, context);
+                          } else {
+                            addStickersToWa(widget.pack);
+                          }
+                        } else {
+                          print("valor if");
+                          print(comprado);
+                          comprar(context);
+                        }
+                      },
+                    ),
                   ),
+                ),
               ],
             ),
           ),
@@ -437,15 +433,7 @@ class _WaStickerDetailState extends State<WaStickerDetail> {
   //       ..show(anchorType: AnchorType.bottom, anchorOffset: 6.0.h, horizontalCenterOffset: 0);
   // }
 
-  // _share() async{
-  //   PackageInfo pi = await PackageInfo.fromPlatform();
-  //   Share.text(pi.appName, "Title: ${widget.pack.name}" '\n'
-  //       "Publisher: ${widget.pack.publisher}" '\n'
-  //       "Download full app in this link https://play.google.com/store/apps/details?id=${pi.packageName}" '\n'
-  //       "version: ${pi.version}" '\n'
-  //       "build number: ${pi.buildNumber} ",
-  //       'text/plain');
-  // }
+  
 
   Future<void> addStickersToWa(StickerPack pack) async {
     try {
@@ -627,10 +615,10 @@ String getCompras() {
 }
 
 void comprar(BuildContext context) {
-  const _paymentItems = [
+  var _paymentItems = [
     PaymentItem(
       label: 'Total',
-      amount: '1.00',
+      amount: price,
       status: PaymentItemStatus.final_price,
     )
   ];
@@ -639,14 +627,13 @@ void comprar(BuildContext context) {
       builder: (BuildContext context) {
         return AlertDialog(
           content: contents(context),
-          actions: [
-            MaterialButton(
-                child: Text('comprar'),
-                onPressed: () {
-                  //addUserr();
-                  router.pushNamed(Routes.BUY);
-                }),
-            GooglePayButton(
+         actions: [ 
+         MaterialButton(
+           child: Text('Cancel', style: TextStyle(fontSize: 19, fontWeight: FontWeight.w800),),
+           onPressed: (){
+             Navigator.pop(context);
+           }),
+         GooglePayButton(
               paymentConfigurationAsset: 'gpay.json',
               paymentItems: _paymentItems,
               width: 200,
@@ -661,8 +648,7 @@ void comprar(BuildContext context) {
               loadingIndicator: const Center(
                 child: CircularProgressIndicator(),
               ),
-            ),
-          ],
+            ),],
         );
       });
 }
@@ -671,8 +657,15 @@ contents(BuildContext context) {
   final size = MediaQuery.of(context).size;
   return Container(
     height: size.height * 0.25,
-    child: Center(
-      child: Text(packagename),
+    child: Container(
+      child: Center(
+        child: Column(
+          children: [
+            Image.network(mainImage),
+            Text(packagename),
+          ],
+        ),
+      ),
     ),
   );
 }
