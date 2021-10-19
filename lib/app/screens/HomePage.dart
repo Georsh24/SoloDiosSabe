@@ -27,7 +27,6 @@ import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:flutter_stickers_internet/app/widgets/ChangeThemeButtonWidget.dart';
 import 'package:sizer/sizer.dart';
 import 'package:http/http.dart' as http;
 
@@ -512,27 +511,36 @@ class _MyHomePageState extends State<MyHomePage> {
                                               Container(
                                                 width: size.height * 0.08,
                                                 height: 50,
-                                               
                                                 decoration: BoxDecoration(
-                                                  color: Colors.red,
-                                                  borderRadius: BorderRadius.circular(20)
-                                                ),
+                                                    color: Colors.red,
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            20)),
                                                 margin:
-                                                    EdgeInsets.only(right: 70),
+                                                    EdgeInsets.only(right: 10),
                                                 child: Center(
                                                     child: Row(
-                                                      crossAxisAlignment: CrossAxisAlignment.center,
-                                                      mainAxisAlignment: MainAxisAlignment.center,
-                                                      children: [
-                                                        Icon(Icons.attach_money_outlined),
-                                                        Text(
-                                                  listOfStickerPack[index]
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.center,
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.center,
+                                                  children: [
+                                                    Icon(
+                                                      Icons
+                                                          .attach_money_outlined,
+                                                      size: size.width * 0.041,
+                                                    ),
+                                                    Text(
+                                                      listOfStickerPack[index]
                                                           .cost,
-                                                  style:
-                                                          TextStyle(fontSize: size.width * 0.025, overflow: TextOverflow.ellipsis ),
-                                                ),
-                                                      ],
-                                                    )),
+                                                      style: TextStyle(
+                                                          fontSize:
+                                                              size.width * 0.04,
+                                                          overflow: TextOverflow
+                                                              .ellipsis),
+                                                    ),
+                                                  ],
+                                                )),
                                               ),
                                               SizedBox(
                                                 width: 6,
