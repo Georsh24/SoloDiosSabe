@@ -282,11 +282,13 @@ class _MyHomePageState extends State<MyHomePage> {
                                               Text(
                                                 '${listOfSliderSticker[index].name}',
                                                 style: TextStyle(
-                                                    fontWeight: FontWeight.w500,
-                                                    fontSize: size.width * 0.05,
-                                                    color: getColorFromHex(
-                                                        GlobalColors()
-                                                            .colorText)),
+                                                  fontWeight: FontWeight.w500,
+                                                  fontSize: size.width * 0.05,
+                                                  color: Theme.of(context)
+                                                      .textTheme
+                                                      .bodyText1!
+                                                      .color,
+                                                ),
                                               ),
                                               Text(
                                                   '${listOfSliderSticker[index].publisher}',
@@ -353,8 +355,10 @@ class _MyHomePageState extends State<MyHomePage> {
                                       style: TextStyle(
                                         fontWeight: FontWeight.w500,
                                         fontSize: 17,
-                                        color: getColorFromHex(
-                                            GlobalColors().colorText),
+                                        color: Theme.of(context)
+                                            .textTheme
+                                            .bodyText1!
+                                            .color,
                                       ),
                                     ),
                                   ),
@@ -366,9 +370,10 @@ class _MyHomePageState extends State<MyHomePage> {
                                         style: TextStyle(
                                           fontWeight: FontWeight.w500,
                                           fontSize: 17,
-                                          color: getColorFromHex(
-                                            GlobalColors().colorText,
-                                          ),
+                                          color: Theme.of(context)
+                                              .textTheme
+                                              .bodyText1!
+                                              .color,
                                         ),
                                       ),
                                     ),

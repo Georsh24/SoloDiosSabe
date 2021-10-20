@@ -56,7 +56,7 @@ class _CategoryItemState extends State<CategoryItem> {
     final logoimg = Theme.of(context).brightness == Brightness.dark
         ? 'assets/logoblack.png'
         : 'assets/logowhite.png';
-          final colorshex1 =
+    final colorshex1 =
         Theme.of(context).brightness == Brightness.dark ? '3A3E98' : '00ff00';
     final colorshex2 =
         Theme.of(context).brightness == Brightness.dark ? '4AB1D8' : '05d0ae';
@@ -99,16 +99,15 @@ class _CategoryItemState extends State<CategoryItem> {
             ),
             elevation: 4,
           ),
-           body: Column(
-          children: [
-            SizedBox(
-              height: 20,
-            ),
-            Container(
-              child: GridView.builder(
+          body: Column(
+            children: [
+              SizedBox(
+                height: 20,
+              ),
+              Container(
+                child: GridView.builder(
                   shrinkWrap: true,
                   physics: NeverScrollableScrollPhysics(),
-                  
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 3,
                       childAspectRatio: 8.5 / 9.0,
@@ -127,9 +126,8 @@ class _CategoryItemState extends State<CategoryItem> {
                             child: Column(
                               children: [
                                 Container(
-                                  
                                   width: size.width * 0.27,
-                                  height: size.height * 0.14,
+                                  height: size.height * 0.13,
                                   margin: EdgeInsets.all(0.2),
                                   decoration: BoxDecoration(
                                     borderRadius:
@@ -153,37 +151,44 @@ class _CategoryItemState extends State<CategoryItem> {
                                   ),
                                   child: CachedNetworkImage(
                                     imageUrl: listOfCategory[i].photo_cat,
-                                  
                                   ),
                                 ),
-                                Center(
-                                  child: Text(
-                                    '${listOfCategory[i].name}',
-                                    style: TextStyle(
-                                        color: getColorFromHex(GlobalColors()
-                                            .searchIconColor), //ebookTheme.themeMode().ratingBar,
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 16),
+                                Container(
+                                  width: size.width * 0.2,
+                                  child: Center(
+                                    child: Text(
+                                      '${listOfCategory[i].name}',
+                                      style: TextStyle(
+                                        overflow: TextOverflow.ellipsis,
+                                        color: Theme.of(context)
+                                            .textTheme
+                                            .bodyText1!
+                                            .color,
+                                        fontWeight: FontWeight.w200,
+                                        fontSize: 15,
+                                      ),
+                                    ),
                                   ),
                                 ),
                               ],
                             ),
                           ),
                         ),
-
                         onTap: () {
                           pushPage(
-                              context,
-                              WaAllStickerByCat(
-                                id: listOfCategory[i].cat_id,
-                              ));
+                            context,
+                            WaAllStickerByCat(
+                              id: listOfCategory[i].cat_id,
+                            ),
+                          );
                         },
                       ),
                     );
-                  }),
-            ),
-          ],
-        ),
+                  },
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

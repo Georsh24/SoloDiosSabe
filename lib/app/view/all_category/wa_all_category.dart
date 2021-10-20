@@ -74,7 +74,7 @@ class _WaAllCategoryState extends State<WaAllCategory> {
     final logoimg = Theme.of(context).brightness == Brightness.dark
         ? 'assets/logoblack.png'
         : 'assets/logowhite.png';
-           final colorshex1 =
+    final colorshex1 =
         Theme.of(context).brightness == Brightness.dark ? '3A3E98' : '00ff00';
     final colorshex2 =
         Theme.of(context).brightness == Brightness.dark ? '4AB1D8' : '05d0ae';
@@ -153,87 +153,86 @@ class _WaAllCategoryState extends State<WaAllCategory> {
             ),
             Container(
               child: GridView.builder(
-                  shrinkWrap: true,
-                  physics: NeverScrollableScrollPhysics(),
-                  
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 3,
-                      childAspectRatio: 8.5 / 9.0,
-                      crossAxisSpacing: 0.0,
-                      mainAxisSpacing: 2.0),
-                  itemCount: listOfCategory.length,
-                  itemBuilder: (ctx, i) {
-                    return Hero(
-                      tag: listOfCategory[i],
-                      child: GestureDetector(
-                        // child: Column(
-                        child: Padding(
-                          padding: const EdgeInsets.all(5),
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(15),
-                            child: Column(
-
-                              children: [
-                                Container(
-                                  
-                                  width: size.width * 0.27,
-                                  height: size.height * 0.13,
-                                  margin: EdgeInsets.all(0.2),
-                                  decoration: BoxDecoration(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(10)),
-                                    color: listOfCategory[i].color == ""
-                                        ? getColorFromHex(
-                                            GlobalColors().bgSticker)
-                                        : getColorFromHex(
-                                            listOfCategory[i].color),
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color: listOfCategory[i].color == ""
-                                            ? getColorFromHex(
-                                                GlobalColors().colorWhite)
-                                            : getColorFromHex(
-                                                listOfCategory[i].color),
-                                        blurRadius: 1.0,
-                                        spreadRadius: 0.2,
-                                      )
-                                    ],
-                                  ),
-                                  child: CachedNetworkImage(
-                                    imageUrl: listOfCategory[i].photo_cat,
-                                  
-                                  ),
+                shrinkWrap: true,
+                physics: NeverScrollableScrollPhysics(),
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 3,
+                    childAspectRatio: 8.5 / 9.0,
+                    crossAxisSpacing: 0.0,
+                    mainAxisSpacing: 2.0),
+                itemCount: listOfCategory.length,
+                itemBuilder: (ctx, i) {
+                  return Hero(
+                    tag: listOfCategory[i],
+                    child: GestureDetector(
+                      // child: Column(
+                      child: Padding(
+                        padding: const EdgeInsets.all(5),
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(15),
+                          child: Column(
+                            children: [
+                              Container(
+                                width: size.width * 0.27,
+                                height: size.height * 0.13,
+                                margin: EdgeInsets.all(0.2),
+                                decoration: BoxDecoration(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(10)),
+                                  color: listOfCategory[i].color == ""
+                                      ? getColorFromHex(
+                                          GlobalColors().bgSticker)
+                                      : getColorFromHex(
+                                          listOfCategory[i].color),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: listOfCategory[i].color == ""
+                                          ? getColorFromHex(
+                                              GlobalColors().colorWhite)
+                                          : getColorFromHex(
+                                              listOfCategory[i].color),
+                                      blurRadius: 1.0,
+                                      spreadRadius: 0.2,
+                                    )
+                                  ],
                                 ),
-                                Container(
-                                  width: size.width * 0.2,
-                                  child: Center(                                
-                                    child: Text(                   
+                                child: CachedNetworkImage(
+                                  imageUrl: listOfCategory[i].photo_cat,
+                                ),
+                              ),
+                              Container(
+                                width: size.width * 0.2,
+                                child: Center(
+                                  child: Text(
                                     '${listOfCategory[i].name}',
-                                      overflow: TextOverflow.ellipsis,
-                                      style: TextStyle(
-
-                                        color: Theme.of(context).textTheme.bodyText1!.color,
-                                        fontWeight: FontWeight.w200,
-                                        
-                                        fontSize: 15),
+                                    overflow: TextOverflow.ellipsis,
+                                    style: TextStyle(
+                                      color: Theme.of(context)
+                                          .textTheme
+                                          .bodyText1!
+                                          .color,
+                                      fontWeight: FontWeight.w200,
+                                      fontSize: 15,
                                     ),
                                   ),
                                 ),
-                              ],
-                            ),
+                              ),
+                            ],
                           ),
                         ),
-
-                        onTap: () {
-                          pushPage(
-                              context,
-                              WaAllStickerByCat(
-                                id: listOfCategory[i].cat_id,
-                              ));
-                        },
                       ),
-                    );
-                  }),
+                      onTap: () {
+                        pushPage(
+                          context,
+                          WaAllStickerByCat(
+                            id: listOfCategory[i].cat_id,
+                          ),
+                        );
+                      },
+                    ),
+                  );
+                },
+              ),
             ),
           ],
         ),
