@@ -56,17 +56,16 @@ class LoginPage extends StatelessWidget {
                     height: 20,
                   ),
                   TextButton(
-                    child: Text(
-                      'Create a account',
-                      style: TextStyle(fontSize: 18, color: Colors.black87),
-                    ),
-                    style: ButtonStyle(
-                        overlayColor: MaterialStateProperty.all(
-                            Colors.indigo.withOpacity(0.1)),
-                        shape: MaterialStateProperty.all(StadiumBorder())),
-                    onPressed: () => router.pushReplacementNamed(Routes.REGISTER)
-                    
-                  ),
+                      child: Text(
+                        'Create a account',
+                        style: TextStyle(fontSize: 18, color: Colors.black87),
+                      ),
+                      style: ButtonStyle(
+                          overlayColor: MaterialStateProperty.all(
+                              Colors.indigo.withOpacity(0.1)),
+                          shape: MaterialStateProperty.all(StadiumBorder())),
+                      onPressed: () =>
+                          router.pushReplacementNamed(Routes.REGISTER)),
                   TextButton(
                     child: const Text(
                       "Forgot Password?",
@@ -76,7 +75,8 @@ class LoginPage extends StatelessWidget {
                         overlayColor: MaterialStateProperty.all(
                             Colors.indigo.withOpacity(0.1)),
                         shape: MaterialStateProperty.all(StadiumBorder())),
-                    onPressed: () => router.pushReplacementNamed(Routes.RESET_PASSWORD),
+                    onPressed: () =>
+                        router.pushReplacementNamed(Routes.RESET_PASSWORD),
                   ),
                   SizedBox(
                     height: 50,
@@ -96,14 +96,11 @@ class _LoginForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final colorshex1 = Theme.of(context).brightness == Brightness.dark
-        ? '3A3E98'
-        : '00ff00';
-         final colorshex2 = Theme.of(context).brightness == Brightness.dark
-        ? '4AB1D8'
-        : '05d0ae';
+    final colorshex1 =
+        Theme.of(context).brightness == Brightness.dark ? '3A3E98' : '00ff00';
+    final colorshex2 =
+        Theme.of(context).brightness == Brightness.dark ? '4AB1D8' : '05d0ae';
     return ProviderListener<LoginController>(
-      
       provider: loginProvider,
       builder: (_, controller) {
         return Container(
@@ -167,9 +164,10 @@ class _LoginForm extends StatelessWidget {
                       child: const Text(
                         'Sign In',
                         style: TextStyle(
-                            color: Colors.black87,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 20),
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20,
+                        ),
                       ),
                     ),
                     onPressed: () => sendLoginForm(context),

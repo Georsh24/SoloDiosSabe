@@ -21,6 +21,10 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
+    final colorshex1 =
+        Theme.of(context).brightness == Brightness.dark ? '3A3E98' : '00ff00';
+    final colorshex2 =
+        Theme.of(context).brightness == Brightness.dark ? '4AB1D8' : '05d0ae';
     final pages = [
       Container(
         height: double.infinity,
@@ -194,7 +198,8 @@ class _SplashScreenState extends State<SplashScreen> {
                         children: [
                           Container(
                             child: Image(
-                                image: (AssetImage('assets/logowhite.png'))),
+                              image: (AssetImage('assets/logowhite.png')),
+                            ),
                           ),
                           SizedBox(
                             height: size.height * 0.29,
@@ -205,12 +210,28 @@ class _SplashScreenState extends State<SplashScreen> {
                               Container(
                                 width: size.width * 0.7,
                                 decoration: BoxDecoration(
-                                  color: HexColor('05d0ae'),
-                                  borderRadius: BorderRadius.circular(20),
+                                  borderRadius: BorderRadius.circular(10),
+                                  gradient: LinearGradient(
+                                    begin: Alignment.topLeft,
+                                    end: Alignment.topRight,
+                                    stops: [
+                                      0.1,
+                                      0.80,
+                                    ],
+                                    colors: [
+                                      HexColor('$colorshex1'),
+                                      HexColor('$colorshex2'),
+                                    ],
+                                  ),
                                 ),
                                 child: MaterialButton(
                                   child: Text(
-                                    'Comencemos',
+                                    'Let´s Start!',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 20,
+                                    ),
                                   ),
                                   onPressed: () {
                                     Navigator.pushNamed(context, Routes.LOGIN);
@@ -263,21 +284,22 @@ class _SplashScreenState extends State<SplashScreen> {
   /// liquid_swipe / Pase su método como devolución de llamada, devolverá un número de página. */
   onPageChangeCallback(int lpage) {
     setState(
-        // Controla el estado de la visibilidad de iconButton para deslizar la pantalla del lado izquierdo
-        () {
-      page = lpage;
-      if (4 == page) {
-        // Esconde el iconButton de desplazamiento */
-        enableSlideIcon = false;
-        // Aplicar color oscuro al iconButton de deslizamiento */
-        isDarkGlobal = true;
-      } else {
-        // Muestra el iconButton de desplazamiento */
-        enableSlideIcon = true;
-        // Por default aplica el brillo al iconButton */
-        isDarkGlobal = false;
-      }
-    });
+      // Controla el estado de la visibilidad de iconButton para deslizar la pantalla del lado izquierdo
+      () {
+        page = lpage;
+        if (4 == page) {
+          // Esconde el iconButton de desplazamiento */
+          enableSlideIcon = false;
+          // Aplicar color oscuro al iconButton de deslizamiento */
+          isDarkGlobal = true;
+        } else {
+          // Muestra el iconButton de desplazamiento */
+          enableSlideIcon = true;
+          // Por default aplica el brillo al iconButton */
+          isDarkGlobal = false;
+        }
+      },
+    );
   }
 }
 
@@ -295,8 +317,9 @@ class _Tapiz extends StatelessWidget {
       width: double.infinity,
       height: double.infinity,
       decoration: BoxDecoration(
-          image: DecorationImage(
-              image: AssetImage('assets/1.png'), fit: BoxFit.cover)),
+        image: DecorationImage(
+            image: AssetImage('assets/1.png'), fit: BoxFit.cover),
+      ),
     );
   }
 }
@@ -315,8 +338,9 @@ class _Tapiz2 extends StatelessWidget {
       width: double.infinity,
       height: double.infinity,
       decoration: BoxDecoration(
-          image: DecorationImage(
-              image: AssetImage('assets/2.png'), fit: BoxFit.cover)),
+        image: DecorationImage(
+            image: AssetImage('assets/2.png'), fit: BoxFit.cover),
+      ),
     );
   }
 }
@@ -335,8 +359,9 @@ class _Tapiz3 extends StatelessWidget {
       width: double.infinity,
       height: double.infinity,
       decoration: BoxDecoration(
-          image: DecorationImage(
-              image: AssetImage('assets/3.png'), fit: BoxFit.cover)),
+        image: DecorationImage(
+            image: AssetImage('assets/3.png'), fit: BoxFit.cover),
+      ),
     );
   }
 }
@@ -355,24 +380,27 @@ class _Tapiz4 extends StatelessWidget {
       width: double.infinity,
       height: double.infinity,
       decoration: BoxDecoration(
-          image: DecorationImage(
-              image: AssetImage('assets/4.png'), fit: BoxFit.cover)),
-    );
-  }
-}
-
-class _LogoTapiz extends StatelessWidget {
-  const _LogoTapiz({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
-    return Container(
-      width: size.width * 0.35,
-      child: Opacity(
-        opacity: 0.3,
-        child: Image(image: AssetImage('assets/logoblack.png')),
+        image: DecorationImage(
+            image: AssetImage('assets/4.png'), fit: BoxFit.cover),
       ),
     );
   }
 }
+
+// class _LogoTapiz extends StatelessWidget {
+//   const _LogoTapiz({Key? key}) : super(key: key);
+
+//   @override
+//   Widget build(BuildContext context) {
+//     final size = MediaQuery.of(context).size;
+//     return Container(
+//       width: size.width * 0.35,
+//       child: Opacity(
+//         opacity: 0.3,
+//         child: Image(
+//           image: AssetImage('assets/logoblack.png'),
+//         ),
+//       ),
+//     );
+//   }
+// }

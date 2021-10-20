@@ -85,12 +85,10 @@ class _RegisterForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-     final colorshex1 = Theme.of(context).brightness == Brightness.dark
-        ? '3A3E98'
-        : '00ff00';
-         final colorshex2 = Theme.of(context).brightness == Brightness.dark
-        ? '4AB1D8'
-        : '05d0ae';
+    final colorshex1 =
+        Theme.of(context).brightness == Brightness.dark ? '3A3E98' : '00ff00';
+    final colorshex2 =
+        Theme.of(context).brightness == Brightness.dark ? '4AB1D8' : '05d0ae';
     return ProviderListener<RegisterController>(
       provider: registerProvider,
       builder: (_, controller) {
@@ -194,7 +192,7 @@ class _RegisterForm extends StatelessWidget {
                       child: const Text(
                         'Sign Up',
                         style: TextStyle(
-                            color: Colors.black87,
+                            color: Colors.white,
                             fontWeight: FontWeight.bold,
                             fontSize: 20),
                       ),

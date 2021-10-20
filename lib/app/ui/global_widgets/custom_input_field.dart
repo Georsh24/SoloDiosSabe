@@ -34,6 +34,15 @@ class _CustomInputFieldState extends State<CustomInputField> {
 
   @override
   Widget build(BuildContext context) {
+    final underline =
+        Theme.of(context).brightness == Brightness.dark ? '3A3E98' : '00ff00';
+
+    final borderslide =
+        Theme.of(context).brightness == Brightness.dark ? '4AB1D8' : '05d0ae';
+    final visibility =
+        Theme.of(context).brightness == Brightness.dark ? '4AB1D8' : '05d0ae';
+    final prefixicon =
+        Theme.of(context).brightness == Brightness.dark ? '4AB1D8' : '05d0ae';
     return FormField<String>(
       validator: widget.validator,
       initialValue: '',
@@ -62,19 +71,19 @@ class _CustomInputFieldState extends State<CustomInputField> {
                 hintStyle: TextStyle(color: Colors.blue),
                 enabledBorder: UnderlineInputBorder(
                   borderSide: BorderSide(
-                    color: HexColor('007c00'),
+                    color: HexColor('$underline'),
                   ),
                 ),
                 focusedBorder: UnderlineInputBorder(
                     borderSide: BorderSide(
-                  color: HexColor('00ff00'),
+                  color: HexColor('$borderslide'),
                   width: 2,
                 )),
                 labelStyle: TextStyle(color: Colors.grey),
                 labelText: widget.label,
                 prefixIcon: Icon(
                   widget.prefixIcon,
-                  color: HexColor('007c00'),
+                  color: HexColor('$prefixicon'),
                 ),
                 border: const OutlineInputBorder(),
                 suffixIcon: widget.isPassword
@@ -83,7 +92,7 @@ class _CustomInputFieldState extends State<CustomInputField> {
                           _obscureText
                               ? Icons.visibility
                               : Icons.visibility_off,
-                          color: HexColor('007c00'),
+                          color: HexColor('$visibility'),
                         ),
                         onPressed: () {
                           _obscureText = !_obscureText;

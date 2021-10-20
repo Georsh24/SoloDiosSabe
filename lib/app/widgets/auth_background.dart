@@ -19,21 +19,28 @@ class AuthBackround extends StatelessWidget {
 }
 
 class _HeaderIcon extends StatelessWidget {
-  
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: Container(
-        width: double.infinity,
-        child: Container(
-            width: 170,
-            height: 170,
-            margin: EdgeInsets.only(top: 30),
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage('assets/avatar.png'),
-              ),
-            )),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Container(
+              width: 170,
+              height: 170,
+              margin: EdgeInsets.only(top: 30),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(200),
+                boxShadow: [
+                  BoxShadow(
+                      color: Colors.white, blurRadius: 10, spreadRadius: -8),
+                ],
+                image: DecorationImage(
+                  image: AssetImage('assets/avatar.png'),
+                ),
+              )),
+        ],
       ),
     );
   }
@@ -80,12 +87,10 @@ class _RedBox extends StatelessWidget {
   }
 
   BoxDecoration _redBackground(context) {
-    final colorshex1 = Theme.of(context).brightness == Brightness.dark
-        ? '3A3E98'
-        : '00ff00';
-         final colorshex2 = Theme.of(context).brightness == Brightness.dark
-        ? '4AB1D8'
-        : '05d0ae';
+    final colorshex1 =
+        Theme.of(context).brightness == Brightness.dark ? '3A3E98' : '00ff00';
+    final colorshex2 =
+        Theme.of(context).brightness == Brightness.dark ? '4AB1D8' : '05d0ae';
     return BoxDecoration(
         gradient: LinearGradient(colors: [
       HexColor('$colorshex1'),

@@ -4,6 +4,7 @@ import 'package:flutter/painting.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_meedu/meedu.dart';
 import 'package:flutter_stickers_internet/app/domain/repositories/preferences_repository.dart';
+import 'package:hexcolor/hexcolor.dart';
 
 class ThemeProvider extends ChangeNotifier {
   late ThemeMode themeMode;
@@ -150,41 +151,38 @@ class MyThemes {
       bodyText1: TextStyle(
         color: Colors.white,
         overflow: TextOverflow.ellipsis,
-        fontWeight:FontWeight.bold,
-
+        fontWeight: FontWeight.bold,
       ),
       overline: TextStyle(
-          color: Colors.yellow,
-          decorationColor: Colors.yellow,
-          fontSize: 20,
-          fontFamily: 'arial'),
+        color: HexColor('4AB1D8'),
+        fontSize: 20,
+        fontFamily: 'arial',
+      ),
     ),
+    cardColor: Colors.grey.shade800,
     scaffoldBackgroundColor: Colors.grey.shade700,
     backgroundColor: Colors.grey.shade700,
-    cardColor: Colors.grey.shade800,
-    hintColor: Colors.yellow,
+    // hintColor: Colors.yellow,
     brightness: Brightness.dark,
   );
 
   static final lightTheme = ThemeData(
-        cardColor: Colors.grey.shade100,
-    scaffoldBackgroundColor: Colors.grey.shade300,
-    backgroundColor: Colors.grey.shade300,
-    
-    hintColor: Colors.blue,
-    brightness: Brightness.light,
     textTheme: TextTheme(
       bodyText1: TextStyle(
         color: Colors.black,
         overflow: TextOverflow.ellipsis,
-        fontWeight:FontWeight.bold,
-
+        fontWeight: FontWeight.bold,
       ),
-
-        overline: TextStyle(
-            color: Colors.black,
-            decorationColor: Colors.yellow,
-            fontSize: 15,
-            fontStyle: FontStyle.normal)),
+      overline: TextStyle(
+        color: Colors.black,
+        fontSize: 20,
+        fontFamily: 'arial',
+      ),
+    ),
+    cardColor: Colors.grey.shade100,
+    scaffoldBackgroundColor: Colors.grey.shade300,
+    backgroundColor: Colors.grey.shade300,
+    // hintColor: Colors.blue,
+    brightness: Brightness.light,
   );
 }

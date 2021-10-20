@@ -242,19 +242,27 @@ class _WaStickerDetailState extends State<WaStickerDetail> {
                                                   overflow:
                                                       TextOverflow.ellipsis,
                                                   fontSize: size.width * 0.04,
-                                                  fontStyle: FontStyle.normal,
                                                   decoration:
                                                       TextDecoration.none,
-                                                  color: getColorFromHex(
-                                                      GlobalColors().colorText),
+                                                  color: Theme.of(context)
+                                                      .textTheme
+                                                      .bodyText1!
+                                                      .color,
+                                                  fontWeight: FontWeight.w100,
                                                 ),
                                               ),
                                             ),
                                             Text(
                                               widget.pack.publisher,
-                                              style: Theme.of(context)
-                                                  .textTheme
-                                                  .bodyText1,
+                                              style: TextStyle(
+                                                fontSize: size.width * 0.060,
+                                                color: Theme.of(context)
+                                                    .textTheme
+                                                    .bodyText1!
+                                                    .color,
+                                                fontWeight: FontWeight.bold,
+                                                overflow: TextOverflow.ellipsis,
+                                              ),
                                             ),
                                           ],
                                         ),
@@ -279,17 +287,19 @@ class _WaStickerDetailState extends State<WaStickerDetail> {
                                                     .textTheme
                                                     .bodyText1!
                                                     .color,
+                                                fontWeight: FontWeight.w100,
                                               ),
                                             ),
                                             Text(
                                               "${widget.pack.stickers.length}",
                                               style: TextStyle(
                                                 fontSize: size.width * 0.060,
-                                                fontStyle: FontStyle.normal,
-                                                decoration: TextDecoration.none,
-                                                color: getColorFromHex(
-                                                  GlobalColors().colorText,
-                                                ),
+                                                color: Theme.of(context)
+                                                    .textTheme
+                                                    .bodyText1!
+                                                    .color,
+                                                fontWeight: FontWeight.bold,
+                                                overflow: TextOverflow.ellipsis,
                                               ),
                                             ),
                                           ],
@@ -309,9 +319,15 @@ class _WaStickerDetailState extends State<WaStickerDetail> {
                                               child: Text(
                                                 'Price',
                                                 style: TextStyle(
-                                                    fontSize: 15,
-                                                    overflow:
-                                                        TextOverflow.ellipsis),
+                                                  fontSize: 15,
+                                                  overflow:
+                                                      TextOverflow.ellipsis,
+                                                  color: Theme.of(context)
+                                                      .textTheme
+                                                      .bodyText1!
+                                                      .color,
+                                                  fontWeight: FontWeight.w100,
+                                                ),
                                               ),
                                             ),
                                             Row(
@@ -330,12 +346,16 @@ class _WaStickerDetailState extends State<WaStickerDetail> {
                                                   child: Text(
                                                     "${widget.pack.cost}",
                                                     style: TextStyle(
+                                                      color: Theme.of(context)
+                                                          .textTheme
+                                                          .bodyText1!
+                                                          .color,
+                                                      fontWeight:
+                                                          FontWeight.bold,
                                                       fontSize:
                                                           size.width * 0.060,
                                                       overflow:
                                                           TextOverflow.ellipsis,
-                                                      fontWeight:
-                                                          FontWeight.w600,
                                                     ),
                                                   ),
                                                 )
@@ -737,5 +757,6 @@ void onApplePayResult(paymentResult) {
 
 void onGooglePayResult(paymentResult) {
   debugPrint(paymentResult.toString());
+
   // Send the resulting Google Pay token to your server / PSP
 }

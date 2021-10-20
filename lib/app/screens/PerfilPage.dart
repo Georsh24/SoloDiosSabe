@@ -15,28 +15,25 @@ class PerfilPage extends ConsumerWidget {
   Widget build(BuildContext context, watch) {
     // final sessionController = watch(sessionProvider);
     // final user = sessionController.user!;
-  return WillPopScope(
-    onWillPop: ()async =>false,
-    child:  Scaffold(
-      extendBodyBehindAppBar: true,
-      extendBody: true,
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-      ),
-      body: ListView(
-        padding: EdgeInsets.only(top: 0),
-        children: [
-          buildProfile(context, watch),
-          infoProfile(context, watch),
-          settings(context),
-        ],
-      ),
-    ) 
-    
-    );
-   
+    return WillPopScope(
+        onWillPop: () async => false,
+        child: Scaffold(
+          extendBodyBehindAppBar: true,
+          extendBody: true,
+          appBar: AppBar(
+            automaticallyImplyLeading: false,
+            backgroundColor: Colors.transparent,
+            elevation: 0,
+          ),
+          body: ListView(
+            padding: EdgeInsets.only(top: 0),
+            children: [
+              buildProfile(context, watch),
+              infoProfile(context, watch),
+              settings(context),
+            ],
+          ),
+        ));
   }
 }
 
@@ -45,12 +42,10 @@ Widget buildProfile(BuildContext context, watch) {
   final user = sessionController.user!;
   final displayname = user.displayName ?? '';
   final email = user.email ?? '';
-    final colorshex1 = Theme.of(context).brightness == Brightness.dark
-        ? '3A3E98'
-        : '00ff00';
-         final colorshex2 = Theme.of(context).brightness == Brightness.dark
-        ? '4AB1D8'
-        : '05d0ae';
+  final colorshex1 =
+      Theme.of(context).brightness == Brightness.dark ? '3A3E98' : '00ff00';
+  final colorshex2 =
+      Theme.of(context).brightness == Brightness.dark ? '4AB1D8' : '05d0ae';
 
   return Stack(
     clipBehavior: Clip.none,
@@ -99,7 +94,8 @@ Widget buildProfile(BuildContext context, watch) {
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(200),
               boxShadow: [
-                BoxShadow(color: Colors.white, blurRadius: 5, spreadRadius: -8),
+                BoxShadow(
+                    color: Colors.white, blurRadius: 10, spreadRadius: -8),
               ],
               image: DecorationImage(
                 image: AssetImage('assets/avatar.png'),
