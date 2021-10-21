@@ -8,8 +8,10 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_stickers_internet/app/back/models/stickerPacks.dart';
 import 'package:flutter_stickers_internet/app/controller/api/api_constant.dart';
 import 'package:flutter_stickers_internet/app/model/stickerPack.dart';
+import 'package:flutter_stickers_internet/app/screens/HomeScreen.dart';
 import 'package:flutter_stickers_internet/app/ui/global_controllers/session_controller.dart';
 import 'package:flutter_stickers_internet/app/widget/favorite/wa_detail.dart';
 import 'package:flutter_stickers_internet/app/widget/global_colors.dart';
@@ -36,6 +38,7 @@ String packagename = "none";
 String publisher = "No Publisher";
 String mainImage = ' ';
 int numstickers = 0;
+bool googleresult = false;
 
 // ignore: must_be_immutable
 class WaStickerDetail extends StatefulWidget {
@@ -45,6 +48,15 @@ class WaStickerDetail extends StatefulWidget {
 
   @override
   _WaStickerDetailState createState() => _WaStickerDetailState();
+  void onGooglePayResult(paymentResult) {
+    debugPrint(paymentResult.toString());
+    googleresult = true;
+    router.push(HomeScreen());
+    //router.pushReplacement(WaStickerDetail(pack: pack));
+    debugPrint(pack.toString());
+
+    // Send the resulting Google Pay token to your server / PSP
+  }
 }
 
 class _WaStickerDetailState extends State<WaStickerDetail> {
@@ -67,6 +79,7 @@ class _WaStickerDetailState extends State<WaStickerDetail> {
     Future.delayed(Duration(milliseconds: 100), () {
       getCompras();
     });
+
     // _bannerAd = BannerAd(
     //     adUnitId: AdManager.bannerAdUnitId,
     //     size: AdSize.banner
@@ -220,8 +233,8 @@ class _WaStickerDetailState extends State<WaStickerDetail> {
                                         // color: Colors.red,
                                         child: Image.network(
                                           widget.pack.trayimageFile,
-                                          height: 17.0.h,
-                                          width: 30.0.w,
+                                          height: 15.0.h,
+                                          width: 28.0.w,
                                           //color: Colors.yellow,
                                         ),
                                       ),
@@ -255,7 +268,7 @@ class _WaStickerDetailState extends State<WaStickerDetail> {
                                             Text(
                                               widget.pack.publisher,
                                               style: TextStyle(
-                                                fontSize: size.width * 0.060,
+                                                fontSize: size.width * 0.0450,
                                                 color: Theme.of(context)
                                                     .textTheme
                                                     .bodyText1!
@@ -293,7 +306,7 @@ class _WaStickerDetailState extends State<WaStickerDetail> {
                                             Text(
                                               "${widget.pack.stickers.length}",
                                               style: TextStyle(
-                                                fontSize: size.width * 0.060,
+                                                fontSize: size.width * 0.0450,
                                                 color: Theme.of(context)
                                                     .textTheme
                                                     .bodyText1!
@@ -343,6 +356,7 @@ class _WaStickerDetailState extends State<WaStickerDetail> {
                                                   ),
                                                 ),
                                                 Container(
+                                                  width: size.width * 0.15,
                                                   child: Text(
                                                     "${widget.pack.cost}",
                                                     style: TextStyle(
@@ -353,7 +367,7 @@ class _WaStickerDetailState extends State<WaStickerDetail> {
                                                       fontWeight:
                                                           FontWeight.bold,
                                                       fontSize:
-                                                          size.width * 0.060,
+                                                          size.width * 0.045,
                                                       overflow:
                                                           TextOverflow.ellipsis,
                                                     ),
@@ -669,15 +683,15 @@ void comprar(BuildContext context) {
           content: contents(context),
           actions: [
             MaterialButton(
-                child: Text(
-                  'Cancel',
-                  style: TextStyle(
-                      fontSize: size.width * 0.045,
-                      fontWeight: FontWeight.w800),
-                ),
-                onPressed: () {
-                  Navigator.pop(context);
-                }),
+              child: Text(
+                'Cancel',
+                style: TextStyle(
+                    fontSize: size.width * 0.045, fontWeight: FontWeight.w800),
+              ),
+              onPressed: () {
+                Navigator.pop(context);
+              },
+            ),
             GooglePayButton(
               paymentConfigurationAsset: 'gpay.json',
               paymentItems: _paymentItems,
@@ -689,6 +703,7 @@ void comprar(BuildContext context) {
               onPaymentResult: (data) {
                 print("Pagado");
                 addUserr();
+                router.pop();
               },
               loadingIndicator: const Center(
                 child: CircularProgressIndicator(),
@@ -753,10 +768,4 @@ void loadigFav(BuildContext context) {
 
 void onApplePayResult(paymentResult) {
   // Send the resulting Apple Pay token to your server / PSP
-}
-
-void onGooglePayResult(paymentResult) {
-  debugPrint(paymentResult.toString());
-
-  // Send the resulting Google Pay token to your server / PSP
 }

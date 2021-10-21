@@ -155,7 +155,7 @@ class MyThemes {
       ),
       overline: TextStyle(
         color: HexColor('4AB1D8'),
-        fontSize: 20,
+        fontSize: 17,
         fontFamily: 'arial',
       ),
     ),
@@ -175,7 +175,7 @@ class MyThemes {
       ),
       overline: TextStyle(
         color: Colors.black,
-        fontSize: 20,
+        fontSize: 17,
         fontFamily: 'arial',
       ),
     ),
