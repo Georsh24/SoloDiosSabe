@@ -154,3 +154,5 @@ pubspec.lock
 # If you don't generate documentation locally you can remove this line.
 doc/api/
 >>>>>>> 0c8b1d57bc1dd86c587d5b17313b0114a488e0f6
+
+key.properties
