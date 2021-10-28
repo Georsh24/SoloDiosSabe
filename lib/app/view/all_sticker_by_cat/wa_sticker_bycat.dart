@@ -72,6 +72,7 @@ class _WaAllStickerByCatState extends State<WaAllStickerByCat>
             privacypolicywebsite: maps['privacy_policy_website'],
             licenseagreementwebsite: maps['license_agreement_website'],
             color: maps['color'],
+            cost: maps['cost'],
             stickers: listOfStickers));
       }
       loading = false;
@@ -114,6 +115,11 @@ class _WaAllStickerByCatState extends State<WaAllStickerByCat>
         ? 'assets/logoblack.png'
         : 'assets/logowhite.png';
     final size = MediaQuery.of(context).size;
+    final shadowSlider = Theme.of(context).brightness == Brightness.dark;
+    final colorshex1 =
+        Theme.of(context).brightness == Brightness.dark ? '3A3E98' : '00ff00';
+    final colorshex2 =
+        Theme.of(context).brightness == Brightness.dark ? '4AB1D8' : '05d0ae';
     return Material(
         child: Scaffold(
       appBar: AppBar(
@@ -140,11 +146,11 @@ class _WaAllStickerByCatState extends State<WaAllStickerByCat>
         //   )
         // ],
         leading: IconButton(
-          padding: EdgeInsets.all(30),
+          padding: EdgeInsets.only(left: 10),
           icon: Icon(
             Icons.arrow_back,
-            color: Colors.grey,
-            size: size.width * 0.05,
+            color: Colors.white,
+            size: size.width * 0.08,
           ),
           onPressed: () {
             router.pop();
@@ -166,8 +172,8 @@ class _WaAllStickerByCatState extends State<WaAllStickerByCat>
                 0.80,
               ],
               colors: [
-                HexColor('00ff00'),
-                HexColor('05d0ae'),
+                HexColor('$colorshex1'),
+                HexColor('$colorshex2'),
               ],
             ),
             border: Border(
@@ -198,7 +204,7 @@ class _WaAllStickerByCatState extends State<WaAllStickerByCat>
         ),
       ),
       body: Container(
-        padding: EdgeInsetsDirectional.all(12),
+        padding: EdgeInsets.only(top: 10),
         child: SingleChildScrollView(
           controller: _scrollController,
           child: listOfStickerPack.length == 0
@@ -218,29 +224,41 @@ class _WaAllStickerByCatState extends State<WaAllStickerByCat>
                   shrinkWrap: true,
                   physics: NeverScrollableScrollPhysics(),
                   itemBuilder: (context, index) {
-                    return ClipRRect(
-                      borderRadius: BorderRadius.circular(5.0),
-                      child: Container(
-                        margin: EdgeInsets.all(4),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.all(Radius.circular(10)),
-                          color: Colors.white,
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.grey,
-                              blurRadius: 1.0,
-                              spreadRadius: 0.2,
-                            )
-                          ],
-                        ),
-                        child: Column(
-                          children: [
-                            Row(
-                              children: [
-                                GestureDetector(
-                                  child: Container(
-                                    child: Hero(
-                                      tag: widget.id,
+                    return GestureDetector(
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(5.0),
+                        child: Container(
+                          margin:
+                              EdgeInsets.symmetric(horizontal: 4, vertical: 6),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(10),
+                            ),
+                            color: Theme.of(context).cardColor,
+                            boxShadow: [
+                              BoxShadow(
+                                color: shadowSlider
+                                    ? Colors.grey.shade900
+                                    : Colors.grey.shade500,
+                                // color: listOfSliderSticker[index]
+                                //             .color ==
+                                //         ""
+                                //     ? getColorFromHex(
+                                //         GlobalColors().colorWhite)
+                                //     : getColorFromHex(
+                                //         listOfSliderSticker[index]
+                                //             .color),
+                                blurRadius: 1.0,
+                                spreadRadius: 2,
+                              )
+                            ],
+                          ),
+                          child: Column(
+                            children: [
+                              Row(
+                                children: [
+                                  GestureDetector(
+                                    child: Container(
                                       child: Padding(
                                         padding: const EdgeInsets.all(3),
                                         child: ClipRRect(
@@ -254,194 +272,160 @@ class _WaAllStickerByCatState extends State<WaAllStickerByCat>
                                           ),
                                         ),
                                       ),
+                                      decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(10)),
+                                          color: Theme.of(context).cardColor,
+                                          boxShadow: [BoxShadow()]),
+                                      height: 9.0.h,
+                                      width: 9.0.h,
                                     ),
-                                    decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(10)),
-                                        color: listOfStickerPack[index].color ==
-                                                ""
-                                            ? getColorFromHex(
-                                                GlobalColors().colorWhite)
-                                            : getColorFromHex(
-                                                listOfStickerPack[index].color),
-                                        boxShadow: [
-                                          BoxShadow(
-                                            color: listOfStickerPack[index]
-                                                        .color ==
-                                                    ""
-                                                ? getColorFromHex(
-                                                    GlobalColors().colorWhite)
-                                                : getColorFromHex(
-                                                    listOfStickerPack[index]
-                                                        .color),
-                                            blurRadius: 1.0,
-                                            spreadRadius: 0.3,
-                                          )
-                                        ]),
-                                    height: 9.0.h,
-                                    width: 9.0.h,
-                                  ),
-                                  onTap: () {
-                                    pushPage(
+                                    onTap: () {
+                                      pushPageNoAnim(
                                         context,
                                         WaStickerDetail(
                                           pack: listOfStickerPack[index],
-                                        ));
-                                  },
-                                ),
-                                SizedBox(
-                                  width: 8,
-                                ),
-                                GestureDetector(
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                                        ),
+                                      );
+                                    },
+                                  ),
+                                  SizedBox(
+                                    width: 8,
+                                  ),
+                                  GestureDetector(
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          listOfStickerPack[index].name,
+                                          style: TextStyle(
+                                            color: Theme.of(context)
+                                                .textTheme
+                                                .bodyText1!
+                                                .color,
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 18,
+                                          ),
+                                        ),
+                                        Text(
+                                          listOfStickerPack[index].publisher,
+                                          style: TextStyle(
+                                              color: Theme.of(context)
+                                                  .textTheme
+                                                  .bodyText1!
+                                                  .color,
+                                              fontWeight: FontWeight.w100,
+                                              fontSize: 15),
+                                        )
+                                      ],
+                                    ),
+                                    onTap: () {
+                                      pushPageNoAnim(
+                                          context,
+                                          WaStickerDetail(
+                                              pack: listOfStickerPack[index]));
+                                    },
+                                  ),
+                                  Spacer(),
+                                  Container(
+                                    width: size.height * 0.08,
+                                    height: 50,
+                                    decoration: BoxDecoration(
+                                        borderRadius:
+                                            BorderRadius.circular(20)),
+                                    margin: EdgeInsets.only(right: 10),
+                                    child: Center(
+                                        child: Row(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        // Icon(
+                                        //   Icons
+                                        //       .attach_money_outlined,
+                                        //   size:
+                                        //       size.width * 0.041,
+                                        // ),
+                                        Text(
+                                          r"$" +
+                                              " " +
+                                              listOfStickerPack[index].cost,
+                                          style: TextStyle(
+                                              fontSize: size.width * 0.04,
+                                              overflow: TextOverflow.ellipsis),
+                                        ),
+                                      ],
+                                    )),
+                                  ),
+                                  SizedBox(
+                                    width: 6,
+                                  )
+                                ],
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                              ),
+                              SizedBox(
+                                height: 8,
+                              ),
+                              Hero(
+                                tag: listOfStickerPack[index],
+                                child: GestureDetector(
+                                  child: Row(
                                     children: [
-                                      Text(
-                                        listOfStickerPack[index].publisher,
-                                        style: TextStyle(
-                                            color: Colors.black, fontSize: 18),
-                                      ),
-                                      Text(
-                                        listOfStickerPack[index].name,
-                                        style: TextStyle(
-                                            color: Colors.grey, fontSize: 15),
-                                      )
+                                      for (int i = 0;
+                                          i <
+                                              listOfStickerPack[index]
+                                                  .sticker
+                                                  .length;
+                                          i++)
+                                        if (i < 6)
+                                          Flexible(
+                                            child: Padding(
+                                              padding: const EdgeInsets.all(2),
+                                              child: Container(
+                                                child: Image.network(
+                                                  listOfStickerPack[index]
+                                                      .sticker[i]
+                                                      .imagefile,
+                                                  height:
+                                                      widthHeightSticker().h,
+                                                  width: widthHeightSticker().w,
+                                                ),
+                                                decoration: BoxDecoration(
+                                                  color: Theme.of(context)
+                                                      .cardColor,
+                                                  borderRadius:
+                                                      BorderRadius.all(
+                                                    Radius.circular(20),
+                                                  ),
+                                                ),
+                                                height:
+                                                    widthHeightContainer().h,
+                                                width: widthHeightContainer().h,
+                                              ),
+                                            ),
+                                          ),
                                     ],
                                   ),
                                   onTap: () {
-                                    pushPage(
-                                        context,
-                                        WaStickerDetail(
-                                          pack: listOfStickerPack[index],
-                                        ));
-                                  },
-                                ),
-                                Spacer(),
-                                // Stack(
-                                //   children: [
-                                //     if(!downloadList.contains(listOfStickerPack[index].identiFier))...[
-                                //       id == index && !downloading ? Center(
-                                //         child: Container(
-                                //           child: CircularProgressIndicator(strokeWidth: 1,),height: 2.0.h, width: 4.0.w,),
-                                //       ) :
-                                //       GestureDetector(
-                                //         child: Container(
-                                //           decoration: BoxDecoration(
-                                //               color: getColorFromHex(GlobalColors().waColor),
-                                //               borderRadius: BorderRadius.all(Radius.circular(8)),
-                                //               boxShadow: [
-                                //                 BoxShadow(
-                                //                   color: getColorFromHex(GlobalColors().waColor),
-                                //                   spreadRadius: 0.4,
-                                //                 )
-                                //               ]
-                                //           ),
-                                //           child: Padding(
-                                //             padding: const EdgeInsets.all(5.0),
-                                //             child: Text('Download', style: TextStyle(
-                                //                 color: getColorFromHex(GlobalColors().colorWhite), fontSize: 12
-                                //             ),),
-                                //           ),
-                                //         ),
-                                //         onTap: (){
-                                //           setState(() {
-                                //             id = index;
-                                //             downloading = false;
-                                //             downloadStickers(listOfStickerPack[index]);
-                                //           });
-                                //         },
-                                //       ),
-                                //     ],
-                                //     if(downloadList.contains(listOfStickerPack[index].identiFier))...[
-                                //       GestureDetector(
-                                //         child: Container(
-                                //           decoration: BoxDecoration(
-                                //               color: getColorFromHex(GlobalColors().waColor),
-                                //               borderRadius: BorderRadius.all(Radius.circular(8)),
-                                //               boxShadow: [
-                                //                 BoxShadow(
-                                //                   color: getColorFromHex(GlobalColors().waColor),
-                                //                   spreadRadius: 0.4,
-                                //                 )
-                                //               ]
-                                //           ),
-                                //           child: Padding(
-                                //             padding: const EdgeInsets.all(5.0),
-                                //             child: Text('Add to Whats app', style: TextStyle(
-                                //                 color: getColorFromHex(GlobalColors().colorWhite), fontSize: 12
-                                //             ),),
-                                //           ),
-                                //         ),
-                                //         onTap: (){
-                                //           setState(() {
-                                //             id = index;
-                                //             addStickersToWa(listOfStickerPack[index]);
-                                //           });
-                                //         },
-                                //       ),
-                                //     ]
-                                //   ],
-                                // ),
-                                SizedBox(
-                                  width: 6,
-                                )
-                              ],
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            ),
-                            SizedBox(
-                              height: 8,
-                            ),
-                            Hero(
-                              tag: listOfStickerPack[index],
-                              child: GestureDetector(
-                                child: Row(
-                                  children: [
-                                    for (int i = 0;
-                                        i <
-                                            listOfStickerPack[index]
-                                                .sticker
-                                                .length;
-                                        i++)
-                                      if (i < 6)
-                                        Flexible(
-                                          child: Padding(
-                                            padding: const EdgeInsets.all(2),
-                                            child: Container(
-                                              child: Image.network(
-                                                listOfStickerPack[index]
-                                                    .sticker[i]
-                                                    .imagefile,
-                                                height: widthHeightSticker().h,
-                                                width: widthHeightSticker().w,
-                                              ),
-                                              decoration: BoxDecoration(
-                                                  color: getColorFromHex(
-                                                      GlobalColors().bgSticker),
-                                                  borderRadius:
-                                                      BorderRadius.all(
-                                                          Radius.circular(20))),
-                                              height: widthHeightContainer().h,
-                                              width: widthHeightContainer().h,
-                                            ),
-                                          ),
-                                        ),
-                                  ],
-                                ),
-                                onTap: () {
-                                  pushPage(
+                                    pushPageNoAnim(
                                       context,
                                       WaStickerDetail(
                                         pack: listOfStickerPack[index],
-                                      ));
-                                },
+                                      ),
+                                    );
+                                  },
+                                ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
                       ),
                     );
-                  }),
+                  },
+                ),
         ),
       ),
     ));

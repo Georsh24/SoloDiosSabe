@@ -249,7 +249,7 @@ class _DashboardState extends State<Dashboard> {
                                     ),
                                   ),
                                   onTap: () {
-                                    pushPage(context, WaAllSticker());
+                                    pushPageNoAnim(context, WaAllSticker());
                                   },
                                 ),
                               ],
@@ -333,7 +333,7 @@ class _DashboardState extends State<Dashboard> {
                                                   width: 9.0.h,
                                                 ),
                                                 onTap: () {
-                                                  pushPage(
+                                                  pushPageNoAnim(
                                                       context,
                                                       WaStickerDetail(
                                                         pack: listOfStickerPack[
@@ -366,7 +366,7 @@ class _DashboardState extends State<Dashboard> {
                                                   ],
                                                 ),
                                                 onTap: () {
-                                                  pushPage(
+                                                  pushPageNoAnim(
                                                       context,
                                                       WaStickerDetail(
                                                         pack: listOfStickerPack[
@@ -549,7 +549,7 @@ class _DashboardState extends State<Dashboard> {
                                                 ],
                                               ),
                                               onTap: () {
-                                                pushPage(
+                                                pushPageNoAnim(
                                                     context,
                                                     WaStickerDetail(
                                                       pack: listOfStickerPack[

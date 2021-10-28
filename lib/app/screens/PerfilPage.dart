@@ -5,12 +5,14 @@ import 'package:flutter_stickers_internet/app/ui/global_widgets/dialogs/dialogs.
 import 'package:flutter_stickers_internet/app/ui/global_widgets/dialogs/progres_dialog.dart';
 import 'package:flutter_stickers_internet/app/ui/global_widgets/dialogs/show_input_dialog.dart';
 import 'package:flutter_stickers_internet/app/ui/routes/routes.dart';
+import 'package:flutter_stickers_internet/app/view/details/wa_sticker_details.dart';
 import 'package:flutter_stickers_internet/app/widgets/ChangeThemeButtonWidget.dart';
 import 'package:flutter_meedu/router.dart' as router;
 import 'package:hexcolor/hexcolor.dart';
 
 class PerfilPage extends ConsumerWidget {
   const PerfilPage({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context, watch) {
     // final sessionController = watch(sessionProvider);
@@ -220,12 +222,12 @@ Widget infoProfile(BuildContext context, watch) {
           //   subtitle: Text('24 Feb 2021'),
           // ),
           // Divider(),
-          ListTile(
-            contentPadding: EdgeInsets.symmetric(vertical: 0, horizontal: 40),
-            leading: Icon(Icons.celebration),
-            title: Text('Total added Stickers'),
-            subtitle: Text('33'),
-          ),
+          // ListTile(
+          //   contentPadding: EdgeInsets.symmetric(vertical: 0, horizontal: 40),
+          //   leading: Icon(Icons.celebration),
+          //   title: Text('Total added Stickers'),
+          //   subtitle: Text('33'),
+          // ),
           Divider(),
         ],
       ),
@@ -267,4 +269,27 @@ Widget settings(BuildContext context) {
       ),
     ),
   );
+}
+
+String getComprasadd() {
+  firestore
+      .collection("Compras")
+      .where('Usuario', isEqualTo: getuid)
+      .get()
+      .then(
+    (querySnapshot) {
+      comprado = "comprar";
+      querySnapshot.docs.forEach(
+        (result) {
+          comprado = "comprado";
+          print(result.data());
+        },
+      );
+      print(getidcompra);
+      print("Comprado:");
+      print(comprado);
+    },
+  );
+
+  return comprado;
 }

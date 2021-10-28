@@ -175,7 +175,7 @@ class _CategoryItemState extends State<CategoryItem> {
                           ),
                         ),
                         onTap: () {
-                          pushPage(
+                          pushPageNoAnim(
                             context,
                             WaAllStickerByCat(
                               id: listOfCategory[i].cat_id,

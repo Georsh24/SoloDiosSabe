@@ -9,8 +9,9 @@ import 'package:flutter_stickers_internet/app/ui/global_widgets/custom_input_fie
 import 'package:flutter_stickers_internet/app/ui/pages/login/utils/send_login_form.dart';
 import 'package:flutter_stickers_internet/app/ui/routes/routes.dart';
 import 'package:flutter_stickers_internet/app/utils/email_validator.dart';
+import 'package:flutter_stickers_internet/app/widgets/CardContainer.dart';
 import 'package:flutter_stickers_internet/app/widgets/auth_background.dart';
-import 'package:flutter_stickers_internet/app/widgets/widgets.dart';
+
 import 'package:hexcolor/hexcolor.dart';
 
 import 'controller/login_controller.dart';

@@ -19,9 +19,7 @@ import 'package:flutter_stickers_internet/app/view/all_sticker/wa_all_sticker.da
 import 'package:flutter_stickers_internet/app/view/bottom_bar/item/favorite.dart';
 import 'package:flutter_stickers_internet/app/view/category/wa_category.dart';
 import 'package:flutter_stickers_internet/app/view/details/wa_sticker_details.dart';
-import 'package:flutter_stickers_internet/app/widget/global_colors.dart';
 import 'package:flutter_stickers_internet/app/widget/global_padding.dart';
-import 'package:flutter_stickers_internet/app/widget/hex_colors.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
@@ -323,7 +321,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                     ),
                                   ),
                                   onTap: () {
-                                    pushPage(
+                                    pushPageNoAnim(
                                       context,
                                       WaStickerDetail(
                                         pack: listOfSliderSticker[index],
@@ -378,7 +376,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                       ),
                                     ),
                                     onTap: () {
-                                      pushPage(context, WaAllSticker());
+                                      pushPageNoAnim(context, WaAllSticker());
                                     },
                                   ),
                                 ],
@@ -445,12 +443,8 @@ class _MyHomePageState extends State<MyHomePage> {
                                                             BorderRadius.all(
                                                                 Radius.circular(
                                                                     10)),
-                                                        color: listOfStickerPack[
-                                                                        index]
-                                                                    .color ==
-                                                                ""
-                                                            ? getColorFromHex(GlobalColors().colorWhite)
-                                                            : getColorFromHex(listOfStickerPack[index].color),
+                                                        color: Theme.of(context)
+                                                            .cardColor,
                                                         boxShadow: [
                                                           BoxShadow()
                                                         ]),
@@ -458,7 +452,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                                     width: 9.0.h,
                                                   ),
                                                   onTap: () {
-                                                    pushPage(
+                                                    pushPageNoAnim(
                                                       context,
                                                       WaStickerDetail(
                                                         pack: listOfStickerPack[
@@ -506,7 +500,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                                     ],
                                                   ),
                                                   onTap: () {
-                                                    pushPage(
+                                                    pushPageNoAnim(
                                                         context,
                                                         WaStickerDetail(
                                                             pack:
@@ -533,15 +527,18 @@ class _MyHomePageState extends State<MyHomePage> {
                                                         MainAxisAlignment
                                                             .center,
                                                     children: [
-                                                      Icon(
-                                                        Icons
-                                                            .attach_money_outlined,
-                                                        size:
-                                                            size.width * 0.041,
-                                                      ),
+                                                      // Icon(
+                                                      //   Icons
+                                                      //       .attach_money_outlined,
+                                                      //   size:
+                                                      //       size.width * 0.041,
+                                                      // ),
                                                       Text(
-                                                        listOfStickerPack[index]
-                                                            .cost,
+                                                        r"$" +
+                                                            " " +
+                                                            listOfStickerPack[
+                                                                    index]
+                                                                .cost,
                                                         style: TextStyle(
                                                             fontSize:
                                                                 size.width *
@@ -621,7 +618,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                                   ],
                                                 ),
                                                 onTap: () {
-                                                  pushPage(
+                                                  pushPageNoAnim(
                                                     context,
                                                     WaStickerDetail(
                                                       pack: listOfStickerPack[

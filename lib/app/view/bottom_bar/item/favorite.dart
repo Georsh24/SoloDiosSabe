@@ -118,7 +118,7 @@ class _FavoriteState extends State<Favorite> {
                               width: 9.0.h,
                             ),
                             onTap: () {
-                              pushPage(
+                              pushPageNoAnim(
                                   context,
                                   WaStickerDetail(
                                     pack: waFavorite,
@@ -145,7 +145,7 @@ class _FavoriteState extends State<Favorite> {
                               ],
                             ),
                             onTap: () {
-                              pushPage(
+                              pushPageNoAnim(
                                   context,
                                   WaStickerDetail(
                                     pack: waFavorite,
@@ -279,7 +279,7 @@ class _FavoriteState extends State<Favorite> {
                             ],
                           ),
                           onTap: () {
-                            pushPage(
+                            pushPageNoAnim(
                                 context,
                                 WaStickerDetail(
                                   pack: waFavorite,

@@ -8,10 +8,10 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_stickers_internet/app/back/models/stickerPacks.dart';
 import 'package:flutter_stickers_internet/app/controller/api/api_constant.dart';
 import 'package:flutter_stickers_internet/app/model/stickerPack.dart';
 import 'package:flutter_stickers_internet/app/screens/HomeScreen.dart';
+import 'package:flutter_stickers_internet/app/screens/PerfilPage.dart';
 import 'package:flutter_stickers_internet/app/ui/global_controllers/session_controller.dart';
 import 'package:flutter_stickers_internet/app/widget/favorite/wa_detail.dart';
 import 'package:flutter_stickers_internet/app/widget/global_colors.dart';
@@ -39,6 +39,7 @@ String publisher = "No Publisher";
 String mainImage = ' ';
 int numstickers = 0;
 bool googleresult = false;
+String dollar = "USD";
 
 // ignore: must_be_immutable
 class WaStickerDetail extends StatefulWidget {
@@ -78,6 +79,7 @@ class _WaStickerDetailState extends State<WaStickerDetail> {
     });
     Future.delayed(Duration(milliseconds: 100), () {
       getCompras();
+      getComprasadd();
     });
 
     // _bannerAd = BannerAd(
@@ -133,11 +135,11 @@ class _WaStickerDetailState extends State<WaStickerDetail> {
             //   )
             // ],
             leading: IconButton(
-              padding: EdgeInsets.all(30),
+              padding: EdgeInsets.only(left: 10),
               icon: Icon(
                 Icons.arrow_back,
-                color: Colors.grey,
-                size: size.width * 0.05,
+                color: Colors.white,
+                size: size.width * 0.08,
               ),
               onPressed: () {
                 router.pop();
@@ -208,10 +210,7 @@ class _WaStickerDetailState extends State<WaStickerDetail> {
                                       spreadRadius: 2,
                                     )
                                   ],
-                                  color: widget.pack.color == ""
-                                      ? getColorFromHex(
-                                          GlobalColors().searchBar)
-                                      : getColorFromHex(widget.pack.color),
+                                  color: Colors.white,
                                   borderRadius:
                                       BorderRadius.all(Radius.circular(15))),
                               height: 20.0.h,
@@ -432,7 +431,6 @@ class _WaStickerDetailState extends State<WaStickerDetail> {
                     right: 0,
                     bottom: 30,
                     child: Container(
-                      width: size.width * 0.7,
                       height: size.height * 0.06,
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10),
@@ -448,9 +446,10 @@ class _WaStickerDetailState extends State<WaStickerDetail> {
                                 HexColor('$colorshex2'),
                               ])),
                       child: MaterialButton(
+                        elevation: 5,
                         padding: const EdgeInsets.all(5.0),
                         child: Text(
-                          'Lo Quiero',
+                          'Add',
                           style: TextStyle(
                               color: getColorFromHex(GlobalColors().colorWhite),
                               fontSize: 25),
@@ -636,6 +635,18 @@ class _WaStickerDetailState extends State<WaStickerDetail> {
 }
 
 void addUserr() {
+  firestore.collection("Compras").add({
+    "Usuario": getuid,
+    "StickerCompra": getidcompra,
+    "PackName": packagename,
+    "Stickers": '$numstickers',
+    "Cost": price,
+  }).then((value) {
+    print(value.id);
+  });
+}
+
+void addTransactions() {
   firestore
       .collection("Compras")
       .add({"Usuario": getuid, "StickerCompra": getidcompra}).then((value) {
@@ -682,31 +693,35 @@ void comprar(BuildContext context) {
         return AlertDialog(
           content: contents(context),
           actions: [
-            MaterialButton(
-              child: Text(
-                'Cancel',
-                style: TextStyle(
-                    fontSize: size.width * 0.045, fontWeight: FontWeight.w800),
+            Container(
+              child: MaterialButton(
+                child: Text(
+                  'Cancel',
+                  style: TextStyle(
+                      fontSize: size.width * 0.045,
+                      fontWeight: FontWeight.w800),
+                ),
+                onPressed: () {
+                  Navigator.pop(context);
+                },
               ),
-              onPressed: () {
-                Navigator.pop(context);
-              },
             ),
-            GooglePayButton(
-              paymentConfigurationAsset: 'gpay.json',
-              paymentItems: _paymentItems,
-              width: size.width * 0.5,
-              height: 50,
-              style: GooglePayButtonStyle.black,
-              type: GooglePayButtonType.pay,
-              margin: const EdgeInsets.only(top: 15.0),
-              onPaymentResult: (data) {
-                print("Pagado");
-                addUserr();
-                router.pop();
-              },
-              loadingIndicator: const Center(
-                child: CircularProgressIndicator(),
+            Container(
+              child: GooglePayButton(
+                paymentConfigurationAsset: 'gpay.json',
+                paymentItems: _paymentItems,
+                width: size.width * 0.5,
+                height: 50,
+                style: GooglePayButtonStyle.black,
+                type: GooglePayButtonType.pay,
+                onPaymentResult: (data) {
+                  print("Pagado");
+                  addUserr();
+                  router.pop();
+                },
+                loadingIndicator: const Center(
+                  child: CircularProgressIndicator(),
+                ),
               ),
             ),
           ],
@@ -717,15 +732,98 @@ void comprar(BuildContext context) {
 contents(BuildContext context) {
   final size = MediaQuery.of(context).size;
   return Container(
-    height: size.height * 0.25,
+    height: size.height * 0.30,
     child: Container(
       child: Center(
         child: Column(
           children: [
             Image.network(mainImage),
+            SizedBox(
+              height: size.height * 0.0001,
+            ),
             Text(packagename),
-            Text(price),
-            Text("$numstickers"),
+            Divider(
+              thickness: 1.5,
+            ),
+            Container(
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Container(
+                    width: size.width * 0.3,
+                    height: 99,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text('Stickers'),
+                        SizedBox(height: size.height * 0.01),
+                        Text('Cost'),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    width: size.width * 0.3,
+                    height: 99,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text('$numstickers'),
+                        SizedBox(height: size.height * 0.01),
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            Text(r"$" + " " + price),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            )
+            // Column(
+            //   children: [
+            //     Container(
+            //       color: Colors.yellow,
+            //       child: Row(
+            //         crossAxisAlignment: CrossAxisAlignment.start,
+            //         mainAxisSize: MainAxisSize.max,
+            //         mainAxisAlignment: MainAxisAlignment.start,
+            //         children: [
+            //           Container(
+            //             color: Colors.red,
+            //             child: Text('Stickers'),
+            //           ),
+            //           SizedBox(
+            //             width: size.width * 0.4,
+            //           ),
+            //           Container(
+            //             child: Text("$numstickers"),
+            //           )
+            //         ],
+            //       ),
+            //     ),
+            //   ],
+            // ),
+            // SizedBox(
+            //   height: size.height * 0.02,
+            // ),
+            // Row(
+            //   crossAxisAlignment: CrossAxisAlignment.start,
+            //   mainAxisSize: MainAxisSize.max,
+            //   mainAxisAlignment: MainAxisAlignment.start,
+            //   children: [
+            //     Text("Price"),
+            //     SizedBox(
+            //       width: size.width * 0.4,
+            //     ),
+            //     Text(price),
+            //   ],
+            // ),
           ],
         ),
       ),

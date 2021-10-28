@@ -105,11 +105,11 @@ class _WaAllCategoryState extends State<WaAllCategory> {
           //   )
           // ],
           leading: IconButton(
-            padding: EdgeInsets.all(30),
+            padding: EdgeInsets.only(left: 10),
             icon: Icon(
               Icons.arrow_back,
-              color: Colors.grey,
-              size: size.width * 0.05,
+              color: Colors.white,
+              size: size.width * 0.08,
             ),
             onPressed: () {
               router.pop();
@@ -222,7 +222,7 @@ class _WaAllCategoryState extends State<WaAllCategory> {
                         ),
                       ),
                       onTap: () {
-                        pushPage(
+                        pushPageNoAnim(
                           context,
                           WaAllStickerByCat(
                             id: listOfCategory[i].cat_id,

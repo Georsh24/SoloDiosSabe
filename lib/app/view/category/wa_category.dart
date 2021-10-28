@@ -8,8 +8,6 @@ import 'package:flutter_stickers_internet/app/model/wa_model_cat.dart';
 import 'package:flutter_stickers_internet/app/routers/wa_route.dart';
 import 'package:flutter_stickers_internet/app/view/all_category/wa_all_category.dart';
 import 'package:flutter_stickers_internet/app/view/all_sticker_by_cat/wa_sticker_bycat.dart';
-import 'package:flutter_stickers_internet/app/widget/global_colors.dart';
-import 'package:flutter_stickers_internet/app/widget/hex_colors.dart';
 import 'package:http/http.dart' as http;
 
 class WaCategory extends StatefulWidget {
@@ -98,7 +96,7 @@ class _WaCategoryState extends State<WaCategory> {
                       itemBuilder: (ctx, index) {
                         return GestureDetector(
                           onTap: () {
-                            pushPage(
+                            pushPageNoAnim(
                                 context,
                                 WaAllStickerByCat(
                                   id: categories[index].cat_id,
@@ -117,18 +115,10 @@ class _WaCategoryState extends State<WaCategory> {
                                     decoration: BoxDecoration(
                                       borderRadius:
                                           BorderRadius.all(Radius.circular(10)),
-                                      color: categories[index].color == ""
-                                          ? getColorFromHex(
-                                              GlobalColors().colorWhite)
-                                          : getColorFromHex(
-                                              categories[index].color),
+                                      color: Theme.of(context).cardColor,
                                       boxShadow: [
                                         BoxShadow(
-                                          color: categories[index].color == ""
-                                              ? getColorFromHex(
-                                                  GlobalColors().colorWhite)
-                                              : getColorFromHex(
-                                                  categories[index].color),
+                                          color: Colors.grey,
                                           blurRadius: 1.0,
                                           spreadRadius: 0.2,
                                         )
