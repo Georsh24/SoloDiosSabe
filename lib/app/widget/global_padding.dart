@@ -1,7 +1,7 @@
-double widthHeightContainer(){
+double widthHeightContainer() {
   return 8;
 }
 
-double widthHeightSticker(){
+double widthHeightSticker() {
   return 10;
 }

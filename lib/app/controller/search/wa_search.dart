@@ -127,13 +127,6 @@ class WaSearchAction extends SearchDelegate<String> {
   @override
   Widget buildResults(BuildContext context) {
     final shadowSlider = Theme.of(context).brightness == Brightness.dark;
-    final logoimg = Theme.of(context).brightness == Brightness.dark
-        ? 'assets/logoblack.png'
-        : 'assets/logowhite.png';
-    final colorshex1 =
-        Theme.of(context).brightness == Brightness.dark ? '3A3E98' : '00ff00';
-    final colorshex2 =
-        Theme.of(context).brightness == Brightness.dark ? '4AB1D8' : '05d0ae';
 
     final size = MediaQuery.of(context).size;
     // return FocusScope(child: Container());

@@ -73,14 +73,17 @@ class _WaStickerDetailState extends State<WaStickerDetail> {
   @override
   void initState() {
     super.initState();
-    SchedulerBinding.instance!.addPostFrameCallback((_) {
-      Provider.of<WaDetail>(context, listen: false)
-          .checkFav(int.parse(widget.pack.identifier));
-    });
-    Future.delayed(Duration(milliseconds: 100), () {
-      getCompras();
-      getComprasadd();
-    });
+    // SchedulerBinding.instance!.addPostFrameCallback((_) {
+    //   Provider.of<WaDetail>(context, listen: false)
+    //       .checkFav(int.parse(widget.pack.identifier));
+    // },);
+    Future.delayed(
+      Duration(milliseconds: 100),
+      () {
+        getCompras();
+        getComprasadd();
+      },
+    );
 
     // _bannerAd = BannerAd(
     //     adUnitId: AdManager.bannerAdUnitId,
@@ -201,25 +204,26 @@ class _WaStickerDetailState extends State<WaStickerDetail> {
                             Container(
                               margin: EdgeInsets.symmetric(horizontal: 10),
                               decoration: BoxDecoration(
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: shadowSlider
-                                          ? Colors.grey.shade900
-                                          : Colors.grey.shade500,
-                                      blurRadius: 4.0,
-                                      spreadRadius: 2,
-                                    )
-                                  ],
-                                  color: Colors.white,
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(15))),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: shadowSlider
+                                        ? Colors.grey.shade900
+                                        : Colors.grey.shade500,
+                                    blurRadius: 4.0,
+                                    spreadRadius: 2,
+                                  )
+                                ],
+                                color: Colors.white,
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(15),
+                                ),
+                              ),
                               height: 20.0.h,
                               width: MediaQuery.of(context).size.width,
                             ),
                             Hero(
                               tag: widget.pack,
                               child: Container(
-                                //color: Colors.blue,
                                 child: Padding(
                                   padding: const EdgeInsets.all(8.0),
                                   child: Row(
@@ -229,18 +233,15 @@ class _WaStickerDetailState extends State<WaStickerDetail> {
                                       Container(
                                         width: size.width * 0.22,
                                         height: size.height * 0.17,
-                                        // color: Colors.red,
                                         child: Image.network(
                                           widget.pack.trayimageFile,
                                           height: 15.0.h,
                                           width: 28.0.w,
-                                          //color: Colors.yellow,
                                         ),
                                       ),
                                       Container(
                                         width: size.width * 0.22,
                                         height: size.height * 0.17,
-                                        // color: Colors.green,
                                         child: Column(
                                           crossAxisAlignment:
                                               CrossAxisAlignment.center,
@@ -433,18 +434,20 @@ class _WaStickerDetailState extends State<WaStickerDetail> {
                     child: Container(
                       height: size.height * 0.06,
                       decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          gradient: LinearGradient(
-                              begin: Alignment.topLeft,
-                              end: Alignment.topRight,
-                              stops: [
-                                0.1,
-                                0.80,
-                              ],
-                              colors: [
-                                HexColor('$colorshex1'),
-                                HexColor('$colorshex2'),
-                              ])),
+                        borderRadius: BorderRadius.circular(10),
+                        gradient: LinearGradient(
+                          begin: Alignment.topLeft,
+                          end: Alignment.topRight,
+                          stops: [
+                            0.1,
+                            0.80,
+                          ],
+                          colors: [
+                            HexColor('$colorshex1'),
+                            HexColor('$colorshex2'),
+                          ],
+                        ),
+                      ),
                       child: MaterialButton(
                         elevation: 5,
                         padding: const EdgeInsets.all(5.0),
@@ -635,23 +638,29 @@ class _WaStickerDetailState extends State<WaStickerDetail> {
 }
 
 void addUserr() {
-  firestore.collection("Compras").add({
-    "Usuario": getuid,
-    "StickerCompra": getidcompra,
-    "PackName": packagename,
-    "Stickers": '$numstickers',
-    "Cost": price,
-  }).then((value) {
-    print(value.id);
-  });
+  firestore.collection("Compras").add(
+    {
+      "Usuario": getuid,
+      "StickerCompra": getidcompra,
+      "PackName": packagename,
+      "Stickers": '$numstickers',
+      "Cost": price,
+    },
+  ).then(
+    (value) {
+      print(value.id);
+    },
+  );
 }
 
 void addTransactions() {
-  firestore
-      .collection("Compras")
-      .add({"Usuario": getuid, "StickerCompra": getidcompra}).then((value) {
-    print(value.id);
-  });
+  firestore.collection("Compras").add(
+    {"Usuario": getuid, "StickerCompra": getidcompra},
+  ).then(
+    (value) {
+      print(value.id);
+    },
+  );
 }
 
 String getCompras() {
@@ -666,7 +675,9 @@ String getCompras() {
       querySnapshot.docs.forEach(
         (result) {
           comprado = "comprado";
-          print(result.data());
+          print(
+            result.data(),
+          );
         },
       );
       print(getidcompra);
@@ -688,45 +699,45 @@ void comprar(BuildContext context) {
     )
   ];
   showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          content: contents(context),
-          actions: [
-            Container(
-              child: MaterialButton(
-                child: Text(
-                  'Cancel',
-                  style: TextStyle(
-                      fontSize: size.width * 0.045,
-                      fontWeight: FontWeight.w800),
-                ),
-                onPressed: () {
-                  Navigator.pop(context);
-                },
+    context: context,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        content: contents(context),
+        actions: [
+          Container(
+            child: MaterialButton(
+              child: Text(
+                'Cancel',
+                style: TextStyle(
+                    fontSize: size.width * 0.045, fontWeight: FontWeight.w800),
+              ),
+              onPressed: () {
+                Navigator.pop(context);
+              },
+            ),
+          ),
+          Container(
+            child: GooglePayButton(
+              paymentConfigurationAsset: 'gpay.json',
+              paymentItems: _paymentItems,
+              width: size.width * 0.5,
+              height: 50,
+              style: GooglePayButtonStyle.black,
+              type: GooglePayButtonType.pay,
+              onPaymentResult: (data) {
+                print("Pagado");
+                addUserr();
+                router.pop();
+              },
+              loadingIndicator: const Center(
+                child: CircularProgressIndicator(),
               ),
             ),
-            Container(
-              child: GooglePayButton(
-                paymentConfigurationAsset: 'gpay.json',
-                paymentItems: _paymentItems,
-                width: size.width * 0.5,
-                height: 50,
-                style: GooglePayButtonStyle.black,
-                type: GooglePayButtonType.pay,
-                onPaymentResult: (data) {
-                  print("Pagado");
-                  addUserr();
-                  router.pop();
-                },
-                loadingIndicator: const Center(
-                  child: CircularProgressIndicator(),
-                ),
-              ),
-            ),
-          ],
-        );
-      });
+          ),
+        ],
+      );
+    },
+  );
 }
 
 contents(BuildContext context) {
@@ -785,45 +796,6 @@ contents(BuildContext context) {
                 ],
               ),
             )
-            // Column(
-            //   children: [
-            //     Container(
-            //       color: Colors.yellow,
-            //       child: Row(
-            //         crossAxisAlignment: CrossAxisAlignment.start,
-            //         mainAxisSize: MainAxisSize.max,
-            //         mainAxisAlignment: MainAxisAlignment.start,
-            //         children: [
-            //           Container(
-            //             color: Colors.red,
-            //             child: Text('Stickers'),
-            //           ),
-            //           SizedBox(
-            //             width: size.width * 0.4,
-            //           ),
-            //           Container(
-            //             child: Text("$numstickers"),
-            //           )
-            //         ],
-            //       ),
-            //     ),
-            //   ],
-            // ),
-            // SizedBox(
-            //   height: size.height * 0.02,
-            // ),
-            // Row(
-            //   crossAxisAlignment: CrossAxisAlignment.start,
-            //   mainAxisSize: MainAxisSize.max,
-            //   mainAxisAlignment: MainAxisAlignment.start,
-            //   children: [
-            //     Text("Price"),
-            //     SizedBox(
-            //       width: size.width * 0.4,
-            //     ),
-            //     Text(price),
-            //   ],
-            // ),
           ],
         ),
       ),
@@ -831,16 +803,16 @@ contents(BuildContext context) {
   );
 }
 
-void descargar(BuildContext context) {
-  showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          content: Text('Hola'),
-          actions: [MaterialButton(child: Text('Descargar'), onPressed: () {})],
-        );
-      });
-}
+// void descargar(BuildContext context) {
+//   showDialog(
+//       context: context,
+//       builder: (BuildContext context) {
+//         return AlertDialog(
+//           content: Text('Hola'),
+//           actions: [MaterialButton(child: Text('Descargar'), onPressed: () {})],
+//         );
+//       });
+// }
 
 void loadigFav(BuildContext context) {
   showDialog(
