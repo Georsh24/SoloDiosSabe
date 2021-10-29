@@ -27,13 +27,11 @@ apply plugin: 'kotlin-android-extensions'
 apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
 apply plugin: 'com.google.gms.google-services'
 
-
  def keystoreProperties = new Properties()
    def keystorePropertiesFile = rootProject.file('key.properties')
    if (keystorePropertiesFile.exists()) {
        keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
-   }
-
+   } 
 android {
     compileSdkVersion 31
 
@@ -96,4 +94,5 @@ dependencies {
 repositories {
     mavenCentral()
 }
+println keystorePropertiesFile
 
