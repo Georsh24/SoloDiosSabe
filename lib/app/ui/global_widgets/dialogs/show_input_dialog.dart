@@ -11,7 +11,7 @@ Future<String?> showInputDialog(
   controller.text = value;
   final result = await showDialog<String>(
     context: context,
-    builder: (context) =>  AlertDialog(
+    builder: (context) => AlertDialog(
       title: title != null ? Text(title) : null,
       content: TextField(
         controller: controller,
@@ -22,14 +22,12 @@ Future<String?> showInputDialog(
       actions: [
         TextButton(
           child: Text('Save'),
-          //isDefaultAction: true,
           onPressed: () {
             Navigator.pop(context, value);
           },
         ),
-       TextButton(
+        TextButton(
           child: Text('Cancel'),
-         // isDefaultAction: true,
           onPressed: () {
             Navigator.pop(
               context,
@@ -39,12 +37,8 @@ Future<String?> showInputDialog(
       ],
     ),
   );
-
-  // controller.dispose();
-
   if (result != null && result.trim().isEmpty) {
     return null;
   }
-
   return result;
 }

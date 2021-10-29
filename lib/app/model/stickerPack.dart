@@ -5,7 +5,6 @@ part 'stickerPack.g.dart';
 
 @JsonSerializable()
 class StickerPack {
-
   String identifier;
   String name;
   String publisher;
@@ -21,20 +20,20 @@ class StickerPack {
   String licenseagreementwebsite;
   @JsonKey(name: 'color')
   String color;
-   @JsonKey(name: 'cost')
+  @JsonKey(name: 'cost')
   String cost;
   @JsonKey(name: 'stickers')
   List<Sticker> stickers;
 
-  StickerPack({
-      this.identifier = '',
+  StickerPack(
+      {this.identifier = '',
       this.name = '',
       this.publisher = '',
-      this.trayimagefile ='',
+      this.trayimagefile = '',
       this.publisheremail = '',
       this.publisherwebsite = '',
       this.privacypolicywebsite = '',
-      this.licenseagreementwebsite= '',
+      this.licenseagreementwebsite = '',
       this.color = '',
       this.cost = '',
       required this.stickers});
@@ -56,46 +55,47 @@ class StickerPack {
   String get cosT => cost;
   List<Sticker> get sticker => stickers;
 
-  set identiFier(String identifier){
+  set identiFier(String identifier) {
     this.identifier = identifier;
   }
 
-  set names(String name){
+  set names(String name) {
     this.name = name;
   }
 
-  set publishers(String publisher){
+  set publishers(String publisher) {
     this.publisher = publisher;
   }
 
-  set trayimageFile(String trayimagefile){
+  set trayimageFile(String trayimagefile) {
     this.trayimagefile = trayimagefile;
   }
 
-  set publisherEmail(String publisheremail){
+  set publisherEmail(String publisheremail) {
     this.publisheremail = publisheremail;
   }
 
-  set publisherWebsite(String publisherwebsite){
+  set publisherWebsite(String publisherwebsite) {
     this.publisherwebsite = publisherwebsite;
   }
 
-  set privacyPolicyWebsite(String privacypolicywebsite){
+  set privacyPolicyWebsite(String privacypolicywebsite) {
     this.privacypolicywebsite = privacypolicywebsite;
   }
 
-  set licenseAgreementWebsite(String licenseagreementwebsite){
+  set licenseAgreementWebsite(String licenseagreementwebsite) {
     this.licenseagreementwebsite = licenseagreementwebsite;
   }
 
-  set coloR(String cosT){
+  set coloR(String cosT) {
     this.cost = cosT;
   }
-   set pricE(String coloR){
+
+  set pricE(String coloR) {
     this.color = coloR;
   }
 
-  set sticker(List<Sticker> stickers){
+  set sticker(List<Sticker> stickers) {
     this.stickers = stickers;
   }
 }

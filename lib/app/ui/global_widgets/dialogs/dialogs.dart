@@ -8,21 +8,22 @@ abstract class Dialogs {
     String okText = "OK",
   }) {
     return showCupertinoDialog(
-        context: context,
-        builder: (_) => CupertinoAlertDialog(
-              title: title != null
-                  ? Text(
-                      title,
-                      style: const TextStyle(fontWeight: FontWeight.bold),
-                    )
-                  : null,
-              content: content != null ? Text(content) : null,
-              actions: [
-                CupertinoDialogAction(
-                  onPressed: () => Navigator.pop(context),
-                  child: Text(okText),
-                )
-              ],
-            ));
+      context: context,
+      builder: (_) => CupertinoAlertDialog(
+        title: title != null
+            ? Text(
+                title,
+                style: const TextStyle(fontWeight: FontWeight.bold),
+              )
+            : null,
+        content: content != null ? Text(content) : null,
+        actions: [
+          CupertinoDialogAction(
+            onPressed: () => Navigator.pop(context),
+            child: Text(okText),
+          )
+        ],
+      ),
+    );
   }
 }

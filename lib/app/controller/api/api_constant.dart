@@ -1,8 +1,8 @@
 import 'package:flutter/services.dart';
 
-class ApiConstant{
-
-  static const MethodChannel methodChannel = const MethodChannel('com.viztushar.flutter.flutter_stickers_internet/sharedata');
+class ApiConstant {
+  static const MethodChannel methodChannel = const MethodChannel(
+      'com.viztushar.flutter.flutter_stickers_internet/sharedata');
   //Change this base url with yours
   static const String BASE_URL = "http://admin.stickerfun.io/";
 

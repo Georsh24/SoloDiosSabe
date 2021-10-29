@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:dio/dio.dart';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
@@ -17,7 +16,6 @@ import 'package:hexcolor/hexcolor.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
-
 import 'package:sizer/sizer.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_meedu/router.dart' as router;
@@ -46,30 +44,32 @@ class _WaAllStickerState extends State<WaAllSticker>
       Uri.parse(ApiConstant.BASE_URL + ApiConstant.JSON + ApiConstant.HOME),
       headers: {"Accept": "application/json"},
     );
-    setState(() {
-      Map jd = jsonDecode(response.body);
-      WaModel waModel = WaModel.fromJson(jd);
-      for (Map<String, dynamic> maps in waModel.stickerpack) {
-        List<Sticker> listOfStickers = [];
-        for (Map<String, dynamic> stickers in maps['stickers']) {
-          listOfStickers.add(Sticker(
-              imagefile: stickers['image_file'], emojis: stickers['emojis']));
+    setState(
+      () {
+        Map jd = jsonDecode(response.body);
+        WaModel waModel = WaModel.fromJson(jd);
+        for (Map<String, dynamic> maps in waModel.stickerpack) {
+          List<Sticker> listOfStickers = [];
+          for (Map<String, dynamic> stickers in maps['stickers']) {
+            listOfStickers.add(Sticker(
+                imagefile: stickers['image_file'], emojis: stickers['emojis']));
+          }
+          listOfStickerPack.add(StickerPack(
+              identifier: maps['identifier'],
+              name: maps['name'],
+              publisher: maps['publisher'],
+              trayimagefile: maps['tray_image_file'],
+              publisheremail: maps['publisher_email'],
+              publisherwebsite: maps['publisher_website'],
+              privacypolicywebsite: maps['privacy_policy_website'],
+              licenseagreementwebsite: maps['license_agreement_website'],
+              color: maps['color'],
+              cost: maps['cost'],
+              stickers: listOfStickers));
         }
-        listOfStickerPack.add(StickerPack(
-            identifier: maps['identifier'],
-            name: maps['name'],
-            publisher: maps['publisher'],
-            trayimagefile: maps['tray_image_file'],
-            publisheremail: maps['publisher_email'],
-            publisherwebsite: maps['publisher_website'],
-            privacypolicywebsite: maps['privacy_policy_website'],
-            licenseagreementwebsite: maps['license_agreement_website'],
-            color: maps['color'],
-            cost: maps['cost'],
-            stickers: listOfStickers));
-      }
-      loading = false;
-    });
+        loading = false;
+      },
+    );
   }
 
   @override
@@ -88,15 +88,19 @@ class _WaAllStickerState extends State<WaAllSticker>
     // );
     getDataFromJson();
     _scrollController = ScrollController()
-      ..addListener(() {
-        setState(() {
-          if (_scrollController.offset >= 350) {
-            buttonBottomTop = true;
-          } else {
-            buttonBottomTop = false;
-          }
-        });
-      });
+      ..addListener(
+        () {
+          setState(
+            () {
+              if (_scrollController.offset >= 350) {
+                buttonBottomTop = true;
+              } else {
+                buttonBottomTop = false;
+              }
+            },
+          );
+        },
+      );
   }
 
   @override

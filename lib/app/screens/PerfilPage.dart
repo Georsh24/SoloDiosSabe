@@ -15,27 +15,26 @@ class PerfilPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, watch) {
-    // final sessionController = watch(sessionProvider);
-    // final user = sessionController.user!;
     return WillPopScope(
-        onWillPop: () async => false,
-        child: Scaffold(
-          extendBodyBehindAppBar: true,
-          extendBody: true,
-          appBar: AppBar(
-            automaticallyImplyLeading: false,
-            backgroundColor: Colors.transparent,
-            elevation: 0,
-          ),
-          body: ListView(
-            padding: EdgeInsets.only(top: 0),
-            children: [
-              buildProfile(context, watch),
-              infoProfile(context, watch),
-              settings(context),
-            ],
-          ),
-        ));
+      onWillPop: () async => false,
+      child: Scaffold(
+        extendBodyBehindAppBar: true,
+        extendBody: true,
+        appBar: AppBar(
+          automaticallyImplyLeading: false,
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+        ),
+        body: ListView(
+          padding: EdgeInsets.only(top: 0),
+          children: [
+            buildProfile(context, watch),
+            infoProfile(context, watch),
+            settings(context),
+          ],
+        ),
+      ),
+    );
   }
 }
 

@@ -36,7 +36,6 @@ class _CustomInputFieldState extends State<CustomInputField> {
   Widget build(BuildContext context) {
     final underline =
         Theme.of(context).brightness == Brightness.dark ? '3A3E98' : '00ff00';
-
     final borderslide =
         Theme.of(context).brightness == Brightness.dark ? '4AB1D8' : '05d0ae';
     final visibility =
@@ -52,8 +51,6 @@ class _CustomInputFieldState extends State<CustomInputField> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             TextField(
-              //style: TextStyle(color: Colors.yellow),
-
               style: Theme.of(context).textTheme.overline,
               obscureText: _obscureText,
               keyboardType: widget.inputType,
@@ -75,10 +72,11 @@ class _CustomInputFieldState extends State<CustomInputField> {
                   ),
                 ),
                 focusedBorder: UnderlineInputBorder(
-                    borderSide: BorderSide(
-                  color: HexColor('$borderslide'),
-                  width: 2,
-                )),
+                  borderSide: BorderSide(
+                    color: HexColor('$borderslide'),
+                    width: 2,
+                  ),
+                ),
                 labelStyle: TextStyle(color: Colors.grey),
                 labelText: widget.label,
                 prefixIcon: Icon(

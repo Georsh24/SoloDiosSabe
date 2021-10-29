@@ -2,7 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 pushPage(BuildContext context, Widget widget) {
-  Navigator.of(context).push(PageRouteBuilder(
+  Navigator.of(context).push(
+    PageRouteBuilder(
       transitionDuration: Duration(milliseconds: 900),
       pageBuilder: (BuildContext context, Animation<double> animation,
           Animation<double> anim) {
@@ -14,7 +15,9 @@ pushPage(BuildContext context, Widget widget) {
           opacity: animation,
           child: child,
         );
-      }));
+      },
+    ),
+  );
 }
 
 void pushPageReplacement(BuildContext context, Widget widget) {

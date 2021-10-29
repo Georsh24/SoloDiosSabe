@@ -2,7 +2,6 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_stickers_internet/app/screens/Buy.dart';
 import 'package:flutter_stickers_internet/app/screens/HomeScreen.dart';
 import 'package:flutter_stickers_internet/app/screens/SplashScreen.dart';
 import 'package:flutter_stickers_internet/app/ui/pages/login/login_page.dart';
@@ -18,6 +17,4 @@ Map<String, Widget Function(BuildContext)> get appRoutes => {
       Routes.HOME: (_) => HomeScreen(),
       Routes.RESET_PASSWORD: (_) => const ResetPasswordPage(),
       Routes.SPLASH1: (_) => SplashScreen(),
-      Routes.BUY: (_) => BuyScreen(),
-
     };

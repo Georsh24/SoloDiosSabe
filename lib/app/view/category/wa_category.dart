@@ -24,18 +24,23 @@ class _WaCategoryState extends State<WaCategory> {
         Uri.parse(
             ApiConstant.BASE_URL + ApiConstant.JSON + ApiConstant.CATEGORY),
         headers: {"Accept": "application/json"});
-    setState(() {
-      Map mapResult = jsonDecode(response.body);
-      WaModelCat wmc = WaModelCat.fromJson(mapResult);
-      for (Map<String, dynamic> cate in wmc.category) {
-        categories.add(Category(
-            cat_id: cate['cat_id'],
-            photo_cat: cate['photo_cat'],
-            name: cate['name'],
-            status: cate['status'],
-            color: cate['color']));
-      }
-    });
+    setState(
+      () {
+        Map mapResult = jsonDecode(response.body);
+        WaModelCat wmc = WaModelCat.fromJson(mapResult);
+        for (Map<String, dynamic> cate in wmc.category) {
+          categories.add(
+            Category(
+              cat_id: cate['cat_id'],
+              photo_cat: cate['photo_cat'],
+              name: cate['name'],
+              status: cate['status'],
+              color: cate['color'],
+            ),
+          );
+        }
+      },
+    );
     loading = false;
   }
 
@@ -53,8 +58,9 @@ class _WaCategoryState extends State<WaCategory> {
       child: loading
           ? Center(
               child: CircularProgressIndicator(
-              strokeWidth: 1.5,
-            ))
+                strokeWidth: 1.5,
+              ),
+            )
           : Column(
               children: [
                 Row(
@@ -91,65 +97,67 @@ class _WaCategoryState extends State<WaCategory> {
                 ),
                 Expanded(
                   child: ListView.builder(
-                      scrollDirection: Axis.horizontal,
-                      itemCount: categories.length,
-                      itemBuilder: (ctx, index) {
-                        return GestureDetector(
-                          onTap: () {
-                            pushPageNoAnim(
-                                context,
-                                WaAllStickerByCat(
-                                  id: categories[index].cat_id,
-                                ));
-                          },
-                          child: Padding(
-                            padding: const EdgeInsets.all(5),
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(15),
-                              child: Column(
-                                children: [
-                                  Container(
-                                    width: size.width * 0.25,
-                                    height: size.height * 0.115,
-                                    margin: EdgeInsets.all(0.2),
-                                    decoration: BoxDecoration(
-                                      borderRadius:
-                                          BorderRadius.all(Radius.circular(10)),
-                                      color: Theme.of(context).cardColor,
-                                      boxShadow: [
-                                        BoxShadow(
-                                          color: Colors.grey,
-                                          blurRadius: 1.0,
-                                          spreadRadius: 0.2,
-                                        )
-                                      ],
-                                    ),
-                                    child: CachedNetworkImage(
-                                      imageUrl: categories[index].photo_cat,
-                                      fit: BoxFit.contain,
-                                    ),
+                    scrollDirection: Axis.horizontal,
+                    itemCount: categories.length,
+                    itemBuilder: (ctx, index) {
+                      return GestureDetector(
+                        onTap: () {
+                          pushPageNoAnim(
+                            context,
+                            WaAllStickerByCat(
+                              id: categories[index].cat_id,
+                            ),
+                          );
+                        },
+                        child: Padding(
+                          padding: const EdgeInsets.all(5),
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(15),
+                            child: Column(
+                              children: [
+                                Container(
+                                  width: size.width * 0.25,
+                                  height: size.height * 0.115,
+                                  margin: EdgeInsets.all(0.2),
+                                  decoration: BoxDecoration(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(10)),
+                                    color: Theme.of(context).cardColor,
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Colors.grey,
+                                        blurRadius: 1.0,
+                                        spreadRadius: 0.2,
+                                      )
+                                    ],
                                   ),
-                                  Center(
-                                    child: Text(
-                                      '${categories[index].name}',
-                                      // style: TextStyle(color: getColorFromHex(GlobalColors().searchIconColor), //ebookTheme.themeMode().ratingBar,
-                                      //     fontWeight: FontWeight.bold,
-                                      //     fontSize: 16),
-                                      style: TextStyle(
-                                          color: Theme.of(context)
-                                              .textTheme
-                                              .bodyText1!
-                                              .color,
-                                          fontWeight: FontWeight.w200,
-                                          fontSize: 15),
-                                    ),
+                                  child: CachedNetworkImage(
+                                    imageUrl: categories[index].photo_cat,
+                                    fit: BoxFit.contain,
                                   ),
-                                ],
-                              ),
+                                ),
+                                Center(
+                                  child: Text(
+                                    '${categories[index].name}',
+                                    // style: TextStyle(color: getColorFromHex(GlobalColors().searchIconColor), //ebookTheme.themeMode().ratingBar,
+                                    //     fontWeight: FontWeight.bold,
+                                    //     fontSize: 16),
+                                    style: TextStyle(
+                                        color: Theme.of(context)
+                                            .textTheme
+                                            .bodyText1!
+                                            .color,
+                                        fontWeight: FontWeight.w200,
+                                        fontSize: 15),
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
-                        );
-                      }),
+                        ),
+                      );
+                    },
+                  ),
                 ),
               ],
             ),

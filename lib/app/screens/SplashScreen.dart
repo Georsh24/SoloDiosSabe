@@ -260,24 +260,24 @@ class _SplashScreenState extends State<SplashScreen> {
 
     return Scaffold(
       body: Builder(
-          builder: (context) => LiquidSwipe(
-                initialPage: 0,
-                fullTransitionValue:
-                    800, // Establece la distancia de desplazamiento o la sensibilidad para un deslizamiento completo. */
-                enableLoop:
-                    false, // Habilitar o deshabilitar la recurrencia de páginas. */
-                positionSlideIcon:
-                    0.5, // Coloque su icono en el eje y en el lado derecho de la pantalla */
-                slideIconWidget: Icon(Icons.arrow_back_ios,
-                    size: size.width * 0.10,
-                    color: isDarkGlobal ? Colors.black : Colors.white),
-                pages:
-                    pages, // Establecer las páginas / vistas / contenedores */
-                onPageChangeCallback:
-                    onPageChangeCallback, // Pase su método como devolución de llamada, devolverá un número de página. */
-                waveType: WaveType
-                    .liquidReveal, // Seleccione el tipo de revelación que desea. */
-              )),
+        builder: (context) => LiquidSwipe(
+          initialPage: 0,
+          fullTransitionValue:
+              800, // Establece la distancia de desplazamiento o la sensibilidad para un deslizamiento completo. */
+          enableLoop:
+              false, // Habilitar o deshabilitar la recurrencia de páginas. */
+          positionSlideIcon:
+              0.5, // Coloque su icono en el eje y en el lado derecho de la pantalla */
+          slideIconWidget: Icon(Icons.arrow_back_ios,
+              size: size.width * 0.10,
+              color: isDarkGlobal ? Colors.black : Colors.white),
+          pages: pages, // Establecer las páginas / vistas / contenedores */
+          onPageChangeCallback:
+              onPageChangeCallback, // Pase su método como devolución de llamada, devolverá un número de página. */
+          waveType: WaveType
+              .liquidReveal, // Seleccione el tipo de revelación que desea. */
+        ),
+      ),
     );
   }
 
@@ -308,9 +308,7 @@ class _Tapiz extends StatelessWidget {
     Key? key,
     required this.size,
   }) : super(key: key);
-
   final Size size;
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -329,9 +327,7 @@ class _Tapiz2 extends StatelessWidget {
     Key? key,
     required this.size,
   }) : super(key: key);
-
   final Size size;
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -350,9 +346,7 @@ class _Tapiz3 extends StatelessWidget {
     Key? key,
     required this.size,
   }) : super(key: key);
-
   final Size size;
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -371,9 +365,7 @@ class _Tapiz4 extends StatelessWidget {
     Key? key,
     required this.size,
   }) : super(key: key);
-
   final Size size;
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -386,21 +378,3 @@ class _Tapiz4 extends StatelessWidget {
     );
   }
 }
-
-// class _LogoTapiz extends StatelessWidget {
-//   const _LogoTapiz({Key? key}) : super(key: key);
-
-//   @override
-//   Widget build(BuildContext context) {
-//     final size = MediaQuery.of(context).size;
-//     return Container(
-//       width: size.width * 0.35,
-//       child: Opacity(
-//         opacity: 0.3,
-//         child: Image(
-//           image: AssetImage('assets/logoblack.png'),
-//         ),
-//       ),
-//     );
-//   }
-// }

@@ -5,7 +5,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter/rendering.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_stickers_internet/app/controller/api/api_constant.dart';
@@ -55,7 +54,6 @@ class WaStickerDetail extends StatefulWidget {
     router.push(HomeScreen());
     //router.pushReplacement(WaStickerDetail(pack: pack));
     debugPrint(pack.toString());
-
     // Send the resulting Google Pay token to your server / PSP
   }
 }

@@ -121,7 +121,7 @@ class _MyHomePageState extends State<MyHomePage> {
     //   ..addListener(() {
     //     setState(() {});
     //   });
-    Favorite();
+    //Favorite();
     //getCompras();
   }
 

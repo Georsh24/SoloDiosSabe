@@ -7,14 +7,14 @@ class AccountRepositoryImpl implements AccountRepository {
   AccountRepositoryImpl(this._auth);
   @override
   Future<User?> updateDisplayName(String value) async {
-   try{
- final user = _auth.currentUser;
-    //assert(User != null);
-    await user!.updateDisplayName(value);
-    user.reload();
-    return  _auth.currentUser;
-   }catch (e){
-     return null;
-   }
+    try {
+      final user = _auth.currentUser;
+      //assert(User != null);
+      await user!.updateDisplayName(value);
+      user.reload();
+      return _auth.currentUser;
+    } catch (e) {
+      return null;
+    }
   }
 }

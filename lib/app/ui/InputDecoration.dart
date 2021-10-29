@@ -14,15 +14,19 @@ class InputDecorations {
           ),
         ),
         focusedBorder: UnderlineInputBorder(
-            borderSide: BorderSide(
-          color: HexColor('00ff00'),
-          width: 2,
-        )),
+          borderSide: BorderSide(
+            color: HexColor('00ff00'),
+            width: 2,
+          ),
+        ),
         hintText: hintText,
         labelText: labelText,
         labelStyle: TextStyle(color: Colors.grey),
         prefixIcon: prefixIcon != null
-            ? Icon(prefixIcon, color: HexColor('007c00'))
+            ? Icon(
+                prefixIcon,
+                color: HexColor('007c00'),
+              )
             : null);
   }
 }

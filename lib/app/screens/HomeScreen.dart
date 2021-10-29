@@ -20,11 +20,16 @@ class _HomeScreenState extends State<HomeScreen> {
 
   void onItemTab(int index) {
     //si se quita este delayed la aplicacion crashea ya que el usuario sale y regresa de la tabs varias veces lo cual no le permite a la app cargar la data se cambiara por una animacion
-    Future.delayed(Duration(milliseconds: 500), () {
-      setState(() {
-        currentPage = index;
-      });
-    });
+    Future.delayed(
+      Duration(milliseconds: 500),
+      () {
+        setState(
+          () {
+            currentPage = index;
+          },
+        );
+      },
+    );
   }
 
   @override
@@ -40,27 +45,28 @@ class _HomeScreenState extends State<HomeScreen> {
           BottomNavigationBarItem(
               label: 'Home', icon: Icon(Icons.apps_outlined)),
           BottomNavigationBarItem(
-              label: 'Categories',
-              icon: Stack(
-                children: [
-                  Icon(Icons.category_outlined),
-                  // Positioned(
-                  //   top: 0,
-                  //   left: .0,
-                  //   child: Container(
-                  //     child: Text('12',
-                  //         style: TextStyle(color: Colors.white, fontSize: 8)),
-                  //     alignment: Alignment.center,
-                  //     width: 15,
-                  //     height: 15,
-                  //     decoration: BoxDecoration(
-                  //       color: Colors.red,
-                  //       shape: BoxShape.circle,
-                  //     ),
-                  //   ),
-                  // )
-                ],
-              )),
+            label: 'Categories',
+            icon: Stack(
+              children: [
+                Icon(Icons.category_outlined),
+                // Positioned(
+                //   top: 0,
+                //   left: .0,
+                //   child: Container(
+                //     child: Text('12',
+                //         style: TextStyle(color: Colors.white, fontSize: 8)),
+                //     alignment: Alignment.center,
+                //     width: 15,
+                //     height: 15,
+                //     decoration: BoxDecoration(
+                //       color: Colors.red,
+                //       shape: BoxShape.circle,
+                //     ),
+                //   ),
+                // )
+              ],
+            ),
+          ),
           BottomNavigationBarItem(
             label: 'My Profile',
             icon: Icon(Icons.mood_outlined),

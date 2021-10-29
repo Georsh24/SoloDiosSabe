@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_stickers_internet/app/controller/api/api_constant.dart';
 import 'package:flutter_stickers_internet/app/model/category.dart';
@@ -12,7 +11,6 @@ import 'package:hexcolor/hexcolor.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_meedu/router.dart' as router;
-
 import 'package:http/http.dart' as http;
 
 class WaAllCategory extends StatefulWidget {
@@ -31,19 +29,23 @@ class _WaAllCategoryState extends State<WaAllCategory> {
         Uri.parse(
             ApiConstant.BASE_URL + ApiConstant.JSON + ApiConstant.CATEGORY),
         headers: {'Accept': 'application/json'});
-    setState(() {
-      Map<String, dynamic> map = jsonDecode(response.body);
-      WaModelCat waModelCat = WaModelCat.fromJson(map);
-
-      for (Map<String, dynamic> cate in waModelCat.category) {
-        listOfCategory.add(Category(
-            cat_id: cate['cat_id'],
-            photo_cat: cate['photo_cat'],
-            name: cate['name'],
-            status: cate['status'],
-            color: cate['color']));
-      }
-    });
+    setState(
+      () {
+        Map<String, dynamic> map = jsonDecode(response.body);
+        WaModelCat waModelCat = WaModelCat.fromJson(map);
+        for (Map<String, dynamic> cate in waModelCat.category) {
+          listOfCategory.add(
+            Category(
+              cat_id: cate['cat_id'],
+              photo_cat: cate['photo_cat'],
+              name: cate['name'],
+              status: cate['status'],
+              color: cate['color'],
+            ),
+          );
+        }
+      },
+    );
     isLoading = false;
   }
 
