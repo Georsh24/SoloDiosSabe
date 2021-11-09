@@ -287,6 +287,7 @@ String getComprasadd() {
       print(getidcompra);
       print("Comprado:");
       print(comprado);
+      print(getComprasadd().length);
     },
   );
 

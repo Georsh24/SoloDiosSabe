@@ -282,11 +282,13 @@ class _MyHomePageState extends State<MyHomePage> {
                                                 '${listOfSliderSticker[index].name}',
                                                 style: TextStyle(
                                                   fontWeight: FontWeight.w500,
-                                                  fontSize: size.width * 0.05,
+                                                  fontSize: size.width * 0.04,
                                                   color: Theme.of(context)
                                                       .textTheme
                                                       .bodyText1!
                                                       .color,
+                                                  overflow:
+                                                      TextOverflow.ellipsis,
                                                 ),
                                               ),
                                               Text(

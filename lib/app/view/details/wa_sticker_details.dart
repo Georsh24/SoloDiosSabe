@@ -33,7 +33,7 @@ FirebaseFirestore firestore = FirebaseFirestore.instance;
 String getuid = '';
 String price = '1';
 String getidcompra = '';
-String comprado = "init";
+String comprado = "comprar";
 String packagename = "none";
 String publisher = "No Publisher";
 String mainImage = ' ';
@@ -51,9 +51,7 @@ class WaStickerDetail extends StatefulWidget {
   _WaStickerDetailState createState() => _WaStickerDetailState();
   void onGooglePayResult(paymentResult) {
     debugPrint(paymentResult.toString());
-    googleresult = true;
-    router.push(HomeScreen());
-    //router.pushReplacement(WaStickerDetail(pack: pack));
+
     debugPrint(pack.toString());
     // Send the resulting Google Pay token to your server / PSP
   }
@@ -83,7 +81,7 @@ class _WaStickerDetailState extends State<WaStickerDetail> {
         getComprasadd();
       },
     );
-    comprado = '';
+    comprado = 'comprar';
     // _bannerAd = BannerAd(
     //     adUnitId: AdManager.bannerAdUnitId,
     //     size: AdSize.banner
@@ -230,7 +228,7 @@ class _WaStickerDetailState extends State<WaStickerDetail> {
                                         MainAxisAlignment.spaceAround,
                                     children: [
                                       Container(
-                                        width: size.width * 0.22,
+                                        width: size.width * 0.20,
                                         height: size.height * 0.17,
                                         child: Image.network(
                                           widget.pack.trayimageFile,
@@ -239,7 +237,7 @@ class _WaStickerDetailState extends State<WaStickerDetail> {
                                         ),
                                       ),
                                       Container(
-                                        width: size.width * 0.22,
+                                        width: size.width * 0.35,
                                         height: size.height * 0.17,
                                         child: Column(
                                           crossAxisAlignment:
@@ -249,7 +247,7 @@ class _WaStickerDetailState extends State<WaStickerDetail> {
                                           children: [
                                             Container(
                                               child: Text(
-                                                widget.pack.identifier,
+                                                widget.pack.name,
                                                 style: TextStyle(
                                                   overflow:
                                                       TextOverflow.ellipsis,
@@ -280,7 +278,7 @@ class _WaStickerDetailState extends State<WaStickerDetail> {
                                         ),
                                       ),
                                       Container(
-                                        width: size.width * 0.22,
+                                        width: size.width * 0.13,
                                         height: size.height * 0.17,
                                         // color: Colors.red,
                                         child: Column(
@@ -318,7 +316,7 @@ class _WaStickerDetailState extends State<WaStickerDetail> {
                                         ),
                                       ),
                                       Container(
-                                        height: size.height * 0.17,
+                                        height: size.height * 0.10,
                                         width: size.width * 0.22,
                                         //color: Colors.grey,
                                         child: Column(
@@ -346,18 +344,14 @@ class _WaStickerDetailState extends State<WaStickerDetail> {
                                               crossAxisAlignment:
                                                   CrossAxisAlignment.center,
                                               mainAxisAlignment:
-                                                  MainAxisAlignment.center,
+                                                  MainAxisAlignment.end,
                                               children: [
-                                                Container(
-                                                  child: Icon(
-                                                    Icons.attach_money_outlined,
-                                                    size: size.width * 0.06,
-                                                  ),
-                                                ),
                                                 Container(
                                                   width: size.width * 0.15,
                                                   child: Text(
-                                                    "${widget.pack.cost}",
+                                                    r"$" +
+                                                        " " +
+                                                        widget.pack.cost,
                                                     style: TextStyle(
                                                       color: Theme.of(context)
                                                           .textTheme
@@ -598,6 +592,7 @@ class _WaStickerDetailState extends State<WaStickerDetail> {
     }
   }
 
+// show dialog  que muestra la descarga de los stickers
   Future<void> showProgressDownload(context) {
     CupertinoAlertDialog s = CupertinoAlertDialog(
       content: Row(
@@ -628,15 +623,22 @@ class _WaStickerDetailState extends State<WaStickerDetail> {
       barrierDismissible: false,
       builder: (context) {
         if (Platform.isAndroid)
-          return a;
+          return WillPopScope(
+            child: a,
+            onWillPop: () async => false,
+          );
         else
-          return s;
+          return WillPopScope(
+            child: s,
+            onWillPop: () async => false,
+          );
       },
     );
   }
 }
 
-void addUserr() {
+// añade las compras a firebase
+void addCompras() {
   firestore.collection("Compras").add(
     {
       "Usuario": getuid,
@@ -652,6 +654,7 @@ void addUserr() {
   );
 }
 
+// añade la transaccion a la firebase tipo respaldo
 void addTransactions() {
   firestore.collection("Compras").add(
     {"Usuario": getuid, "StickerCompra": getidcompra},
@@ -662,6 +665,7 @@ void addTransactions() {
   );
 }
 
+// valida si el sticker ya a sido comprado
 String getCompras() {
   firestore
       .collection("Compras")
@@ -674,11 +678,13 @@ String getCompras() {
       querySnapshot.docs.forEach(
         (result) {
           comprado = "comprado";
+          print('consulta firebase');
           print(
             result.data(),
           );
         },
       );
+      print('Consulta firebase');
       print(getidcompra);
       print("Comprado:");
       print(comprado);
@@ -688,6 +694,7 @@ String getCompras() {
   return comprado;
 }
 
+// proceso de compra
 void comprar(BuildContext context) {
   final size = MediaQuery.of(context).size;
   var _paymentItems = [
@@ -697,6 +704,7 @@ void comprar(BuildContext context) {
       status: PaymentItemStatus.final_price,
     )
   ];
+  // show dialog contenedor del resumen de la compra
   showDialog(
     context: context,
     builder: (BuildContext context) {
@@ -725,10 +733,12 @@ void comprar(BuildContext context) {
               type: GooglePayButtonType.pay,
               onPaymentResult: (data) {
                 print("Pagado");
-                addUserr();
+                addCompras();
                 router.pop();
                 router.pushNamed(Routes.PAY);
-                // comprado = ''; probas si con esto se actualiza la compra si no agregar el id del comprado recientemente
+                getCompras();
+                comprado =
+                    'comprar'; //probas si con esto se actualiza la compra si no agregar el id del comprado recientemente
               },
               loadingIndicator: const Center(
                 child: CircularProgressIndicator(),
@@ -741,6 +751,7 @@ void comprar(BuildContext context) {
   );
 }
 
+// contenido del resumen de la compra
 contents(BuildContext context) {
   final size = MediaQuery.of(context).size;
   return Container(
