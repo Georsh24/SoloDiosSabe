@@ -117,12 +117,13 @@ class _MyHomePageState extends State<MyHomePage> {
     id = -1;
     getDataFromJson();
     getSlider();
+    getidcompra = '';
     // widget.scrollController = ScrollController()
     //   ..addListener(() {
     //     setState(() {});
     //   });
     //Favorite();
-    //getCompras();
+    // getCompras();
   }
 
   @override

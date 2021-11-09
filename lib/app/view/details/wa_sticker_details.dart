@@ -12,6 +12,7 @@ import 'package:flutter_stickers_internet/app/model/stickerPack.dart';
 import 'package:flutter_stickers_internet/app/screens/HomeScreen.dart';
 import 'package:flutter_stickers_internet/app/screens/PerfilPage.dart';
 import 'package:flutter_stickers_internet/app/ui/global_controllers/session_controller.dart';
+import 'package:flutter_stickers_internet/app/ui/routes/routes.dart';
 import 'package:flutter_stickers_internet/app/widget/favorite/wa_detail.dart';
 import 'package:flutter_stickers_internet/app/widget/global_colors.dart';
 import 'package:flutter_stickers_internet/app/widget/global_padding.dart';
@@ -82,7 +83,7 @@ class _WaStickerDetailState extends State<WaStickerDetail> {
         getComprasadd();
       },
     );
-
+    comprado = '';
     // _bannerAd = BannerAd(
     //     adUnitId: AdManager.bannerAdUnitId,
     //     size: AdSize.banner
@@ -248,7 +249,7 @@ class _WaStickerDetailState extends State<WaStickerDetail> {
                                           children: [
                                             Container(
                                               child: Text(
-                                                widget.pack.name,
+                                                widget.pack.identifier,
                                                 style: TextStyle(
                                                   overflow:
                                                       TextOverflow.ellipsis,
@@ -726,6 +727,8 @@ void comprar(BuildContext context) {
                 print("Pagado");
                 addUserr();
                 router.pop();
+                router.pushNamed(Routes.PAY);
+                // comprado = ''; probas si con esto se actualiza la compra si no agregar el id del comprado recientemente
               },
               loadingIndicator: const Center(
                 child: CircularProgressIndicator(),
