@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_stickers_internet/app/view/details/wa_sticker_details.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:flutter_meedu/router.dart' as router;
 
@@ -18,12 +19,13 @@ class _PaySuccesState extends State<PaySucces> {
     //   Provider.of<WaDetail>(context, listen: false)
     //       .checkFav(int.parse(widget.pack.identifier));
     // },);
-    // Future.delayed(
-    //   Duration(seconds: 3),
-    //   () {
-    //     router.pop();
-    //   },
-    // );
+    Future.delayed(
+      Duration(seconds: 3),
+      () {
+        router.pop();
+        getCompras();
+      },
+    );
 
     // _bannerAd = BannerAd(
     //     adUnitId: AdManager.bannerAdUnitId,
@@ -47,28 +49,16 @@ class _PaySuccesState extends State<PaySucces> {
     return Scaffold(
       body: Container(
         decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-            stops: [
-              0.1,
-              0.80,
-            ],
-            colors: [
-              HexColor('$colorshex1'),
-              HexColor('$colorshex2'),
-            ],
-          ),
+          image: DecorationImage(
+              image: AssetImage('assets/pay.png'), fit: BoxFit.cover),
         ),
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Icon(
-                Icons.task_alt_rounded,
-                size: size.width * 0.5,
-                color: Colors.white,
+              Container(
+                child: Image.asset('assets/success2.gif'),
               ),
               Text(
                 'Sucess',

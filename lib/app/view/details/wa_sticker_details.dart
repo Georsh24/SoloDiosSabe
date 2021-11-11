@@ -33,7 +33,7 @@ FirebaseFirestore firestore = FirebaseFirestore.instance;
 String getuid = '';
 String price = '1';
 String getidcompra = '';
-String comprado = "comprar";
+String comprado = "";
 String packagename = "none";
 String publisher = "No Publisher";
 String mainImage = ' ';
@@ -74,14 +74,15 @@ class _WaStickerDetailState extends State<WaStickerDetail> {
     //   Provider.of<WaDetail>(context, listen: false)
     //       .checkFav(int.parse(widget.pack.identifier));
     // },);
-    Future.delayed(
-      Duration(milliseconds: 100),
-      () {
-        getCompras();
-        getComprasadd();
-      },
-    );
-    comprado = 'comprar';
+    // Future.delayed(
+    //   Duration(milliseconds: 100),
+    //   () {
+    //     getCompras();
+    //     // getComprasadd();
+    //   },
+    // );
+    getCompras();
+    //comprado = 'comprar';
     // _bannerAd = BannerAd(
     //     adUnitId: AdManager.bannerAdUnitId,
     //     size: AdSize.banner
@@ -452,13 +453,13 @@ class _WaStickerDetailState extends State<WaStickerDetail> {
                         ),
                         onPressed: () {
                           if (getCompras() == "comprado") {
-                            if (!downloadList
-                                .contains(widget.pack.identiFier)) {
-                              downloading = false;
-                              downloadStickers(widget.pack, context);
-                            } else {
-                              addStickersToWa(widget.pack);
-                            }
+                            // if (!downloadList
+                            //     .contains(widget.pack.identiFier)) {
+                            //   downloading = false;
+                            downloadStickers(widget.pack, context);
+                            // } else {
+                            //   addStickersToWa(widget.pack);
+                            // }
                           } else {
                             print("valor if");
                             print(comprado);
@@ -638,32 +639,18 @@ class _WaStickerDetailState extends State<WaStickerDetail> {
 }
 
 // añade las compras a firebase
-void addCompras() {
-  firestore.collection("Compras").add(
-    {
-      "Usuario": getuid,
-      "StickerCompra": getidcompra,
-      "PackName": packagename,
-      "Stickers": '$numstickers',
-      "Cost": price,
-    },
-  ).then(
-    (value) {
-      print(value.id);
-    },
-  );
+void addUserr() {
+  firestore.collection("Compras").add({
+    "Usuario": getuid,
+    "StickerCompra": getidcompra,
+    "PackName": packagename,
+    "Stickers": numstickers
+  }).then((value) {
+    print(value.id);
+  });
 }
 
 // añade la transaccion a la firebase tipo respaldo
-void addTransactions() {
-  firestore.collection("Compras").add(
-    {"Usuario": getuid, "StickerCompra": getidcompra},
-  ).then(
-    (value) {
-      print(value.id);
-    },
-  );
-}
 
 // valida si el sticker ya a sido comprado
 String getCompras() {
@@ -678,13 +665,10 @@ String getCompras() {
       querySnapshot.docs.forEach(
         (result) {
           comprado = "comprado";
-          print('consulta firebase');
-          print(
-            result.data(),
-          );
+          print(result.data());
         },
       );
-      print('Consulta firebase');
+      print('consulta firebase');
       print(getidcompra);
       print("Comprado:");
       print(comprado);
@@ -733,12 +717,12 @@ void comprar(BuildContext context) {
               type: GooglePayButtonType.pay,
               onPaymentResult: (data) {
                 print("Pagado");
-                addCompras();
+                addUserr();
                 router.pop();
                 router.pushNamed(Routes.PAY);
-                getCompras();
-                comprado =
-                    'comprar'; //probas si con esto se actualiza la compra si no agregar el id del comprado recientemente
+                // getCompras();
+                //comprado =
+                // 'comprar'; //probas si con esto se actualiza la compra si no agregar el id del comprado recientemente
               },
               loadingIndicator: const Center(
                 child: CircularProgressIndicator(),

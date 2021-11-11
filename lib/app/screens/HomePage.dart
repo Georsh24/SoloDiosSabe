@@ -621,6 +621,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                                   ],
                                                 ),
                                                 onTap: () {
+                                                  getCompras();
                                                   pushPageNoAnim(
                                                     context,
                                                     WaStickerDetail(
