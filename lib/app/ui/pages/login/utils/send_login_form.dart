@@ -34,7 +34,7 @@ Future<void> sendLoginForm(BuildContext context) async {
           break;
         case SignInError.unknow:
         default:
-          errorMessage = "unknow";
+          errorMessage = "Email and/or password are wrong";
           break;
       }
       Dialogs.alert(context, title: "Error", content: errorMessage);

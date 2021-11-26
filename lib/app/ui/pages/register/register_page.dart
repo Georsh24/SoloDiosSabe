@@ -55,7 +55,7 @@ class RegisterPage extends StatelessWidget {
                   SizedBox(),
                   TextButton(
                     child: Text(
-                      'You have account?',
+                      'Do you already have an account?',
                       style: TextStyle(fontSize: 18, color: Colors.black87),
                     ),
                     style: ButtonStyle(
@@ -116,7 +116,7 @@ class _RegisterForm extends StatelessWidget {
                     // ignore: avoid_print
                     print("text $text");
 
-                    return isValidName(text!) ? null : "Invalid Last Namne";
+                    return isValidName(text!) ? null : "Invalid Last Name";
                   },
                   prefixIcon: Icons.face_outlined,
                 ),
@@ -151,7 +151,7 @@ class _RegisterForm extends StatelessWidget {
                   watch(registerProvider.select((state) => state.password));
                   return CustomInputField(
                     isPassword: true,
-                    label: "Verification Password",
+                    label: "Confirm Password",
                     onChanged: controller.onVPasswordhanged,
                     validator: (text) {
                       if (controller.state.password != text) {

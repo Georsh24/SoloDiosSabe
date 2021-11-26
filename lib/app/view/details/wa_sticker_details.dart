@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
@@ -9,8 +10,8 @@ import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_stickers_internet/app/controller/api/api_constant.dart';
 import 'package:flutter_stickers_internet/app/model/stickerPack.dart';
-import 'package:flutter_stickers_internet/app/screens/HomeScreen.dart';
-import 'package:flutter_stickers_internet/app/screens/PerfilPage.dart';
+import 'package:flutter_stickers_internet/app/routers/wa_route.dart';
+import 'package:flutter_stickers_internet/app/screens/PaySuccesful.dart';
 import 'package:flutter_stickers_internet/app/ui/global_controllers/session_controller.dart';
 import 'package:flutter_stickers_internet/app/ui/routes/routes.dart';
 import 'package:flutter_stickers_internet/app/widget/favorite/wa_detail.dart';
@@ -40,6 +41,9 @@ String mainImage = ' ';
 int numstickers = 0;
 bool googleresult = false;
 String dollar = "USD";
+bool compratext = false;
+bool pantalla = false;
+StickerPack packs = packs;
 
 // ignore: must_be_immutable
 class WaStickerDetail extends StatefulWidget {
@@ -74,14 +78,19 @@ class _WaStickerDetailState extends State<WaStickerDetail> {
     //   Provider.of<WaDetail>(context, listen: false)
     //       .checkFav(int.parse(widget.pack.identifier));
     // },);
-    // Future.delayed(
-    //   Duration(milliseconds: 100),
-    //   () {
-    //     getCompras();
-    //     // getComprasadd();
-    //   },
-    // );
-    getCompras();
+
+    pantalla = false;
+    Future.delayed(
+      Duration(milliseconds: 100),
+      () {
+        print('Futuredelayed');
+        print(getCompras());
+        getCompras();
+        // getComprasadd();
+      },
+    );
+
+    //getCompras();
     //comprado = 'comprar';
     // _bannerAd = BannerAd(
     //     adUnitId: AdManager.bannerAdUnitId,
@@ -191,6 +200,7 @@ class _WaStickerDetailState extends State<WaStickerDetail> {
                     publisher = widget.pack.publisher;
                     mainImage = widget.pack.trayimagefile;
                     numstickers = widget.pack.stickers.length;
+                    packs = widget.pack;
                     return SizedBox.shrink();
                   }),
                   SingleChildScrollView(
@@ -211,7 +221,7 @@ class _WaStickerDetailState extends State<WaStickerDetail> {
                                     spreadRadius: 2,
                                   )
                                 ],
-                                color: Colors.white,
+                                color: Theme.of(context).cardColor,
                                 borderRadius: BorderRadius.all(
                                   Radius.circular(15),
                                 ),
@@ -281,7 +291,6 @@ class _WaStickerDetailState extends State<WaStickerDetail> {
                                       Container(
                                         width: size.width * 0.13,
                                         height: size.height * 0.17,
-                                        // color: Colors.red,
                                         child: Column(
                                           crossAxisAlignment:
                                               CrossAxisAlignment.center,
@@ -319,7 +328,6 @@ class _WaStickerDetailState extends State<WaStickerDetail> {
                                       Container(
                                         height: size.height * 0.10,
                                         width: size.width * 0.22,
-                                        //color: Colors.grey,
                                         child: Column(
                                           crossAxisAlignment:
                                               CrossAxisAlignment.center,
@@ -421,6 +429,57 @@ class _WaStickerDetailState extends State<WaStickerDetail> {
                       alignment: Alignment.bottomCenter,
                     ),
                   ),
+                  // compratext
+                  //     ? Positioned(
+                  //         left: 0,
+                  //         right: 0,
+                  //         bottom: 30,
+                  //         child: Container(
+                  //           height: size.height * 0.06,
+                  //           decoration: BoxDecoration(
+                  //             borderRadius: BorderRadius.circular(10),
+                  //             gradient: LinearGradient(
+                  //               begin: Alignment.topLeft,
+                  //               end: Alignment.topRight,
+                  //               stops: [
+                  //                 0.1,
+                  //                 0.80,
+                  //               ],
+                  //               colors: [
+                  //                 HexColor('$colorshex1'),
+                  //                 HexColor('$colorshex2'),
+                  //               ],
+                  //             ),
+                  //           ),
+                  //           child: MaterialButton(
+                  //             elevation: 5,
+                  //             padding: const EdgeInsets.all(5.0),
+                  //             child: Text(
+                  //               "comprar",
+                  //               style: TextStyle(
+                  //                   color: getColorFromHex(
+                  //                       GlobalColors().colorWhite),
+                  //                   fontSize: 25),
+                  //             ),
+                  //             onPressed: () {
+                  //               if (getCompras() == "comprado") {
+                  //                 // if (!downloadList
+                  //                 //     .contains(widget.pack.identiFier)) {
+                  //                 //   downloading = false;
+                  //                 downloadStickers(widget.pack, context);
+                  //                 // } else {
+                  //                 //   addStickersToWa(widget.pack);
+                  //                 // }
+                  //               } else {
+                  //                 print("valor if");
+                  //                 print(comprado);
+                  //                 comprar(context);
+                  //               }
+                  //             },
+                  //           ),
+                  //         ),
+                  //       )
+                  //     : Positioned(
                   Positioned(
                     left: 0,
                     right: 0,
@@ -443,32 +502,50 @@ class _WaStickerDetailState extends State<WaStickerDetail> {
                         ),
                       ),
                       child: MaterialButton(
-                        elevation: 5,
-                        padding: const EdgeInsets.all(5.0),
-                        child: Text(
-                          'Add',
-                          style: TextStyle(
-                              color: getColorFromHex(GlobalColors().colorWhite),
-                              fontSize: 25),
-                        ),
-                        onPressed: () {
-                          if (getCompras() == "comprado") {
-                            // if (!downloadList
-                            //     .contains(widget.pack.identiFier)) {
-                            //   downloading = false;
-                            downloadStickers(widget.pack, context);
-                            // } else {
-                            //   addStickersToWa(widget.pack);
-                            // }
-                          } else {
-                            print("valor if");
-                            print(comprado);
-                            comprar(context);
-                          }
-                        },
-                      ),
+                          elevation: 5,
+                          padding: const EdgeInsets.all(5.0),
+                          child: Text(
+                            compratext
+                                ? 'Comprar'
+                                : 'Comprado'
+                                    "$compratext",
+                            style: TextStyle(
+                                color:
+                                    getColorFromHex(GlobalColors().colorWhite),
+                                fontSize: 25),
+                          ),
+                          onPressed: () {
+                            // setState(() {
+                            //   if (getCompras() == "comprado") {
+                            //     // if (!downloadList
+                            //     //     .contains(widget.pack.identiFier)) {
+                            //     //   downloading = false;
+                            //     downloadStickers(widget.pack, context);
+                            //     // } else {
+                            //     //   addStickersToWa(widget.pack);
+                            //     // }
+                            //   } else {
+                            //     print("valor if");
+                            //     print(comprado);
+                            //     comprar(context);
+                            //   }
+                            // });
+                            if (getCompras() == "comprado") {
+                              // if (!downloadList
+                              //     .contains(widget.pack.identiFier)) {
+                              //   downloading = false;
+                              downloadStickers(widget.pack, context);
+                              // } else {
+                              //   addStickersToWa(widget.pack);
+                              // }
+                            } else {
+                              print("valor if");
+                              print(comprado);
+                              comprar(context);
+                            }
+                          }),
                     ),
-                  ),
+                  )
                 ],
               ),
             ),
@@ -644,7 +721,8 @@ void addUserr() {
     "Usuario": getuid,
     "StickerCompra": getidcompra,
     "PackName": packagename,
-    "Stickers": numstickers
+    "Stickers": numstickers,
+    "Price": price
   }).then((value) {
     print(value.id);
   });
@@ -662,12 +740,16 @@ String getCompras() {
       .then(
     (querySnapshot) {
       comprado = "comprar";
+      compratext = true;
       querySnapshot.docs.forEach(
         (result) {
           comprado = "comprado";
+          compratext = false;
           print(result.data());
         },
       );
+
+      print(compratext);
       print('consulta firebase');
       print(getidcompra);
       print("Comprado:");
@@ -679,6 +761,7 @@ String getCompras() {
 }
 
 // proceso de compra
+
 void comprar(BuildContext context) {
   final size = MediaQuery.of(context).size;
   var _paymentItems = [
@@ -719,7 +802,15 @@ void comprar(BuildContext context) {
                 print("Pagado");
                 addUserr();
                 router.pop();
-                router.pushNamed(Routes.PAY);
+                //router.pushNamed(Routes.PAY);
+                router
+                    .pushReplacement(PaySucces(
+                  pack: packs,
+                ))
+                    .then((value) {
+                  boton();
+                });
+
                 // getCompras();
                 //comprado =
                 // 'comprar'; //probas si con esto se actualiza la compra si no agregar el id del comprado recientemente
@@ -733,6 +824,10 @@ void comprar(BuildContext context) {
       );
     },
   );
+}
+
+Future<void> boton() async {
+  compratext = false;
 }
 
 // contenido del resumen de la compra

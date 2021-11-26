@@ -18,5 +18,5 @@ Map<String, Widget Function(BuildContext)> get appRoutes => {
       Routes.HOME: (_) => HomeScreen(),
       Routes.RESET_PASSWORD: (_) => const ResetPasswordPage(),
       Routes.SPLASH1: (_) => SplashScreen(),
-      Routes.PAY: (_) => PaySucces(),
+      // Routes.PAY: (_) => PaySucces(),
     };

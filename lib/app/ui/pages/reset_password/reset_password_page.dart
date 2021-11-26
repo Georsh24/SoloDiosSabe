@@ -57,7 +57,7 @@ class ResetPasswordPage extends StatelessWidget {
                   ),
                   TextButton(
                       child: const Text(
-                        "You have account?",
+                        "Do you already have an account?",
                         style: TextStyle(fontSize: 18, color: Colors.black87),
                       ),
                       style: ButtonStyle(
@@ -68,7 +68,7 @@ class ResetPasswordPage extends StatelessWidget {
                           router.pushReplacementNamed(Routes.LOGIN)),
                   TextButton(
                       child: const Text(
-                        "Create a account",
+                        "Create an account",
                         style: TextStyle(fontSize: 18, color: Colors.black87),
                       ),
                       style: ButtonStyle(
@@ -163,7 +163,8 @@ class _ResetForm extends StatelessWidget {
       final response = await controller.submit();
       Navigator.pop(context);
       if (response == ResetPasswordResponse.ok) {
-        Dialogs.alert(context, title: "Good", content: "Email Send");
+        Dialogs.alert(context,
+            title: "Great Job!", content: "Recovery email was sent");
       } else {
         String errorMessage = "";
         switch (response) {

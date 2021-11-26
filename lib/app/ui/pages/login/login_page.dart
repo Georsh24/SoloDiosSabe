@@ -58,7 +58,7 @@ class LoginPage extends StatelessWidget {
                   ),
                   TextButton(
                       child: Text(
-                        'Create a account',
+                        'Create an account',
                         style: TextStyle(fontSize: 18, color: Colors.black87),
                       ),
                       style: ButtonStyle(
@@ -134,7 +134,7 @@ class _LoginForm extends StatelessWidget {
                     if (text!.trim().length >= 6) {
                       return null;
                     }
-                    return "invalid Password";
+                    return "Invalid Password";
                   },
                 ),
                 SizedBox(

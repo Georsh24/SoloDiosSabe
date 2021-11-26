@@ -132,18 +132,10 @@ class _CategoryItemState extends State<CategoryItem> {
                                   decoration: BoxDecoration(
                                     borderRadius:
                                         BorderRadius.all(Radius.circular(10)),
-                                    color: listOfCategory[i].color == ""
-                                        ? getColorFromHex(
-                                            GlobalColors().bgSticker)
-                                        : getColorFromHex(
-                                            listOfCategory[i].color),
+                                    color: Theme.of(context).cardColor,
                                     boxShadow: [
                                       BoxShadow(
-                                        color: listOfCategory[i].color == ""
-                                            ? getColorFromHex(
-                                                GlobalColors().colorWhite)
-                                            : getColorFromHex(
-                                                listOfCategory[i].color),
+                                        color: Theme.of(context).cardColor,
                                         blurRadius: 1.0,
                                         spreadRadius: 0.2,
                                       )

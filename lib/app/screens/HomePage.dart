@@ -2,7 +2,6 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dio/dio.dart';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
@@ -16,7 +15,6 @@ import 'package:flutter_stickers_internet/app/model/stickerPack.dart';
 import 'package:flutter_stickers_internet/app/model/wa_model.dart';
 import 'package:flutter_stickers_internet/app/routers/wa_route.dart';
 import 'package:flutter_stickers_internet/app/view/all_sticker/wa_all_sticker.dart';
-import 'package:flutter_stickers_internet/app/view/bottom_bar/item/favorite.dart';
 import 'package:flutter_stickers_internet/app/view/category/wa_category.dart';
 import 'package:flutter_stickers_internet/app/view/details/wa_sticker_details.dart';
 import 'package:flutter_stickers_internet/app/widget/global_padding.dart';
@@ -117,7 +115,9 @@ class _MyHomePageState extends State<MyHomePage> {
     id = -1;
     getDataFromJson();
     getSlider();
+    compratext = false;
     getidcompra = '';
+
     // widget.scrollController = ScrollController()
     //   ..addListener(() {
     //     setState(() {});
@@ -252,14 +252,6 @@ class _MyHomePageState extends State<MyHomePage> {
                                           color: shadowSlider
                                               ? Colors.grey.shade900
                                               : Colors.grey.shade500,
-                                          // color: listOfSliderSticker[index]
-                                          //             .color ==
-                                          //         ""
-                                          //     ? getColorFromHex(
-                                          //         GlobalColors().colorWhite)
-                                          //     : getColorFromHex(
-                                          //         listOfSliderSticker[index]
-                                          //             .color),
                                           blurRadius: 4.0,
                                           spreadRadius: 2,
                                         )

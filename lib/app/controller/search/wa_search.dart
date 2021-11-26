@@ -394,7 +394,7 @@ class WaSearchAction extends SearchDelegate<String> {
     return query.isEmpty
         ? Center(
             child: Text(
-              'Get search stickers',
+              'Enter your keywords',
               style: TextStyle(
                   fontSize: 18,
                   color: getColorFromHex(GlobalColors().searchIconColor)),

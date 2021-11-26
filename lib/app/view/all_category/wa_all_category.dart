@@ -80,6 +80,7 @@ class _WaAllCategoryState extends State<WaAllCategory> {
         Theme.of(context).brightness == Brightness.dark ? '3A3E98' : '00ff00';
     final colorshex2 =
         Theme.of(context).brightness == Brightness.dark ? '4AB1D8' : '05d0ae';
+    final shadowSlider = Theme.of(context).brightness == Brightness.dark;
     final size = MediaQuery.of(context).size;
     return Material(
       child: Scaffold(
@@ -181,18 +182,17 @@ class _WaAllCategoryState extends State<WaAllCategory> {
                                 decoration: BoxDecoration(
                                   borderRadius:
                                       BorderRadius.all(Radius.circular(10)),
-                                  color: listOfCategory[i].color == ""
-                                      ? getColorFromHex(
-                                          GlobalColors().bgSticker)
-                                      : getColorFromHex(
-                                          listOfCategory[i].color),
+                                  color: Theme.of(context).cardColor,
+                                  // color: listOfCategory[i].color == ""
+                                  //     ? getColorFromHex(
+                                  //         GlobalColors().bgSticker)
+                                  //     : getColorFromHex(
+                                  //         listOfCategory[i].color),
                                   boxShadow: [
                                     BoxShadow(
-                                      color: listOfCategory[i].color == ""
-                                          ? getColorFromHex(
-                                              GlobalColors().colorWhite)
-                                          : getColorFromHex(
-                                              listOfCategory[i].color),
+                                      color: shadowSlider
+                                          ? Colors.grey.shade900
+                                          : Colors.grey.shade500,
                                       blurRadius: 1.0,
                                       spreadRadius: 0.2,
                                     )
